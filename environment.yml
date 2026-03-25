@@ -1,0 +1,17 @@
+name: FastHydroMap
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy=1.26.*
+  - pandas=2.2.*
+  - scipy=1.11.*
+  - scikit-learn=1.4.*
+  - mdtraj=1.10.*
+  - openmm=8.1.*
+  - pdbfixer
+  - biopython=1.85
+  - pyyaml
+  - tqdm
+  - setuptools=80.*
+  - pip
