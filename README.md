@@ -71,10 +71,10 @@ fasthydromap predict examples/1A1U.pdb -o outputs/1A1U_fdewet
 ./scripts/smoke_test_install.sh
 ```
 
-## Input/Trajectory sanity checks
+## Trajectory sanity checks
 
 ```bash
-# Trajectory run from CLI (DCD or XTC; writes total/intrinsic/context CSVs + summary)
+# Trajectory run (DCD or XTC)
 fasthydromap predict-trajectory examples/proteinG.pdb examples/proteinG_short.dcd
 ```
 
