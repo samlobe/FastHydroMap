@@ -36,33 +36,45 @@ FastHydroMap was trained on structured single-chain proteins and the 20 canonica
 Predictions for PTMs and other non-canonical chemistries should be treated cautiously.
 
 # Installation
-### 1. Create the base conda environment
+### 1. Create a conda environment
+Recommended Python 3.11 environment:
 ```bash
-conda env create -f environment.yml
+mamba env create -f environment.py311.yml
+conda activate FastHydroMap311
+```
+
+Legacy Python 3.10 environment:
+```bash
+mamba env create -f environment.yml
 conda activate FastHydroMap
 ```
-### 2. Install PyTorch + PyG wheels
+FastHydroMap keeps `numpy<2` for binary compatibility with packages such as `mdtraj`.
+
+### 2. Install PyTorch
 Recommended (CPU):
 ```bash
-./scripts/install_torch_pyg.sh cpu
+./scripts/install_torch.sh cpu
 ```
 Optional (NVIDIA GPU):
 ```bash
 # CUDA 12.1-compatible wheel set
-./scripts/install_torch_pyg.sh cu121
+./scripts/install_torch.sh cu121
 
 # CUDA 11.8-compatible wheel set
-./scripts/install_torch_pyg.sh cu118
+./scripts/install_torch.sh cu118
 ```
 Pick the CUDA variant that is compatible with your driver/runtime (`nvidia-smi`).
 For current FastHydroMap inference workloads, CPU is typically similar in end-to-end speed because preprocessing dominates runtime.
+`torch_geometric` and `torch_scatter` are no longer required for inference.
 
 ### 3. Install FastHydroMap
 ```bash
 git clone https://github.com/samlobe/FastHydroMap.git
 cd FastHydroMap
-pip install -e .
+pip install -e . --no-deps
 ```
+The conda environment already provides the scientific runtime stack. Using `--no-deps`
+avoids pip replacing conda-managed packages such as `openmm`.
 
 ### 4. Test your installation
 ```bash

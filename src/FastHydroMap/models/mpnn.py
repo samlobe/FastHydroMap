@@ -9,8 +9,8 @@ from __future__ import annotations
 
 import torch
 import torch.nn as nn
-from torch_geometric.data import Data
-from torch_scatter import scatter
+
+from ..tensor_graph import TensorGraph
 
 # ─── default hyper-params for the locked production model ──────────────
 NODE_IN = 32
@@ -53,9 +53,17 @@ class EvoLayer(nn.Module):
         e = self.norm_e(e + self.drop(e_msg))
 
         m = self.phi_v(torch.cat([h[src], h[dst], e], -1)) * keep_expand
-        agg = scatter(m, dst, dim=0, dim_size=h.size(0), reduce="mean")
+        agg = _scatter_mean(m, dst, dim_size=h.size(0))
         h = self.norm_v(h + self.drop(agg))
         return h, e
+
+
+def _scatter_mean(src: torch.Tensor, index: torch.Tensor, *, dim_size: int) -> torch.Tensor:
+    out = torch.zeros((dim_size, src.shape[1]), dtype=src.dtype, device=src.device)
+    counts = torch.zeros((dim_size, 1), dtype=src.dtype, device=src.device)
+    out.index_add_(0, index, src)
+    counts.index_add_(0, index, torch.ones((src.shape[0], 1), dtype=src.dtype, device=src.device))
+    return out / counts.clamp_min_(1.0)
 
 
 class FdewetMPNN(nn.Module):
@@ -93,7 +101,7 @@ class FdewetMPNN(nn.Module):
             nn.Linear(head_hidden, 1),
         )
 
-    def forward(self, d: Data, return_parts: bool = False):
+    def forward(self, d: TensorGraph, return_parts: bool = False):
         h0 = self.node_in(d.x)
         intrinsic = self.intrinsic_head(h0).squeeze(-1)
 

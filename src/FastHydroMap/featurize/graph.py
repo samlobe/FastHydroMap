@@ -11,7 +11,8 @@ import numpy as np, pandas as pd
 from Bio.PDB import PDBParser
 from scipy.spatial import cKDTree
 import torch
-from torch_geometric.data import Data
+
+from ..tensor_graph import TensorGraph
 from ..utils.constants import AA3_TO_1
 from ..utils.atom_names import backbone_alias_priority, canonical_backbone_atom_name
 from .sasa import SASA_COMPONENT_NAMES, SASA_RELATIVE_NAMES
@@ -126,7 +127,7 @@ def build_graph(
     rbf_max   : float = RBF_MAX,
     rbf_sigma : float = SIGMA,
     pid_ix    : int  = 0,
-) -> Data:
+) -> TensorGraph:
     """
     Build a PyG graph for **either**
       • a static PDB structure   (use heavy-atom coords from the file), or
@@ -151,7 +152,7 @@ def build_graph(
 
     Returns
     -------
-    torch_geometric.data.Data
+    TensorGraph
     """
     rbf_centers = np.linspace(rbf_min, rbf_max, n_rbf)
 
@@ -249,7 +250,7 @@ def build_graph(
     # ------------------------------------------------------------------
     # 4.  pack PyG Data object
     # ------------------------------------------------------------------
-    return Data(
+    return TensorGraph(
         x          = torch.from_numpy(node).float(),
         pos        = torch.from_numpy(ca_xyz).float(),
         edge_index = torch.from_numpy(np.stack([src, dst], 0)).long(),
