@@ -1,0 +1,14 @@
+.git
+.pytest_cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+training/
+checkpoints_direct_feat/
+docs/
+tests/
+
+examples/old/
+examples/rcsb_stress/

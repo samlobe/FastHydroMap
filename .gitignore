@@ -1,0 +1,32 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+
+# Build directories
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.venv/
+env/
+venv/
+.wheel-test/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Training artifacts (generated)
+training/data/graphs/*.pt
+training/data/minimization_work/
+training/logs/
+training/checkpoints_direct_feat/
+training/checkpoints_delta_feat/
+training/models/*.pt
+training/models/*.npz
+training/models/*.json
+
+# Paper/experiment generated artifacts
+training/paper/*.bak_before_minimized_*
+training/paper/*.png

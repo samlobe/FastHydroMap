@@ -58,6 +58,44 @@ def _rewrite_backbone_oxygen_aliases(src: Path, dst: Path) -> None:
     dst.write_text("\n".join(lines) + "\n")
 
 
+def _rewrite_selected_residues_to_unk(src: Path, dst: Path, residue_numbers: set[int]) -> None:
+    lines = []
+    for line in src.read_text().splitlines():
+        if line.startswith(("ATOM", "HETATM")):
+            resid = int(line[22:26])
+            if resid in residue_numbers:
+                line = f"{line[:17]}UNK{line[20:]}"
+        lines.append(line)
+    dst.write_text("\n".join(lines) + "\n")
+
+
+def _append_unknown_polymer_chain(src: Path, dst: Path) -> None:
+    lines = src.read_text().splitlines()
+    extra = []
+    serial = 9001
+    coords = [
+        ("N", 30.0, 10.0, 10.0, "N"),
+        ("CA", 31.4, 10.1, 10.2, "C"),
+        ("C", 32.1, 11.4, 10.0, "C"),
+        ("O", 33.2, 11.5, 10.2, "O"),
+        ("CB", 31.8, 9.0, 11.2, "C"),
+    ]
+    for resid in (1, 2):
+        x_shift = 3.8 * (resid - 1)
+        for atom_name, x, y, z, elem in coords:
+            extra.append(
+                f"ATOM  {serial:5d} {atom_name:>4} {'UNK':>3} {'B'}{resid:4d}    "
+                f"{x + x_shift:8.3f}{y:8.3f}{z:8.3f}{1.00:6.2f}{20.00:6.2f}          {elem:>2}"
+            )
+            serial += 1
+    try:
+        end_idx = next(i for i, line in enumerate(lines) if line.startswith("END"))
+    except StopIteration:
+        end_idx = len(lines)
+    new_lines = lines[:end_idx] + extra + lines[end_idx:]
+    dst.write_text("\n".join(new_lines) + "\n")
+
+
 def test_predictor_matches_1a1u_reference():
     predictor = FdewetPredictor()
     scores, res_ids = predictor(PDB_PATH)
@@ -172,6 +210,40 @@ def test_predictor_handles_oxygen_alias_names(tmp_path):
 
     np.testing.assert_array_equal(alias_ids, ref_ids)
     assert np.mean(np.abs(alias_scores - ref_scores)) < 0.05
+
+
+def test_predictor_handles_unknown_residue_names_with_warning(tmp_path):
+    unk_pdb = tmp_path / "1A1U_unk.pdb"
+    _rewrite_selected_residues_to_unk(PDB_PATH, unk_pdb, {31, 32, 33})
+
+    predictor = FdewetPredictor()
+    with warnings.catch_warnings(record=True) as seen:
+        warnings.simplefilter("always")
+        scores, res_ids = predictor(unk_pdb)
+
+    assert any("nonstandard polymer residues" in str(w.message) for w in seen)
+    assert len(scores) == 29
+    assert len(res_ids) == 29
+    assert np.isfinite(scores).all()
+
+
+def test_cli_predict_writes_bfactors_with_nonprotein_and_unknown_residues(monkeypatch, tmp_path):
+    mixed_pdb = tmp_path / "1A1U_mixed.pdb"
+    water_pdb = tmp_path / "1A1U_water.pdb"
+    _append_water_heterogen(PDB_PATH, water_pdb)
+    _append_unknown_polymer_chain(water_pdb, mixed_pdb)
+
+    outroot = tmp_path / "mixed_fdewet"
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        ["fasthydromap", "predict", str(mixed_pdb), "-o", str(outroot)],
+    )
+
+    main()
+
+    assert Path(f"{outroot}.csv").exists()
+    assert Path(f"{outroot}.pdb").exists()
 
 
 def test_predictor_accepts_xtc_trajectory(tmp_path):

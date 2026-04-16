@@ -40,8 +40,10 @@ def _rbf(d, centers, sigma):              # Gaussian basis
     return np.exp(-(d[..., None] - centers) ** 2 / (2 * sigma ** 2))
 
 def _one_hot(idxs, n=20):
+    idxs = np.asarray(idxs, dtype=np.int64)
     out = np.zeros((len(idxs), n), np.float32)
-    out[np.arange(len(idxs)), idxs] = 1
+    valid = (idxs >= 0) & (idxs < n)
+    out[np.arange(len(idxs))[valid], idxs[valid]] = 1
     return out
 
 def _res_uid(res) -> str:

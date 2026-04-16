@@ -6,8 +6,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from .predictors.fdewet import FdewetPredictor
 from .io.pdb            import write_bfactor
+from .install_torch import install_torch, torch_install_command
 
 
 # ---------------------------------------------------------------------
@@ -42,16 +42,81 @@ def _build_parser() -> argparse.ArgumentParser:
         help="basename for outputs (default: <dcd>_fdewet_traj)",
     )
 
+    # -------- install-torch ------------------------------------------
+    it = sub.add_parser(
+        "install-torch",
+        help="install a recommended PyTorch build into the current environment",
+    )
+    it.add_argument(
+        "--variant",
+        choices=("cpu", "cu118", "cu121"),
+        default="cpu",
+        help="PyTorch wheel channel to install (default: cpu)",
+    )
+    it.add_argument(
+        "--torch-spec",
+        default="torch>=2.2,<2.8",
+        help="torch requirement specifier to install",
+    )
+    it.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="print the pip command without executing it",
+    )
+    it.add_argument(
+        "--no-upgrade",
+        action="store_true",
+        help="do not pass --upgrade to pip",
+    )
+
     return ap
+
+
+def _load_predictor_or_exit():
+    try:
+        from .predictors.fdewet import FdewetPredictor
+    except ModuleNotFoundError as err:
+        if err.name == "torch":
+            print(
+                "FastHydroMap inference requires PyTorch, but torch is not installed in this environment.\n"
+                "Recommended CPU install:\n"
+                "  fasthydromap install-torch\n\n"
+                "Optional GPU install:\n"
+                "  fasthydromap install-torch --variant cu121",
+                file=sys.stderr,
+            )
+            sys.exit(2)
+        raise
+    return FdewetPredictor
 
 
 def main() -> None:
     args = _build_parser().parse_args()
 
-    if args.cmd not in {"predict", "predict-trajectory"}:
+    if args.cmd not in {"predict", "predict-trajectory", "install-torch"}:
         print("Unknown sub-command", file=sys.stderr)
         sys.exit(1)
 
+    if args.cmd == "install-torch":
+        command = torch_install_command(
+            args.variant,
+            torch_spec=args.torch_spec,
+            upgrade=not args.no_upgrade,
+        )
+        print("Torch install command:")
+        print("  " + " ".join(command))
+        if args.dry_run:
+            return
+
+        install_torch(
+            args.variant,
+            torch_spec=args.torch_spec,
+            upgrade=not args.no_upgrade,
+        )
+        print("✓ torch installation completed")
+        return
+
+    FdewetPredictor = _load_predictor_or_exit()
     predictor = FdewetPredictor()
 
     if args.cmd == "predict":

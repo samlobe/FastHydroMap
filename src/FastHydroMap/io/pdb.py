@@ -9,6 +9,8 @@ from openmm.app import Modeller, element
 from openmm import unit as u
 from Bio.PDB import PDBParser, PDBIO
 
+from .residue_qc import collect_residue_records, residue_uid
+
 # -----------------------------------------------------------------------------
 # Helper utilities
 # -----------------------------------------------------------------------------
@@ -120,14 +122,30 @@ def write_bfactor(
     """
 
     struct = PDBParser(QUIET=True).get_structure("struct", str(pdb_in))
-    residues = [res for res in struct.get_residues() if any(at.element != "H" for at in res)]
+    residue_records, _, _ = collect_residue_records(pdb_in)
 
-    if len(values) != len(residues):
-        raise ValueError(f"{len(residues)} residues in PDB but {len(values)} values provided")
+    if len(values) != len(residue_records):
+        raise ValueError(
+            f"{len(residue_records)} protein-like residues in PDB but {len(values)} values provided"
+        )
 
-    for val, res in zip(values, residues):
+    value_by_uid = {record.res_uid: float(val) for record, val in zip(residue_records, values)}
+
+    assigned = 0
+    for res in struct.get_residues():
+        if res.id[0].strip():
+            continue
+        uid = residue_uid(res.get_parent().id, res.id[1], res.id[2])
+        if uid not in value_by_uid:
+            continue
         for atom in res.get_atoms():
-            atom.set_bfactor(float(val))
+            atom.set_bfactor(value_by_uid[uid])
+        assigned += 1
+
+    if assigned != len(value_by_uid):
+        raise ValueError(
+            f"assigned B-factors to {assigned} residues, expected {len(value_by_uid)}"
+        )
 
     io = PDBIO(); io.set_structure(struct); io.save(str(pdb_out))
     print(f"✓ B‑factors written → {pdb_out}")
