@@ -3,25 +3,26 @@ requires      = ["setuptools>=70", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name        = "FastHydroMap"
+name        = "fasthydromap"
 version     = "0.1.0"
 description = "Predict per-residue Fdewet using SASA + MPNN"
 authors     = [{name="Samuel Lobo", email="samuels.lobo@gmail.com"}]
 license     = "MIT"
 readme      = "README.md"
-requires-python = ">=3.10,<3.12"
+requires-python = ">=3.11,<3.14"
 keywords = ["protein", "hydrophobicity", "molecular-dynamics", "biophysics", "machine-learning"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Science/Research",
   "Topic :: Scientific/Engineering :: Bio-Informatics",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
 ]
 
 dependencies = [
-  "numpy>=1.26,<2.0",
+  "numpy>=1.26,<3.0",
   "pandas>=2.2,<3.0",
   "mdtraj>=1.10,<2.0",
   "pdbfixer",

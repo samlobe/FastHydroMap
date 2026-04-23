@@ -18,6 +18,12 @@ python -m pip install "${WHEEL_PATH}"
 
 fasthydromap --help
 fasthydromap install-torch --dry-run
+fasthydromap install-torch --variant cpu
+OUTROOT="${TEST_ENV}/smoke_1A1U"
+fasthydromap predict "${ROOT_DIR}/examples/1A1U.pdb" -o "${OUTROOT}"
+
+test -f "${OUTROOT}.csv"
+test -f "${OUTROOT}.pdb"
 
 echo
 echo "Wheel install smoke test passed in ${TEST_ENV}"

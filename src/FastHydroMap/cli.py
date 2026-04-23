@@ -45,7 +45,8 @@ def _build_parser() -> argparse.ArgumentParser:
     # -------- install-torch ------------------------------------------
     it = sub.add_parser(
         "install-torch",
-        help="install a recommended PyTorch build into the current environment",
+        help="install or replace PyTorch in the current environment (advanced/manual helper)",
+        description="Install or replace PyTorch in the current environment (advanced/manual helper).",
     )
     it.add_argument(
         "--variant",
@@ -114,6 +115,7 @@ def main() -> None:
             upgrade=not args.no_upgrade,
         )
         print("✓ torch installation completed")
+        print("  This helper is mainly for advanced/manual CPU or GPU torch setup.")
         return
 
     FdewetPredictor = _load_predictor_or_exit()

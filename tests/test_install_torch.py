@@ -1,6 +1,6 @@
 import sys
 
-from FastHydroMap.cli import main
+from FastHydroMap.cli import _build_parser, main
 from FastHydroMap.install_torch import torch_install_command
 
 
@@ -24,3 +24,12 @@ def test_cli_install_torch_dry_run(monkeypatch, capsys):
     out = capsys.readouterr().out
     assert "Torch install command:" in out
     assert "https://download.pytorch.org/whl/cpu" in out
+
+
+def test_install_torch_subparser_is_marked_as_advanced():
+    parser = _build_parser()
+    subparsers_action = next(
+        action for action in parser._actions if getattr(action, "choices", None)
+    )
+    install_torch_parser = subparsers_action.choices["install-torch"]
+    assert "advanced/manual helper" in install_torch_parser.description
