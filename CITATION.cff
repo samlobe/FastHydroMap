@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use FastHydroMap, please cite the software release below."
+title: "FastHydroMap"
+type: software
+authors:
+  - family-names: "Lobo"
+    given-names: "Samuel"
+    email: "samuels.lobo@gmail.com"
+doi: 10.5281/zenodo.19744335
+version: "0.1.2"
+date-released: 2026-04-24
+url: "https://github.com/samlobe/FastHydroMap"
+repository-code: "https://github.com/samlobe/FastHydroMap"
+license: "MIT"
