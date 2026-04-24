@@ -4,7 +4,7 @@ FastHydroMap predicts per-residue dewetting free energies (`Fdewet`) from protei
 
 <p align="center">
   <img
-    src="images/FastHydroMap_image.png"
+    src="https://raw.githubusercontent.com/samlobe/FastHydroMap/main/images/FastHydroMap_image.png"
     alt="FastHydroMap overview"
     width="720"
   />
