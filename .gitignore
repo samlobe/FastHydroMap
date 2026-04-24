@@ -1,0 +1,75 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.swp
+*.swo
+
+# Build directories
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.venv/
+env/
+venv/
+.wheel-test/
+.codex
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local release / scratch notes
+REPRODUCING.md
+
+# Local outputs and experiment workspace
+outputs/
+training/
+checkpoints_direct_feat/
+trastuzumab.pdb
+trastuzumab_colored.pdb
+trastusumab_colored.pdb.csv
+
+# Example outputs and local scratch files
+examples/*_fdewet*.csv
+examples/*_fdewet*.pdb
+examples/*colored*.csv
+examples/*colored*.pdb
+examples/*.png
+examples/*.pdf
+examples/*.tif
+examples/*.swp
+examples/old/
+examples/rcsb_stress/
+examples/calmodulin_*
+examples/unfolding*
+examples/folding.dcd
+examples/1MI0*
+examples/1mi0*
+examples/1cfd.cif
+examples/1cll.cif
+examples/make_fdewet_movie.py
+examples/make_fdewet_movie_folding.py
+examples/plot_proteinG_dfdewet_selection.py
+examples/rcsb_pdb_stress_test.py
+examples/traj_analysis_testing.py
+examples/proteinG_*.tif
+examples/proteinG_*.pdf
+examples/proteinG_*.png
+examples/proteinG_A_*.fasta
+
+# Training artifacts (generated)
+training/data/graphs/*.pt
+training/data/minimization_work/
+training/logs/
+training/checkpoints_direct_feat/
+training/checkpoints_delta_feat/
+training/models/*.pt
+training/models/*.npz
+training/models/*.json
+
+# Paper/experiment generated artifacts
+training/paper/*.bak_before_minimized_*
+training/paper/*.png

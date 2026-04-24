@@ -1,0 +1,56 @@
+[build-system]
+requires      = ["setuptools>=70", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name        = "fasthydromap"
+version     = "0.1.1"
+description = "Predict per-residue Fdewet using SASA + MPNN"
+authors     = [{name="Samuel Lobo", email="samuels.lobo@gmail.com"}]
+license     = "MIT"
+readme      = "README.md"
+requires-python = ">=3.11,<3.15"
+keywords = ["protein", "hydrophobicity", "molecular-dynamics", "biophysics", "machine-learning"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+]
+
+dependencies = [
+  "numpy>=1.26,<3.0",
+  "pandas>=2.2,<3.0",
+  "mdtraj>=1.10,<2.0",
+  "pdbfixer",
+  "openmm>=8.2,<9",
+  "biopython>=1.85",
+  "tqdm",
+  "scipy>=1.11",
+  "scikit-learn",
+  "pyyaml",
+  "setuptools<81",
+]
+
+[project.optional-dependencies]
+torch = ["torch>=2.2,<2.12"]
+inference = ["torch>=2.2,<2.12"]
+dev = ["build", "twine", "pytest", "black", "ruff"]
+
+[project.urls]
+Homepage = "https://github.com/samlobe/FastHydroMap"
+Repository = "https://github.com/samlobe/FastHydroMap"
+Issues = "https://github.com/samlobe/FastHydroMap/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+FastHydroMap = ["weights/sasa_feature_stats.npz", "weights/mpnn_latest.pt"]
+
+[project.scripts]
+fasthydromap = "FastHydroMap.cli:main"
