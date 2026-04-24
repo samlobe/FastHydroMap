@@ -6,7 +6,7 @@ authors:
   - family-names: "Lobo"
     given-names: "Samuel"
     email: "samuels.lobo@gmail.com"
-doi: 10.5281/zenodo.19744335
+doi: 10.5281/zenodo.19744336
 version: "0.1.2"
 date-released: 2026-04-24
 url: "https://github.com/samlobe/FastHydroMap"
