@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name        = "fasthydromap"
-version     = "0.1.1"
+version     = "0.1.2"
 description = "Predict per-residue Fdewet using SASA + MPNN"
 authors     = [{name="Samuel Lobo", email="samuels.lobo@gmail.com"}]
 license     = "MIT"
