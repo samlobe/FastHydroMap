@@ -22,11 +22,9 @@ PDB structures.
   helpers.
 - `residue_keys.py`: stable residue identifiers for chains and insertion codes.
 
-## Required External Data
+## Required Data
 
-Place the source PDB files in `training/data/rcsb_pdbs/`, or make that path a
-symlink to the directory containing the canonical non-minimized structures.
-Graph caches are written to `training/data/graphs/`.
+Download the source PDB files to `training/data/rcsb_pdbs/`.
 
 ## Production Configuration
 
