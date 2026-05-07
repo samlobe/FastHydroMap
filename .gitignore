@@ -26,7 +26,6 @@ REPRODUCING.md
 
 # Local outputs and experiment workspace
 outputs/
-training/
 checkpoints_direct_feat/
 trastuzumab.pdb
 trastuzumab_colored.pdb
@@ -63,6 +62,11 @@ examples/proteinG_A_*.fasta
 # Training artifacts (generated)
 training/data/graphs/*.pt
 training/data/minimization_work/
+training/data/minimization_work_test/
+training/data/*.bak_*
+training/data/.rcsb_pdbs_symlink_backup
+training/data/embeddings.zarr
+training/data/rcsb_pdbs
 training/logs/
 training/checkpoints_direct_feat/
 training/checkpoints_delta_feat/
