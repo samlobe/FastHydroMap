@@ -5,6 +5,7 @@
 [![DOI](https://zenodo.org/badge/1023802589.svg)](https://doi.org/10.5281/zenodo.19744336)
 
 FastHydroMap predicts per-residue dewetting free energies (`Fdewet`) from protein structures and trajectories.
+It can also predict water structuring  (`PC1`, `PC2`, `PC3` of the [water triplet angle distribution](https://doi.org/10.1021/acs.jpcb.3c00826)).
 
 <p align="center">
   <img
@@ -40,17 +41,20 @@ Typical usage:
 ```bash
 # Single structure
 fasthydromap predict examples/1A1U.pdb -o outputs/1A1U_fdewet
+fasthydromap predict examples/1A1U.pdb --quantity pc1 -o outputs/1A1U_pc1
 
 # Trajectory
 fasthydromap predict-trajectory examples/proteinG.pdb examples/proteinG_short.dcd -o outputs/proteinG_fdewet
 ```
 
+The default `--quantity fdewet` predicts dewetting free energy. Use `--quantity pc1`, `--quantity pc2`, or `--quantity pc3` to predict water-structure principal-component maps instead.
+
 ## Outputs
 
 For a single structure, FastHydroMap writes:
 
-- `*.csv`: one row per residue with `Fdewet`; with `--parts`, intrinsic and context columns are included
-- `*.pdb`: a copy of the input structure with predicted `Fdewet` written to B-factors
+- `*.csv`: one row per residue with the requested quantity; with `--parts`, intrinsic and context columns are included
+- `*.pdb`: a copy of the input structure with the requested quantity written to B-factors
 
 For a trajectory, FastHydroMap writes wide CSV files containing one row per frame and one column per residue.
 Use `--parts` to also write intrinsic, context, and per-frame summary CSVs.
@@ -62,12 +66,20 @@ Predictions for PTMs and other non-canonical chemistries should be treated cauti
 
 ## Visualization
 
-FastHydroMap writes `Fdewet` values to the B-factor column of output PDBs, so you can color structures directly in molecular viewers.
+FastHydroMap writes predicted values to the B-factor column of output PDBs, so you can color structures directly in molecular viewers.
 
 ChimeraX:
 
 ```bash
 color bfactor range 4,6.5 palette ^lipophilicity
+```
+
+Example PC map coloring in ChimeraX:
+
+```bash
+color bfactor range -8,8 palette red-white-blue # example range and palette for PC1: redder = more tetrahedral angles
+color bfactor range -2,8 palette cyanmaroon # for PC2: maroon = more 90 deg angles (unstructured)
+color bfactor range -2,2 palette ^lipophilicity # for PC3: yellower = fewer 50 deg angles (i.e. fewer highly coordinated waters)
 ```
 
 PyMOL:
@@ -85,7 +97,7 @@ If you use FastHydroMap in your research, please cite the software release:
 
 [![DOI](https://zenodo.org/badge/1023802589.svg)](https://doi.org/10.5281/zenodo.19744336)
 
-Lobo, S. FastHydroMap (Version 0.1.2) [Computer software]. Zenodo.
+Lobo, S. FastHydroMap (Version 0.1.3) [Computer software]. Zenodo.
 https://doi.org/10.5281/zenodo.19744336
 
 When the manuscript becomes available, please cite that as well.

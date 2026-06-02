@@ -145,6 +145,22 @@ def test_cli_predict_writes_outputs_for_path_outroot(monkeypatch, tmp_path):
     assert np.max(np.abs(out_scores - ref_scores)) < 0.5
 
 
+def test_cli_predict_can_write_pc_quantity(monkeypatch, tmp_path):
+    outroot = tmp_path / "1A1U_pc1"
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        ["fasthydromap", "predict", str(PDB_PATH), "-o", str(outroot), "--quantity", "pc1"],
+    )
+
+    main()
+
+    df = pd.read_csv(Path(f"{outroot}.csv"))
+    assert list(df.columns) == ["residue", "PC1"]
+    assert len(df) > 0
+    assert np.isfinite(df["PC1"].to_numpy(np.float32)).all()
+
+
 def test_cli_predict_parts_writes_single_structure_decomposition(monkeypatch, tmp_path):
     outroot = tmp_path / "1A1U_fdewet_parts"
     monkeypatch.setattr(

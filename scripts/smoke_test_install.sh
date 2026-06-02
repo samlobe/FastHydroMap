@@ -13,3 +13,4 @@ mkdir -p "${OUTDIR}"
 fasthydromap --help >/dev/null
 fasthydromap install-torch --variant cpu
 fasthydromap predict examples/1A1U.pdb -o "${OUTDIR}/1A1U_fdewet"
+fasthydromap predict examples/1A1U.pdb --quantity pc1 -o "${OUTDIR}/1A1U_pc1"
