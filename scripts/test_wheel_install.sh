@@ -21,9 +21,12 @@ fasthydromap install-torch --dry-run
 fasthydromap install-torch --variant cpu
 OUTROOT="${TEST_ENV}/smoke_1A1U"
 fasthydromap predict "${ROOT_DIR}/examples/1A1U.pdb" -o "${OUTROOT}"
+fasthydromap predict "${ROOT_DIR}/examples/1A1U.pdb" --quantity pc1 -o "${TEST_ENV}/smoke_1A1U_pc1"
 
 test -f "${OUTROOT}.csv"
 test -f "${OUTROOT}.pdb"
+test -f "${TEST_ENV}/smoke_1A1U_pc1.csv"
+test -f "${TEST_ENV}/smoke_1A1U_pc1.pdb"
 
 echo
 echo "Wheel install smoke test passed in ${TEST_ENV}"

@@ -25,6 +25,8 @@ GRAPH_DIR = ROOT / "graphs"
 META_CSV = ROOT / "all_residue_results.csv"
 SPLIT_YML = ROOT / "splits.yaml"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+SUPPORTED_TARGETS = ("Fdewet_pred", "PC1", "PC2", "PC3")
+SUPPORTED_MASK_SOURCES = ("auto", "fdewet", "trusted", "all")
 
 
 @dataclass(frozen=True)
@@ -48,6 +50,20 @@ class TrainConfig:
     clip: float = 2.0
     factor: float = 1.0
     seed: int = 48
+    target: str = "Fdewet_pred"
+    mask_source: str = "auto"
+    winsor_lower: float | None = None
+    winsor_upper: float | None = None
+
+    def __post_init__(self):
+        if self.target not in SUPPORTED_TARGETS:
+            raise ValueError(f"target must be one of {SUPPORTED_TARGETS}; got {self.target!r}")
+        if self.mask_source not in SUPPORTED_MASK_SOURCES:
+            raise ValueError(f"mask_source must be one of {SUPPORTED_MASK_SOURCES}; got {self.mask_source!r}")
+        if (self.winsor_lower is None) != (self.winsor_upper is None):
+            raise ValueError("winsor_lower and winsor_upper must be set together")
+        if self.winsor_lower is not None and not (0.0 <= self.winsor_lower < self.winsor_upper <= 1.0):
+            raise ValueError("winsor bounds must satisfy 0 <= lower < upper <= 1")
 
 
 def _flt_tag(x: float) -> str:
@@ -74,23 +90,88 @@ def set_seed(seed: int) -> None:
     np.random.seed(seed)
 
 
-def masked_mean_target(meta: pd.DataFrame, pdb_ids: list[str]) -> float:
+def _target_mask(rows: pd.DataFrame, target: str, mask_source: str) -> np.ndarray:
+    if target not in rows.columns:
+        raise ValueError(f"target column {target!r} not found in metadata")
+
+    if mask_source == "auto":
+        mask_source = "fdewet" if target == "Fdewet_pred" else "trusted"
+
+    if mask_source == "fdewet":
+        mask = (
+            (rows.avg_n_waters.values > 7.0)
+            & (rows.Fdewet_pred.values >= 3.8)
+            & (rows.Fdewet_pred.values <= 8.7)
+        )
+    elif mask_source == "trusted":
+        if "trusted" not in rows.columns:
+            raise ValueError("trusted mask requested, but metadata has no 'trusted' column")
+        mask = rows.trusted.astype(bool).values
+    elif mask_source == "all":
+        mask = np.ones(len(rows), dtype=np.bool_)
+    else:
+        raise ValueError(f"unknown mask source: {mask_source}")
+
+    return mask & pd.notna(rows[target]).values
+
+
+def compute_winsor_bounds(
+    meta: pd.DataFrame,
+    pdb_ids: list[str],
+    target: str,
+    mask_source: str,
+    lower: float | None,
+    upper: float | None,
+) -> tuple[float, float] | None:
+    if lower is None or upper is None:
+        return None
     subset = meta[meta["pdb_id"].isin(pdb_ids)]
-    trusted = (
-        (subset.avg_n_waters.values > 7.0)
-        & (subset.Fdewet_pred.values >= 3.8)
-        & (subset.Fdewet_pred.values <= 8.7)
-    )
-    return float(subset.loc[trusted, "Fdewet_pred"].mean())
+    mask = _target_mask(subset, target, mask_source)
+    vals = subset.loc[mask, target].astype(float)
+    return float(vals.quantile(lower)), float(vals.quantile(upper))
+
+
+def apply_target_clip(values: np.ndarray, bounds: tuple[float, float] | None) -> np.ndarray:
+    if bounds is None:
+        return values
+    lo, hi = bounds
+    return np.clip(values, lo, hi)
+
+
+def masked_mean_target(
+    meta: pd.DataFrame,
+    pdb_ids: list[str],
+    target: str,
+    mask_source: str,
+    target_clip_bounds: tuple[float, float] | None = None,
+) -> float:
+    subset = meta[meta["pdb_id"].isin(pdb_ids)]
+    mask = _target_mask(subset, target, mask_source)
+    vals = subset.loc[mask, target].values.astype(np.float32)
+    vals = apply_target_clip(vals, target_clip_bounds)
+    return float(vals.mean())
 
 
 class GraphDSDirect(InMemoryDataset):
-    def __init__(self, graphs_pt: Path, meta_df: pd.DataFrame):
+    def __init__(
+        self,
+        graphs_pt: Path,
+        meta_df: pd.DataFrame,
+        target: str = "Fdewet_pred",
+        mask_source: str = "auto",
+        target_clip_bounds: tuple[float, float] | None = None,
+    ):
         super().__init__("")
         self.data, self.slices = torch.load(graphs_pt)
-        self._augment_with_meta(meta_df)
+        self._augment_with_meta(meta_df, target, mask_source, target_clip_bounds)
 
-    def _augment_with_meta(self, meta: pd.DataFrame):
+    def _augment_with_meta(
+        self,
+        meta: pd.DataFrame,
+        target: str,
+        mask_source: str,
+        target_clip_bounds: tuple[float, float] | None,
+    ):
         meta = ensure_residue_key_columns(meta)
         mi_uid = meta.set_index(["pdb_id", "res_uid"])
         mi_resid = meta.set_index(["pdb_id", "resid"])
@@ -105,15 +186,17 @@ class GraphDSDirect(InMemoryDataset):
             if rows.isnull().any().any():
                 raise ValueError(f"missing metadata for graph {g.pdb_id}")
 
-            target = rows.Fdewet_pred.values.astype(np.float32)
-            trusted = (
-                (rows.avg_n_waters.values > 7.0)
-                & (rows.Fdewet_pred.values >= 3.8)
-                & (rows.Fdewet_pred.values <= 8.7)
-            ).astype(np.bool_)
+            raw_target_values = rows[target].values.astype(np.float32)
+            target_values = apply_target_clip(raw_target_values, target_clip_bounds)
+            trusted = _target_mask(rows, target, mask_source).astype(np.bool_)
 
-            g.target = torch.from_numpy(target)
+            g.target = torch.from_numpy(target_values)
+            g.raw_target = torch.from_numpy(raw_target_values)
             g.mask = torch.from_numpy(trusted)
+            g.target_name = target
+            g.mask_source = mask_source
+            if target_clip_bounds is not None:
+                g.target_clip_bounds = target_clip_bounds
             new_graphs.append(g)
 
         self.data, self.slices = InMemoryDataset.collate(new_graphs)

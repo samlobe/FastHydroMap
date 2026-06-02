@@ -38,6 +38,7 @@ That script builds the project, creates a fresh venv, installs the wheel, and ve
 - `fasthydromap --help`
 - `fasthydromap install-torch --dry-run`
 - `fasthydromap predict examples/1A1U.pdb -o ...`
+- `fasthydromap predict examples/1A1U.pdb --quantity pc1 -o ...`
 
 For a manual end-to-end check in the same environment:
 
@@ -45,6 +46,7 @@ For a manual end-to-end check in the same environment:
 source .wheel-test/bin/activate
 fasthydromap install-torch --variant cpu
 fasthydromap predict examples/1A1U.pdb -o /tmp/1A1U_fdewet
+fasthydromap predict examples/1A1U.pdb --quantity pc1 -o /tmp/1A1U_pc1
 ```
 
 ## 4. Create a Git tag
@@ -52,7 +54,7 @@ fasthydromap predict examples/1A1U.pdb -o /tmp/1A1U_fdewet
 Example:
 
 ```bash
-VERSION=0.1.1
+VERSION=0.1.3
 git tag "v${VERSION}"
 git push origin "v${VERSION}"
 ```

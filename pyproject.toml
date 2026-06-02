@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name        = "fasthydromap"
-version     = "0.1.2"
-description = "Predict per-residue Fdewet using SASA + MPNN"
+version     = "0.1.3"
+description = "Predict per-residue FastHydroMap Fdewet and water-structure PC maps"
 authors     = [{name="Samuel Lobo", email="samuels.lobo@gmail.com"}]
 license     = "MIT"
 readme      = "README.md"
@@ -50,7 +50,7 @@ Issues = "https://github.com/samlobe/FastHydroMap/issues"
 where = ["src"]
 
 [tool.setuptools.package-data]
-FastHydroMap = ["weights/sasa_feature_stats.npz", "weights/mpnn_latest.pt"]
+FastHydroMap = ["weights/sasa_feature_stats.npz", "weights/*.pt"]
 
 [project.scripts]
 fasthydromap = "FastHydroMap.cli:main"

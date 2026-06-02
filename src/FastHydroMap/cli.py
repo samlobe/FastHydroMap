@@ -9,13 +9,21 @@ import pandas as pd
 from .io.pdb            import write_bfactor
 from .install_torch import install_torch, torch_install_command
 
+QUANTITIES = ("fdewet", "pc1", "pc2", "pc3")
+QUANTITY_LABELS = {
+    "fdewet": "Fdewet",
+    "pc1": "PC1",
+    "pc2": "PC2",
+    "pc3": "PC3",
+}
+
 
 # ---------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------
 def _build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(prog="fasthydromap",
-                                 description="FastHydroMap – infer per-residue Fdewet")
+                                 description="FastHydroMap – infer per-residue Fdewet or PC maps")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     # -------- predict -------------------------------------------------
@@ -30,6 +38,12 @@ def _build_parser() -> argparse.ArgumentParser:
         "--parts",
         action="store_true",
         help="for single-structure predictions, include intrinsic and context columns",
+    )
+    p.add_argument(
+        "--quantity",
+        choices=QUANTITIES,
+        default="fdewet",
+        help="per-residue quantity to predict (default: fdewet)",
     )
 
     # -------- predict-trajectory --------------------------------------
@@ -50,6 +64,12 @@ def _build_parser() -> argparse.ArgumentParser:
         "--parts",
         action="store_true",
         help="write intrinsic, context, and per-frame summary CSVs in addition to total",
+    )
+    pt.add_argument(
+        "--quantity",
+        choices=QUANTITIES,
+        default="fdewet",
+        help="per-residue quantity to predict (default: fdewet)",
     )
 
     # -------- install-torch ------------------------------------------
@@ -129,7 +149,9 @@ def main() -> None:
         return
 
     FdewetPredictor = _load_predictor_or_exit()
-    predictor = FdewetPredictor()
+    predictor = FdewetPredictor(quantity=args.quantity)
+    quantity_label = QUANTITY_LABELS[args.quantity]
+    quantity_suffix = args.quantity
 
     if args.cmd == "predict":
         if args.parts and args.dcd is not None:
@@ -161,7 +183,7 @@ def main() -> None:
         # -------------------------------------------------------------
         outroot = args.outroot or args.pdb.with_suffix("")
         if args.outroot is None:
-            outroot = outroot.with_name(outroot.name + "_fdewet")
+            outroot = outroot.with_name(outroot.name + f"_{quantity_suffix}")
 
         csv_path = Path(f"{outroot}.csv")
         pdb_path = Path(f"{outroot}.pdb")
@@ -170,11 +192,11 @@ def main() -> None:
         if args.dcd is None:
             data = {
                 "residue": [str(r) for r in res_ids],
-                "Fdewet": scores.round(2),
+                quantity_label: scores.round(2),
             }
             if args.parts:
-                data["Fdewet_intrinsic"] = parts["intrinsic"].round(2)
-                data["Fdewet_context"] = parts["context"].round(2)
+                data[f"{quantity_label}_intrinsic"] = parts["intrinsic"].round(2)
+                data[f"{quantity_label}_context"] = parts["context"].round(2)
             df = pd.DataFrame(data)
         else:
             col_names = [str(r) for r in res_ids]               # columns = residue numbers
@@ -203,7 +225,7 @@ def main() -> None:
 
     outroot = args.outroot or args.dcd.with_suffix("")
     if args.outroot is None:
-        outroot = outroot.with_name(outroot.name + "_fdewet_traj")
+        outroot = outroot.with_name(outroot.name + f"_{quantity_suffix}_traj")
 
     total_csv = Path(f"{outroot}_total.csv")
     intrinsic_csv = Path(f"{outroot}_intrinsic.csv")
