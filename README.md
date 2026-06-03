@@ -2,7 +2,7 @@
 
 [![PyPI version](https://img.shields.io/badge/pypi-v0.1.3-blue)](https://pypi.org/project/fasthydromap/0.1.3/)
 [![Python versions](https://img.shields.io/pypi/pyversions/fasthydromap)](https://pypi.org/project/fasthydromap/)
-[![DOI](https://zenodo.org/badge/1023802589.svg)](https://doi.org/10.5281/zenodo.19744336)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19744336.svg)](https://doi.org/10.5281/zenodo.19744336)
 
 FastHydroMap predicts per-residue dewetting free energies (`Fdewet`) from protein structures and trajectories.
 It can also predict water structuring (`PC1`, `PC2`, `PC3` of the [water triplet angle distribution](https://doi.org/10.1021/acs.jpcb.3c00826)).
@@ -95,7 +95,7 @@ For dynamic hydrophobicity visualization in a MD trajectory, see the teaching-or
 
 If you use FastHydroMap in your research, please cite the software release:
 
-[![DOI](https://zenodo.org/badge/1023802589.svg)](https://doi.org/10.5281/zenodo.19744336)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19744336.svg)](https://doi.org/10.5281/zenodo.19744336)
 
 Lobo, S. FastHydroMap (Version 0.1.3) [Computer software]. Zenodo.
 https://doi.org/10.5281/zenodo.19744336
