@@ -1,11 +1,11 @@
 # FastHydroMap
 
-[![PyPI version](https://img.shields.io/pypi/v/fasthydromap)](https://pypi.org/project/fasthydromap/)
+[![PyPI version](https://img.shields.io/badge/pypi-v0.1.3-blue)](https://pypi.org/project/fasthydromap/0.1.3/)
 [![Python versions](https://img.shields.io/pypi/pyversions/fasthydromap)](https://pypi.org/project/fasthydromap/)
 [![DOI](https://zenodo.org/badge/1023802589.svg)](https://doi.org/10.5281/zenodo.19744336)
 
 FastHydroMap predicts per-residue dewetting free energies (`Fdewet`) from protein structures and trajectories.
-It can also predict water structuring  (`PC1`, `PC2`, `PC3` of the [water triplet angle distribution](https://doi.org/10.1021/acs.jpcb.3c00826)).
+It can also predict water structuring (`PC1`, `PC2`, `PC3` of the [water triplet angle distribution](https://doi.org/10.1021/acs.jpcb.3c00826)).
 
 <p align="center">
   <img
