@@ -24,6 +24,52 @@ from ..models.mpnn import FdewetMPNN
 from ..utils.atom_names import backbone_alias_priority, canonical_backbone_atom_name
 
 WEIGHT_DIR = Path(__file__).parents[1] / "weights"
+QUANTITY_SPECS = {
+    "fdewet": {
+        "label": "Fdewet",
+        "weight": WEIGHT_DIR / "mpnn_latest.pt",
+        "k_nn": 12,
+        "n_rbf": 3,
+        "rbf_min": 2.0,
+        "rbf_max": 14.0,
+        "rbf_sigma": 4.0,
+    },
+    "pc1": {
+        "label": "PC1",
+        "weight": WEIGHT_DIR / "mpnn_pc1_latest.pt",
+        "k_nn": 12,
+        "n_rbf": 3,
+        "rbf_min": 2.0,
+        "rbf_max": 14.0,
+        "rbf_sigma": 4.0,
+    },
+    "pc2": {
+        "label": "PC2",
+        "weight": WEIGHT_DIR / "mpnn_pc2_latest.pt",
+        "k_nn": 12,
+        "n_rbf": 3,
+        "rbf_min": 2.0,
+        "rbf_max": 14.0,
+        "rbf_sigma": 4.0,
+    },
+    "pc3": {
+        "label": "PC3",
+        "weight": WEIGHT_DIR / "mpnn_pc3_latest.pt",
+        "k_nn": 12,
+        "n_rbf": 3,
+        "rbf_min": 2.0,
+        "rbf_max": 14.0,
+        "rbf_sigma": 4.0,
+    },
+}
+
+
+def normalize_quantity(quantity: str) -> str:
+    q = quantity.lower()
+    if q in QUANTITY_SPECS:
+        return q
+    raise ValueError(f"unknown FastHydroMap quantity {quantity!r}")
+
 
 def _display_residue_label(
     chain_id: str,
@@ -42,15 +88,26 @@ def _display_residue_label(
 class FdewetPredictor:
     def __init__(
         self,
+        quantity: str = "fdewet",
         k_nn: int = 12,
         n_rbf: int = 3,
         rbf_min: float = 2.0,
         rbf_max: float = 14.0,
         rbf_sigma: float = 4.0,
-        mpnn_pt: Path = WEIGHT_DIR / "mpnn_latest.pt",
+        mpnn_pt: Path | None = None,
         sasa_stats_npz: Path = WEIGHT_DIR / "sasa_feature_stats.npz",
         device: str | torch.device | None = None,
     ):
+        self.quantity = normalize_quantity(quantity)
+        spec = QUANTITY_SPECS[self.quantity]
+        if mpnn_pt is None:
+            mpnn_pt = spec["weight"]
+            k_nn = int(spec["k_nn"])
+            n_rbf = int(spec["n_rbf"])
+            rbf_min = float(spec["rbf_min"])
+            rbf_max = float(spec["rbf_max"])
+            rbf_sigma = float(spec["rbf_sigma"])
+        self.output_label = str(spec["label"])
         self.k = k_nn
         self.n_rbf = n_rbf
         self.rbf_min = rbf_min

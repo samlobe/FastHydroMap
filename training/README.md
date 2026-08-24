@@ -1,7 +1,9 @@
 # FastHydroMap Training
 
 This directory contains the minimal training pipeline used to build the
-FastHydroMap direct MPNN weights from residue-level Fdewet targets.
+FastHydroMap direct MPNN weights from residue-level Fdewet targets. The same
+graph/training path can also be used for PC target experiments (`PC1`, `PC2`,
+`PC3`) from the metadata CSV.
 
 The large graph tensors and checkpoints are generated artifacts and are not
 stored in Git. They can be rebuilt from the scripts, CSV metadata, and source
@@ -18,6 +20,8 @@ PDB structures.
 - `03_train_mpnn_val.py`: trains on the training split and early-stops on the
   validation split.
 - `04_train_mpnn_prod.py`: retrains on train+validation for production weights.
+- `05_visualize_pc_targets.py`: writes a lightweight SVG/CSV report for
+  inspecting PC distributions and trusted/untrusted residues.
 - `train_mpnn_common.py`: shared dataset, model, optimizer, and evaluation
   helpers.
 - `residue_keys.py`: stable residue identifiers for chains and insertion codes.
@@ -54,3 +58,27 @@ count explicitly:
 ```bash
 python training/04_train_mpnn_prod.py --seed 48 --epochs 22
 ```
+
+## PC Target Experiments
+
+`data/all_residue_results.csv` includes `PC1`, `PC2`, and `PC3`. To inspect the
+targets and the trusted/untrusted split:
+
+```bash
+python training/05_visualize_pc_targets.py
+```
+
+This writes local generated files under `training/figures/`.
+
+To train the same direct MPNN architecture against `PC1`:
+
+```bash
+python training/03_train_mpnn_val.py --target PC1 --report-test
+python training/04_train_mpnn_prod.py --target PC1
+```
+
+For PC targets, `--mask-source auto` uses the CSV `trusted` column. The other
+available modes are `--mask-source fdewet` for the original Fdewet rule and
+`--mask-source all` for every residue with a finite target value. PC experiment
+weights stay under `training/models/`; the production script only copies the
+default Fdewet model into the package weights directory.

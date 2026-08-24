@@ -2,9 +2,11 @@
 
 [![PyPI version](https://img.shields.io/pypi/v/fasthydromap)](https://pypi.org/project/fasthydromap/)
 [![Python versions](https://img.shields.io/pypi/pyversions/fasthydromap)](https://pypi.org/project/fasthydromap/)
-[![DOI](https://zenodo.org/badge/1023802589.svg)](https://doi.org/10.5281/zenodo.19744336)
+[![Paper DOI](https://img.shields.io/badge/DOI-10.64898%2F2026.06.07.730647-blue)](https://doi.org/10.64898/2026.06.07.730647)
 
-FastHydroMap predicts per-residue dewetting free energies (`Fdewet`) from protein structures and trajectories.
+FastHydroMap predicts per-residue dewetting free energies (`Fdewet`) from protein
+structures and trajectories. It is also available as a ChimeraX bundle from the
+[UCSF ChimeraX Toolshed](https://cxtoolshed.rbvi.ucsf.edu/apps/chimeraxfasthydromap).
 
 <p align="center">
   <img
@@ -27,6 +29,43 @@ fasthydromap predict your_structure.pdb -o outputs/your_structure_fdewet
 `fasthydromap install-torch` defaults to the CPU build, which is usually the right choice for current FastHydroMap workloads because SASA preprocessing dominates runtime.
 
 Advanced installation options, Docker usage, GPU Torch variants, and release workflows are documented in [INSTALL.md](https://github.com/samlobe/FastHydroMap/blob/main/docs/INSTALL.md) and [PYPI_RELEASE.md](https://github.com/samlobe/FastHydroMap/blob/main/docs/PYPI_RELEASE.md).
+
+## ChimeraX implementation
+
+FastHydroMap is available directly from the
+[UCSF ChimeraX Toolshed](https://cxtoolshed.rbvi.ucsf.edu/apps/chimeraxfasthydromap)
+for ChimeraX 1.12 and newer. In ChimeraX, choose **Tools > More Tools...**, search
+for **FastHydroMap**, and click **Install**. The command-line equivalent is:
+
+```text
+toolshed install FastHydroMap
+```
+
+Then perform the one-time installation of FastHydroMap and PyTorch in the
+bundle-managed environment:
+
+```text
+fasthydromap install
+```
+
+Open a protein and make a residue-level Fdewet map:
+
+```text
+open 1a1u
+fasthydromap #1
+```
+where `#1` refers to the atom/object selection. For example, `#2` would color the second loaded object, and `/A` would color only chain A.
+
+Water-structure maps and custom ranges are available through command options:
+
+```text
+fasthydromap #1 quantity pc1
+fasthydromap #1 quantity pc2 range -2,8
+```
+
+Run `help fasthydromap` inside ChimeraX for examples and interpretation, or see
+the complete
+[FastHydroMap ChimeraX tutorial](https://github.com/samlobe/FastHydroMap/blob/main/docs/ChimeraX_tutorial.md).
 
 ## Inputs
 
@@ -58,7 +97,7 @@ Use `--parts` to also write intrinsic, context, and per-frame summary CSVs.
 ## Model Scope
 
 FastHydroMap was trained on structured single-chain proteins and the 20 canonical amino-acid chemistries.
-Predictions for PTMs and other non-canonical chemistries should be treated cautiously.
+Predictions for PTMs and other non-canonical chemistries should be treated cautiously; we recommend using/altering [HydroMap](github.com/samlobe/HydroMap) to model PTMs and non-canonical chemistries.
 
 ## Visualization
 
@@ -81,14 +120,14 @@ For dynamic hydrophobicity visualization in a MD trajectory, see the teaching-or
 
 ## Citation
 
-If you use FastHydroMap in your research, please cite the software release:
+If you use FastHydroMap in your research, please cite the HydroMap and
+FastHydroMap paper:
 
-[![DOI](https://zenodo.org/badge/1023802589.svg)](https://doi.org/10.5281/zenodo.19744336)
+[![Paper DOI](https://img.shields.io/badge/DOI-10.64898%2F2026.06.07.730647-blue)](https://doi.org/10.64898/2026.06.07.730647)
 
-Lobo, S. FastHydroMap (Version 0.1.2) [Computer software]. Zenodo.
-https://doi.org/10.5281/zenodo.19744336
-
-When the manuscript becomes available, please cite that as well.
+Lobo, S.; Najafi, S.; Shea, J.-E.; Shell, M. S. *Context-Aware Hydrophobicity
+Modeling: HydroMap and FastHydroMap*. bioRxiv (2026).
+[https://doi.org/10.64898/2026.06.07.730647](https://doi.org/10.64898/2026.06.07.730647)
 
 ## Acknowledgements
 

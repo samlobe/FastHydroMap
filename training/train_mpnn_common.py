@@ -25,6 +25,8 @@ GRAPH_DIR = ROOT / "graphs"
 META_CSV = ROOT / "all_residue_results.csv"
 SPLIT_YML = ROOT / "splits.yaml"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+SUPPORTED_TARGETS = ("Fdewet_pred", "PC1", "PC2", "PC3")
+SUPPORTED_MASK_SOURCES = ("auto", "fdewet", "trusted", "all")
 
 
 @dataclass(frozen=True)
@@ -48,6 +50,14 @@ class TrainConfig:
     clip: float = 2.0
     factor: float = 1.0
     seed: int = 48
+    target: str = "Fdewet_pred"
+    mask_source: str = "auto"
+
+    def __post_init__(self):
+        if self.target not in SUPPORTED_TARGETS:
+            raise ValueError(f"target must be one of {SUPPORTED_TARGETS}; got {self.target!r}")
+        if self.mask_source not in SUPPORTED_MASK_SOURCES:
+            raise ValueError(f"mask_source must be one of {SUPPORTED_MASK_SOURCES}; got {self.mask_source!r}")
 
 
 def _flt_tag(x: float) -> str:
@@ -74,23 +84,50 @@ def set_seed(seed: int) -> None:
     np.random.seed(seed)
 
 
-def masked_mean_target(meta: pd.DataFrame, pdb_ids: list[str]) -> float:
+def _target_mask(rows: pd.DataFrame, target: str, mask_source: str) -> np.ndarray:
+    if target not in rows.columns:
+        raise ValueError(f"target column {target!r} not found in metadata")
+
+    if mask_source == "auto":
+        mask_source = "fdewet" if target == "Fdewet_pred" else "trusted"
+
+    if mask_source == "fdewet":
+        mask = (
+            (rows.avg_n_waters.values > 7.0)
+            & (rows.Fdewet_pred.values >= 3.8)
+            & (rows.Fdewet_pred.values <= 8.7)
+        )
+    elif mask_source == "trusted":
+        if "trusted" not in rows.columns:
+            raise ValueError("trusted mask requested, but metadata has no 'trusted' column")
+        mask = rows.trusted.astype(bool).values
+    elif mask_source == "all":
+        mask = np.ones(len(rows), dtype=np.bool_)
+    else:
+        raise ValueError(f"unknown mask source: {mask_source}")
+
+    return mask & pd.notna(rows[target]).values
+
+
+def masked_mean_target(meta: pd.DataFrame, pdb_ids: list[str], target: str, mask_source: str) -> float:
     subset = meta[meta["pdb_id"].isin(pdb_ids)]
-    trusted = (
-        (subset.avg_n_waters.values > 7.0)
-        & (subset.Fdewet_pred.values >= 3.8)
-        & (subset.Fdewet_pred.values <= 8.7)
-    )
-    return float(subset.loc[trusted, "Fdewet_pred"].mean())
+    mask = _target_mask(subset, target, mask_source)
+    return float(subset.loc[mask, target].mean())
 
 
 class GraphDSDirect(InMemoryDataset):
-    def __init__(self, graphs_pt: Path, meta_df: pd.DataFrame):
+    def __init__(
+        self,
+        graphs_pt: Path,
+        meta_df: pd.DataFrame,
+        target: str = "Fdewet_pred",
+        mask_source: str = "auto",
+    ):
         super().__init__("")
         self.data, self.slices = torch.load(graphs_pt)
-        self._augment_with_meta(meta_df)
+        self._augment_with_meta(meta_df, target, mask_source)
 
-    def _augment_with_meta(self, meta: pd.DataFrame):
+    def _augment_with_meta(self, meta: pd.DataFrame, target: str, mask_source: str):
         meta = ensure_residue_key_columns(meta)
         mi_uid = meta.set_index(["pdb_id", "res_uid"])
         mi_resid = meta.set_index(["pdb_id", "resid"])
@@ -105,15 +142,13 @@ class GraphDSDirect(InMemoryDataset):
             if rows.isnull().any().any():
                 raise ValueError(f"missing metadata for graph {g.pdb_id}")
 
-            target = rows.Fdewet_pred.values.astype(np.float32)
-            trusted = (
-                (rows.avg_n_waters.values > 7.0)
-                & (rows.Fdewet_pred.values >= 3.8)
-                & (rows.Fdewet_pred.values <= 8.7)
-            ).astype(np.bool_)
+            target_values = rows[target].values.astype(np.float32)
+            trusted = _target_mask(rows, target, mask_source).astype(np.bool_)
 
-            g.target = torch.from_numpy(target)
+            g.target = torch.from_numpy(target_values)
             g.mask = torch.from_numpy(trusted)
+            g.target_name = target
+            g.mask_source = mask_source
             new_graphs.append(g)
 
         self.data, self.slices = InMemoryDataset.collate(new_graphs)

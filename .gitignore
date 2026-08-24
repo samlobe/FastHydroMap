@@ -70,6 +70,7 @@ training/data/rcsb_pdbs
 training/logs/
 training/checkpoints_direct_feat/
 training/checkpoints_delta_feat/
+training/figures/
 training/models/*.pt
 training/models/*.npz
 training/models/*.json
