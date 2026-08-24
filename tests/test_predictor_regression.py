@@ -8,6 +8,7 @@ import pandas as pd
 import pytest
 
 from FastHydroMap.cli import main
+from FastHydroMap.featurize.sasa import residue_sasa_components
 from FastHydroMap.predictors.fdewet import FdewetPredictor
 
 
@@ -300,6 +301,37 @@ def test_predictor_ignores_nonprotein_residues_with_warning(tmp_path):
     assert any("ignoring non-protein residues" in str(w.message) for w in seen)
     assert len(scores) == 29
     assert len(res_ids) == 29
+
+
+def test_protein_atom_slice_excludes_nucleic_acid_from_sasa():
+    topology = md.Topology()
+    protein_chain = topology.add_chain("A")
+    protein = topology.add_residue("ALA", protein_chain, resSeq=1)
+    for name, element in (
+        ("N", md.element.nitrogen),
+        ("CA", md.element.carbon),
+        ("C", md.element.carbon),
+        ("O", md.element.oxygen),
+        ("CB", md.element.carbon),
+    ):
+        topology.add_atom(name, element, protein)
+
+    dna_chain = topology.add_chain("P")
+    nucleotide = topology.add_residue("DC", dna_chain, resSeq=1)
+    topology.add_atom("P", md.element.phosphorus, nucleotide)
+    topology.add_atom("OP1", md.element.oxygen, nucleotide)
+    topology.add_atom("C1'", md.element.carbon, nucleotide)
+    topology.add_atom("N1", md.element.nitrogen, nucleotide)
+
+    xyz = np.arange(topology.n_atoms * 3, dtype=np.float32).reshape(1, -1, 3) * 0.01
+    mixed = md.Trajectory(xyz, topology)
+    protein_indices = FdewetPredictor._trajectory_residue_indices(topology)
+    protein_only = FdewetPredictor._protein_atom_slice(mixed, protein_indices)
+
+    assert protein_indices == [0]
+    assert protein_only.n_residues == 1
+    assert protein_only.n_atoms == 5
+    assert residue_sasa_components(protein_only, strict=True).shape == (1, 7)
 
 
 def test_predictor_handles_oxygen_alias_names(tmp_path):

@@ -1,14 +1,28 @@
 cff-version: 1.2.0
-message: "If you use FastHydroMap, please cite the software release below."
+message: "If you use FastHydroMap, please cite the HydroMap and FastHydroMap paper below."
 title: "FastHydroMap"
 type: software
 authors:
   - family-names: "Lobo"
     given-names: "Samuel"
     email: "samuels.lobo@gmail.com"
-doi: 10.5281/zenodo.19744336
-version: "0.1.3"
-date-released: 2026-05-28
+version: "0.1.4"
+date-released: 2026-08-24
 url: "https://github.com/samlobe/FastHydroMap"
 repository-code: "https://github.com/samlobe/FastHydroMap"
 license: "MIT"
+preferred-citation:
+  type: article
+  title: "Context-Aware Hydrophobicity Modeling: HydroMap and FastHydroMap"
+  authors:
+    - family-names: "Lobo"
+      given-names: "Samuel"
+    - family-names: "Najafi"
+      given-names: "Soroush"
+    - family-names: "Shea"
+      given-names: "Joan-Emma"
+    - family-names: "Shell"
+      given-names: "M. Scott"
+  year: 2026
+  doi: 10.64898/2026.06.07.730647
+  url: "https://doi.org/10.64898/2026.06.07.730647"

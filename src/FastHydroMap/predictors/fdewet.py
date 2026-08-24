@@ -173,6 +173,19 @@ class FdewetPredictor:
         return keep
 
     @staticmethod
+    def _protein_atom_slice(traj, residue_indices: list[int]):
+        """Return a trajectory containing only the protein-like residues."""
+        residues = list(traj.topology.residues)
+        atom_indices = [
+            atom.index
+            for residue_idx in residue_indices
+            for atom in residues[residue_idx].atoms
+        ]
+        if len(atom_indices) == traj.n_atoms:
+            return traj
+        return traj.atom_slice(atom_indices)
+
+    @staticmethod
     def _populate_frame_atom_coords(
         frame,
         topology,
@@ -261,6 +274,7 @@ class FdewetPredictor:
                 f"residue count mismatch between PDB parsing ({len(residue_records)}) "
                 f"and trajectory protein-like residues ({len(traj_residue_indices)})"
             )
+        protein_traj = self._protein_atom_slice(traj, traj_residue_indices)
 
         include_chain = len({r.chain_id for r in residue_records}) > 1
         res_ids = [
@@ -271,7 +285,7 @@ class FdewetPredictor:
         ]
 
         if traj.n_frames == 1:
-            df_features = self._feature_frame(traj, residue_records)
+            df_features = self._feature_frame(protein_traj, residue_records)
             graph = build_graph(
                 pdb_path,
                 df_features,
@@ -302,7 +316,8 @@ class FdewetPredictor:
         with torch.inference_mode():
             for frame_idx in tqdm(range(traj.n_frames)):
                 fr = traj.slice(frame_idx)
-                df_features = self._feature_frame(fr, residue_records)
+                protein_fr = protein_traj.slice(frame_idx)
+                df_features = self._feature_frame(protein_fr, residue_records)
 
                 for arr in res2atom.values():
                     arr.fill(np.nan)
