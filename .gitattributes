@@ -1,0 +1,2 @@
+# PDB is a fixed-column format; trailing blank charge fields are intentional.
+tests/data/v2_chain.pdb whitespace=-blank-at-eol

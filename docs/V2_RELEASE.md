@@ -33,8 +33,8 @@ release decision, not an undocumented change inside the packaging work.
 
 ## Local verification
 
-The full Python 3.12 test suite, including histidine-ID and two-frame trajectory
-checks, passes locally. Portable v2 predictions agree with the
+All 41 Python 3.12 tests, including histidine-ID and two-frame trajectory
+checks, pass locally. Portable v2 predictions agree with the
 research runtime on 100 development structures plus five assembly/perturbation
 fixtures, with a maximum absolute difference of 2.87e-6 across all four outputs.
 This is an implementation-parity check, not label-based accuracy evaluation.
