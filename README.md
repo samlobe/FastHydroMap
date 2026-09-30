@@ -1,146 +1,82 @@
 # FastHydroMap
 
-[![PyPI version](https://img.shields.io/badge/pypi-v0.1.4-blue)](https://pypi.org/project/fasthydromap/0.1.4/)
-[![Python versions](https://img.shields.io/pypi/pyversions/fasthydromap)](https://pypi.org/project/fasthydromap/)
-[![Paper DOI](https://img.shields.io/badge/DOI-10.64898%2F2026.06.07.730647-blue)](https://doi.org/10.64898/2026.06.07.730647)
+FastHydroMap predicts residue-level hydrophobicity (`Fdewet`) and water-structure
+maps (`PC1`, `PC2`, `PC3`) from protein structures and trajectories.
 
-FastHydroMap predicts per-residue dewetting free energies (`Fdewet`) from protein structures and trajectories.
-It can also predict water structuring (`PC1`, `PC2`, `PC3` of the [water triplet angle distribution](https://doi.org/10.1021/acs.jpcb.3c00826)).
-It is available as a ChimeraX bundle from the
-[UCSF ChimeraX Toolshed](https://cxtoolshed.rbvi.ucsf.edu/apps/chimeraxfasthydromap).
+This branch prepares **FastHydroMap v2** for release: improved training labels,
+explicit histidine states, and more detailed local surface features. Models are
+included; prediction needs no MD simulation, network access, or research files.
 
-<p align="center">
-  <img
-    src="https://raw.githubusercontent.com/samlobe/FastHydroMap/main/images/FastHydroMap_image.png"
-    alt="FastHydroMap overview"
-    width="720"
-  />
-</p>
+## Quick start
 
-## Quick Start
-
-Use a fresh Python environment. Python `3.11` to `3.14` are supported.
+Install this checkout in a fresh Python 3.11–3.14 environment:
 
 ```bash
-pip install fasthydromap
+pip install -e .
 fasthydromap install-torch
-fasthydromap predict your_structure.pdb -o outputs/your_structure_fdewet
+fasthydromap predict protein.pdb --model v2 --prepare -o results/protein
 ```
 
-`fasthydromap install-torch` defaults to the CPU build, which is usually the right choice for current FastHydroMap workloads because SASA preprocessing dominates runtime.
+`--prepare` adds missing heavy atoms and saves a prepared PDB for inspection.
+Omit it for already prepared structures. CPU inference is the default.
+During this preview, `--model v2` selects the new models; omitting it retains
+published v1 behavior. **This is not yet a published v2 release.**
 
-Advanced installation options, Docker usage, GPU Torch variants, and release workflows are documented in [INSTALL.md](https://github.com/samlobe/FastHydroMap/blob/main/docs/INSTALL.md) and [PYPI_RELEASE.md](https://github.com/samlobe/FastHydroMap/blob/main/docs/PYPI_RELEASE.md).
-
-## ChimeraX implementation
-
-FastHydroMap is available directly from the
-[UCSF ChimeraX Toolshed](https://cxtoolshed.rbvi.ucsf.edu/apps/chimeraxfasthydromap)
-for ChimeraX 1.12 and newer. In ChimeraX, choose **Tools > More Tools...**, search
-for **FastHydroMap**, and click **Install**. The command-line equivalent is:
-
-```text
-toolshed install FastHydroMap
-```
-
-Then perform the one-time installation of FastHydroMap and PyTorch in the
-bundle-managed environment:
-
-```text
-fasthydromap install
-```
-
-Open a protein and make a residue-level Fdewet map:
-
-```text
-open 1a1u
-fasthydromap #1
-```
-
-Here, `#1` refers to the first loaded model. Water-structure maps and custom
-ranges are available through command options:
-
-```text
-fasthydromap #1 quantity pc1
-fasthydromap #1 quantity pc2 range -2,8
-```
-
-Run `help fasthydromap` inside ChimeraX for examples and interpretation, or see
-the complete
-[FastHydroMap ChimeraX tutorial](https://github.com/samlobe/FastHydroMap/blob/main/docs/ChimeraX_tutorial.md).
-
-## Inputs
-
-FastHydroMap supports:
-
-- Single protein structures in `PDB` format
-- Protein trajectories in `DCD` or `XTC` format together with a matching topology `PDB`
-
-Typical usage:
+## Water-structure maps
 
 ```bash
-# Single structure
-fasthydromap predict examples/1A1U.pdb -o outputs/1A1U_fdewet
-fasthydromap predict examples/1A1U.pdb --quantity pc1 -o outputs/1A1U_pc1
+# One map
+fasthydromap predict protein.pdb --model v2 --prepare --quantity pc1 -o results/pc1
 
-# Trajectory
-fasthydromap predict-trajectory examples/proteinG.pdb examples/proteinG_short.dcd -o outputs/proteinG_fdewet
+# All four maps, sharing the structural calculations
+fasthydromap predict protein.pdb --model v2 --prepare --quantity all -o results/maps
 ```
 
-The default `--quantity fdewet` predicts dewetting free energy. Use `--quantity pc1`, `--quantity pc2`, or `--quantity pc3` to predict water-structure principal-component maps instead.
+Outputs include a CSV, PDBs with predictions in the B-factor column, and a JSON
+record identifying models and histidine assignments. Use `--parts` to include
+the model's intrinsic and context contributions.
 
-## Outputs
+Histidines default to neutral HIE unless specified in the PDB or with
+`--histidine-states states.csv`. This is not a pKa prediction.
+See [model and input notes](docs/V2.md) for examples and limitations.
 
-For a single structure, FastHydroMap writes:
+## Trajectories
 
-- `*.csv`: one row per residue with the requested quantity; with `--parts`, intrinsic and context columns are included
-- `*.pdb`: a copy of the input structure with the requested quantity written to B-factors
+Use a prepared topology whose atoms match the trajectory:
 
-For a trajectory, FastHydroMap writes wide CSV files containing one row per frame and one column per residue.
-Use `--parts` to also write intrinsic, context, and per-frame summary CSVs.
+```bash
+fasthydromap predict-trajectory protein.pdb trajectory.dcd --model v2 -o results/trajectory
+```
 
-## Model Scope
-
-FastHydroMap was trained on structured single-chain proteins and the 20 canonical amino-acid chemistries.
-Predictions for PTMs and other non-canonical chemistries should be treated cautiously; consider using or adapting [HydroMap](https://github.com/samlobe/HydroMap) for those systems.
+DCD and XTC are supported. Output is a frame-by-residue CSV. Do not use
+`--prepare` with a trajectory. Make molecules whole first; periodic-boundary
+wrapping is not repaired automatically.
 
 ## Visualization
 
-FastHydroMap writes predicted values to the B-factor column of output PDBs, so you can color structures directly in molecular viewers.
+Open an output PDB in ChimeraX and color its B-factors:
 
-ChimeraX:
-
-```bash
+```text
 color bfactor range 4,6.5 palette ^lipophilicity
 ```
 
-Example PC map coloring in ChimeraX:
+The existing [ChimeraX bundle](docs/ChimeraX_tutorial.md) supports the published
+release. Its integration with this v2 preview has not yet been verified.
 
-```bash
-color bfactor range -8,8 palette red-white-blue # example range and palette for PC1: redder = more tetrahedral angles
-color bfactor range -2,8 palette cyanmaroon # for PC2: maroon = more 90 deg angles (unstructured)
-color bfactor range -2,2 palette ^lipophilicity # for PC3: yellower = fewer 50 deg angles (i.e. fewer highly coordinated waters)
-```
+## Scope
 
-PyMOL:
+The models were trained on standard single-chain proteins. Assemblies are
+exploratory; predictions for buried or terminal residues require caution.
+Some predictions remain sensitive to small coordinate changes. Experimental
+smoothing models are not included.
 
-```bash
-spectrum b, red_white_blue, minimum=4, maximum=6.5
-```
-
-For dynamic hydrophobicity visualization in a MD trajectory, see the teaching-oriented example script
-[`scripts/chimerax_fdewet_trajectory_example.py`](scripts/chimerax_fdewet_trajectory_example.py) with a ChimeraX implementation you can adjust.
+See [v2 model notes](docs/V2.md), [installation](docs/INSTALL.md), and the
+[release checklist](docs/V2_RELEASE.md).
 
 ## Citation
 
-If you use FastHydroMap in your research, please cite the HydroMap and
-FastHydroMap paper:
-
-[![Paper DOI](https://img.shields.io/badge/DOI-10.64898%2F2026.06.07.730647-blue)](https://doi.org/10.64898/2026.06.07.730647)
-
 Lobo, S.; Najafi, S.; Shea, J.-E.; Shell, M. S. *Context-Aware Hydrophobicity
 Modeling: HydroMap and FastHydroMap*. bioRxiv (2026).
-[https://doi.org/10.64898/2026.06.07.730647](https://doi.org/10.64898/2026.06.07.730647)
+[doi:10.64898/2026.06.07.730647](https://doi.org/10.64898/2026.06.07.730647).
 
-## Acknowledgements
-
-[Shell Lab](https://theshelllab.org/) and [Shea Group](https://labs.chem.ucsb.edu/shea/joan-emma/)
+[Shell Lab](https://theshelllab.org/) · [Shea Group](https://labs.chem.ucsb.edu/shea/joan-emma/)

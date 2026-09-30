@@ -1,0 +1,5290 @@
+{
+  "templates": {
+    "ACE": {
+      "CH3": {
+        "charge": -0.029300000000000007,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.5972,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NME": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CH3": {
+        "charge": 0.14380000000000004,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      }
+    },
+    "NHE": {
+      "N": {
+        "charge": 0.0,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      }
+    },
+    "NH2": {
+      "N": {
+        "charge": 0.0,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      }
+    },
+    "ALA": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.11599999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": -0.0016000000000000042,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "GLY": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1144,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "C1",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "SER": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.0594,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.2821,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "C8",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "OG": {
+        "charge": -0.22709999999999997,
+        "hydrogens": 1,
+        "element": "O",
+        "type": "OH",
+        "sigma": 3.06647,
+        "epsilon": 0.880314
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "THR": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.0618,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.36970000000000003,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "C8",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG2": {
+        "charge": -0.051199999999999996,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "OG1": {
+        "charge": -0.2659,
+        "hydrogens": 1,
+        "element": "O",
+        "type": "O3",
+        "sigma": 3.06647,
+        "epsilon": 0.880314
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "LEU": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.040400000000000005,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": -0.018800000000000004,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.317,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "C4",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD1": {
+        "charge": -0.11210000000000003,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD2": {
+        "charge": -0.11210000000000003,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "ILE": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.027200000000000002,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.149,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG2": {
+        "charge": -0.055800000000000016,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "C3",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG1": {
+        "charge": 0.004200000000000002,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "CD1": {
+        "charge": -0.010200000000000008,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      }
+    },
+    "VAL": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.009400000000000006,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.2688,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "C8",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG1": {
+        "charge": -0.08189999999999997,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG2": {
+        "charge": -0.08189999999999997,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "ASN": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.11910000000000001,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": -0.04470000000000002,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.713,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C5",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OD1": {
+        "charge": -0.5931,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "ND2": {
+        "charge": -0.07990000000000008,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "GLN": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.0819,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.030600000000000002,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.0059000000000000025,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "C9",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD": {
+        "charge": 0.6951,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OE1": {
+        "charge": -0.6086,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "NE2": {
+        "charge": -0.09050000000000008,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "ARG": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.14050200000000002,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.099637,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.025282,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "C9",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD": {
+        "charge": 0.183411,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "NE": {
+        "charge": -0.289861,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N2",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CZ": {
+        "charge": 1.034975,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NH1": {
+        "charge": -0.03977300000000006,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N2",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "NH2": {
+        "charge": -0.03977300000000006,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N2",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "HID": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1069,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0342,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": -0.0266,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CC",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "ND1": {
+        "charge": -0.016199999999999992,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CE1": {
+        "charge": 0.3449,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CR",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NE2": {
+        "charge": -0.5727,
+        "hydrogens": 0,
+        "element": "N",
+        "type": "NB",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CD2": {
+        "charge": 0.2439,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CV",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "HIE": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.07790000000000001,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.066,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.1868,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CC",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "ND1": {
+        "charge": -0.5432,
+        "hydrogens": 0,
+        "element": "N",
+        "type": "NB",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CE1": {
+        "charge": 0.307,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CR",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NE2": {
+        "charge": 0.05439999999999995,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CD2": {
+        "charge": -0.0345,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CW",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "HIP": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.200758,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.12141400000000001,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": -0.007459,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CC",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "ND1": {
+        "charge": 0.210993,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CE1": {
+        "charge": 0.29484699999999997,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CR",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NE2": {
+        "charge": 0.196712,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CD2": {
+        "charge": 0.097135,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CW",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "TRP": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.0848,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0628,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": -0.1415,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C*",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD1": {
+        "charge": 0.04239999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CW",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NE1": {
+        "charge": -0.0005999999999999894,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CE2": {
+        "charge": 0.138,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CN",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CZ2": {
+        "charge": -0.10289999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CH2": {
+        "charge": 0.028299999999999992,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CZ3": {
+        "charge": -0.05249999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CE3": {
+        "charge": -0.06869999999999998,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD2": {
+        "charge": 0.1243,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CB",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "PHE": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.0954,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0247,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.0118,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD1": {
+        "charge": 0.007400000000000018,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CE1": {
+        "charge": -0.027400000000000008,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CZ": {
+        "charge": 0.022500000000000006,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CE2": {
+        "charge": -0.027400000000000008,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD2": {
+        "charge": 0.007400000000000018,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "TYR": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.0862,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0438,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": -0.0011,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD1": {
+        "charge": -0.020699999999999996,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CE1": {
+        "charge": -0.0685,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CZ": {
+        "charge": 0.3226,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OH": {
+        "charge": -0.15869999999999995,
+        "hydrogens": 1,
+        "element": "O",
+        "type": "OH",
+        "sigma": 3.06647,
+        "epsilon": 0.880314
+      },
+      "CE2": {
+        "charge": -0.0685,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD2": {
+        "charge": -0.020699999999999996,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "GLU": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.07303800000000002,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.103576,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": -0.09410199999999999,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "C9",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD": {
+        "charge": 0.728614,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OE1": {
+        "charge": -0.775325,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OE2": {
+        "charge": -0.775325,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "ASP": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.07837100000000002,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": -0.027586,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.762867,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C6",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OD1": {
+        "charge": -0.771255,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OD2": {
+        "charge": -0.771255,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "LYS": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.184655,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": -0.021652999999999978,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.061984,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "C9",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD": {
+        "charge": -0.014055999999999999,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CE": {
+        "charge": 0.33886700000000003,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "NZ": {
+        "charge": 0.564602,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "LYN": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.027340000000000003,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.019550000000000005,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.08694,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "C9",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD": {
+        "charge": -0.014580000000000001,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CE": {
+        "charge": 0.25888,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "NZ": {
+        "charge": -0.26372999999999996,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "PRO": {
+      "N": {
+        "charge": -0.2548,
+        "hydrogens": 0,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CD": {
+        "charge": 0.09740000000000001,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.0615,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0436,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CA": {
+        "charge": 0.037500000000000006,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "C7",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.5896,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5748,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CYS": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.13369999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.09929999999999999,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "SG": {
+        "charge": -0.11860000000000001,
+        "hydrogens": 1,
+        "element": "S",
+        "type": "SH",
+        "sigma": 3.5635899999999996,
+        "epsilon": 1.046
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CYM": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.0157,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": -0.0169,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "SG": {
+        "charge": -0.8844,
+        "hydrogens": 0,
+        "element": "S",
+        "type": "SH",
+        "sigma": 3.5635899999999996,
+        "epsilon": 1.046
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CYX": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1195,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.103,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "SG": {
+        "charge": -0.1081,
+        "hydrogens": 0,
+        "element": "S",
+        "type": "S",
+        "sigma": 3.5635899999999996,
+        "epsilon": 1.046
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "MET": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.0643,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0824,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.08979999999999999,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "C9",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "SD": {
+        "charge": -0.2737,
+        "hydrogens": 0,
+        "element": "S",
+        "type": "S",
+        "sigma": 3.5635899999999996,
+        "epsilon": 1.046
+      },
+      "CE": {
+        "charge": 0.1516,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "ASH": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1205,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.066,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.6462,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OD1": {
+        "charge": -0.5554,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OD2": {
+        "charge": -0.16289999999999993,
+        "hydrogens": 1,
+        "element": "O",
+        "type": "OH",
+        "sigma": 3.06647,
+        "epsilon": 0.880314
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "GLH": {
+      "N": {
+        "charge": -0.14380000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.0924,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0441,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.0686,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD": {
+        "charge": 0.6801,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OE1": {
+        "charge": -0.5838,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OE2": {
+        "charge": -0.187,
+        "hydrogens": 1,
+        "element": "O",
+        "type": "OH",
+        "sigma": 3.06647,
+        "epsilon": 0.880314
+      },
+      "C": {
+        "charge": 0.5973,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5679,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CALA": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.06799999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.019899999999999973,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.7731,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8055,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8055,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CGLY": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.038099999999999995,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "C1",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.7231,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.7855,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.7855,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CSER": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.1418,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.2749,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "OG": {
+        "charge": -0.20399999999999996,
+        "hydrogens": 1,
+        "element": "O",
+        "type": "OH",
+        "sigma": 3.06647,
+        "epsilon": 0.880314
+      },
+      "C": {
+        "charge": 0.8113,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8132,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8132,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CTHR": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.12129999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.31029999999999996,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG2": {
+        "charge": -0.00949999999999998,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "OG1": {
+        "charge": -0.23769999999999997,
+        "hydrogens": 1,
+        "element": "O",
+        "type": "OH",
+        "sigma": 3.06647,
+        "epsilon": 0.880314
+      },
+      "C": {
+        "charge": 0.781,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8044,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8044,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CLEU": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.1501,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": -0.05210000000000002,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.3332,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "C4",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD1": {
+        "charge": -0.1049,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD2": {
+        "charge": -0.1049,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.8326,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8199,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8199,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CILE": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.1725,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.1129,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG2": {
+        "charge": -0.04350000000000001,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "C3",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG1": {
+        "charge": 0.03189999999999999,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.8343,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.819,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.819,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "CD1": {
+        "charge": -0.011100000000000006,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      }
+    },
+    "CVAL": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.19999999999999998,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.2248,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG1": {
+        "charge": -0.0556,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG2": {
+        "charge": -0.0556,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.835,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8173,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8173,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CASN": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.07219999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": -0.02529999999999999,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.7153,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C5",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OD1": {
+        "charge": -0.601,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "ND2": {
+        "charge": -0.07840000000000003,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "C": {
+        "charge": 0.805,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8147,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8147,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CGLN": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.1016,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.023999999999999994,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.019599999999999996,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD": {
+        "charge": 0.7093,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OE1": {
+        "charge": -0.6098,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "NE2": {
+        "charge": -0.09660000000000002,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "C": {
+        "charge": 0.7775,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8042,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8042,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CARG": {
+      "N": {
+        "charge": -0.07170000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.16210000000000002,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0368,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.1114,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD": {
+        "charge": 0.20500000000000002,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "NE": {
+        "charge": -0.20850000000000002,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N2",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CZ": {
+        "charge": 0.8368,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NH1": {
+        "charge": 0.024899999999999922,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N2",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "NH2": {
+        "charge": 0.024899999999999922,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N2",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "C": {
+        "charge": 0.8557,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8266,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8266,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CHID": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.0639,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.008400000000000005,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.0293,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CC",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "ND1": {
+        "charge": -0.01369999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CE1": {
+        "charge": 0.33430000000000004,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CR",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NE2": {
+        "charge": -0.5629,
+        "hydrogens": 0,
+        "element": "N",
+        "type": "NB",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CD2": {
+        "charge": 0.2242,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CV",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.7615,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8016,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8016,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CHIE": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.10489999999999997,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.017199999999999993,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.2724,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CC",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "ND1": {
+        "charge": -0.5517,
+        "hydrogens": 0,
+        "element": "N",
+        "type": "NB",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CE1": {
+        "charge": 0.3006,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CR",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NE2": {
+        "charge": 0.06489999999999996,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CD2": {
+        "charge": -0.06309999999999996,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CW",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.7916,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8065,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8065,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CHIP": {
+      "N": {
+        "charge": -0.07170000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.03299999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0936,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.0298,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CC",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "ND1": {
+        "charge": 0.23819999999999997,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CE1": {
+        "charge": 0.24429999999999996,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CR",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NE2": {
+        "charge": 0.22299999999999998,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CD2": {
+        "charge": 0.10800000000000001,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CW",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.8032,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8177,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8177,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CTRP": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.0812,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0252,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": -0.0796,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C*",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD1": {
+        "charge": 0.02350000000000002,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CW",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NE1": {
+        "charge": 0.009699999999999986,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CE2": {
+        "charge": 0.1222,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CN",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CZ2": {
+        "charge": -0.10270000000000001,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CH2": {
+        "charge": 0.03810000000000001,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CZ3": {
+        "charge": -0.07799999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CE3": {
+        "charge": -0.03459999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD2": {
+        "charge": 0.1078,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CB",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.7658,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8011,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8011,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CPHE": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.0727,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": -0.007300000000000001,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.0552,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD1": {
+        "charge": 0.010800000000000004,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CE1": {
+        "charge": -0.038599999999999995,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CZ": {
+        "charge": 0.033600000000000005,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CE2": {
+        "charge": -0.038599999999999995,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD2": {
+        "charge": 0.010800000000000004,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.766,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8026,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8026,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CTYR": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.09230000000000001,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0228,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.0243,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD1": {
+        "charge": -0.014200000000000018,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CE1": {
+        "charge": -0.07849999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CZ": {
+        "charge": 0.3395,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OH": {
+        "charge": -0.16260000000000002,
+        "hydrogens": 1,
+        "element": "O",
+        "type": "OH",
+        "sigma": 3.06647,
+        "epsilon": 0.880314
+      },
+      "CE2": {
+        "charge": -0.07849999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD2": {
+        "charge": -0.014200000000000018,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.7817,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.807,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.807,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CGLU": {
+      "N": {
+        "charge": -0.2137,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.066,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": -0.008499999999999999,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": -0.0421,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD": {
+        "charge": 0.8183,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OE1": {
+        "charge": -0.822,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OE2": {
+        "charge": -0.822,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "C": {
+        "charge": 0.742,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.793,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.793,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CASP": {
+      "N": {
+        "charge": -0.2137,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.0771,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": -0.11009999999999999,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.8851,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C6",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OD1": {
+        "charge": -0.8162,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OD2": {
+        "charge": -0.8162,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "C": {
+        "charge": 0.7256,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.7887,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.7887,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CLYS": {
+      "N": {
+        "charge": -0.07170000000000004,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.1465,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0426,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.0495,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD": {
+        "charge": 0.083,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CE": {
+        "charge": 0.2066,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "NZ": {
+        "charge": 0.6380999999999999,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "C": {
+        "charge": 0.8488,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8252,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8252,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CPRO": {
+      "N": {
+        "charge": -0.2802,
+        "hydrogens": 0,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CD": {
+        "charge": 0.1096,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.08099999999999999,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.021900000000000003,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CA": {
+        "charge": -0.055999999999999994,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "C7",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.6631,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.7697,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.7697,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CCYS": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.023900000000000005,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.08779999999999999,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "SG": {
+        "charge": -0.10339999999999996,
+        "hydrogens": 1,
+        "element": "S",
+        "type": "SH",
+        "sigma": 3.5635899999999996,
+        "epsilon": 1.046
+      },
+      "C": {
+        "charge": 0.7497,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.7981,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.7981,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CCYX": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.038000000000000006,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.05130000000000001,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "SG": {
+        "charge": -0.0529,
+        "hydrogens": 0,
+        "element": "S",
+        "type": "S",
+        "sigma": 3.5635899999999996,
+        "epsilon": 1.046
+      },
+      "C": {
+        "charge": 0.7618,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8041,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8041,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "CMET": {
+      "N": {
+        "charge": -0.11399999999999999,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": -0.13199999999999998,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0724,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.1126,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "SD": {
+        "charge": -0.2692,
+        "hydrogens": 0,
+        "element": "S",
+        "type": "S",
+        "sigma": 3.5635899999999996,
+        "epsilon": 1.046
+      },
+      "CE": {
+        "charge": 0.1499,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.8013,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OC1": {
+        "charge": -0.8105,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OC2": {
+        "charge": -0.8105,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NALA": {
+      "N": {
+        "charge": 0.7404999999999999,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1851,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.030299999999999994,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.6163,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5722,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NGLY": {
+      "N": {
+        "charge": 0.7869,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.16899999999999998,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "C1",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.6163,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5722,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NSER": {
+      "N": {
+        "charge": 0.7543,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.13490000000000002,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.3142,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "OG": {
+        "charge": -0.2475,
+        "hydrogens": 1,
+        "element": "O",
+        "type": "OH",
+        "sigma": 3.06647,
+        "epsilon": 0.880314
+      },
+      "C": {
+        "charge": 0.6163,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5722,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NTHR": {
+      "N": {
+        "charge": 0.7614,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1121,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.41910000000000003,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "C8",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG2": {
+        "charge": -0.0673,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "OG1": {
+        "charge": -0.26940000000000003,
+        "hydrogens": 1,
+        "element": "O",
+        "type": "O3",
+        "sigma": 3.06647,
+        "epsilon": 0.880314
+      },
+      "C": {
+        "charge": 0.6163,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5722,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NLEU": {
+      "N": {
+        "charge": 0.7454,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1157,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0268,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.30410000000000004,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "C4",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD1": {
+        "charge": -0.11659999999999998,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD2": {
+        "charge": -0.1164,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.6123,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5713,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NILE": {
+      "N": {
+        "charge": 0.7298,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1288,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.2098,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG2": {
+        "charge": -0.08789999999999998,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "C3",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG1": {
+        "charge": 0.0015000000000000013,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.6123,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5713,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "CD1": {
+        "charge": -0.023000000000000017,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      }
+    },
+    "NVAL": {
+      "N": {
+        "charge": 0.7393000000000001,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.10389999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.2975,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG1": {
+        "charge": -0.0924,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG2": {
+        "charge": -0.0924,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.6163,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5722,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NASN": {
+      "N": {
+        "charge": 0.7564,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1599,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.07469999999999999,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.5833,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C5",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OD1": {
+        "charge": -0.5744,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "ND2": {
+        "charge": -0.04399999999999993,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "C": {
+        "charge": 0.6163,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5722,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NGLN": {
+      "N": {
+        "charge": 0.7481,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.15510000000000002,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.07510000000000001,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": -0.02410000000000001,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD": {
+        "charge": 0.7354,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OE1": {
+        "charge": -0.6133,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "NE2": {
+        "charge": -0.11730000000000002,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "C": {
+        "charge": 0.6123,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5713,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NARG": {
+      "N": {
+        "charge": 0.7554000000000001,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1019,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.056999999999999995,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.0854,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD": {
+        "charge": 0.1989,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "NE": {
+        "charge": -0.20579999999999993,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "N2",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CZ": {
+        "charge": 0.8281,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NH1": {
+        "charge": 0.02950000000000008,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N2",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "NH2": {
+        "charge": 0.02950000000000008,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N2",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "C": {
+        "charge": 0.7214,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.6013,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NHID": {
+      "N": {
+        "charge": 0.7431000000000001,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.19219999999999998,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0677,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": -0.0399,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CC",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "ND1": {
+        "charge": -0.018699999999999994,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CE1": {
+        "charge": 0.3512,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CR",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NE2": {
+        "charge": -0.5711,
+        "hydrogens": 0,
+        "element": "N",
+        "type": "NB",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CD2": {
+        "charge": 0.2345,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CV",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.6123,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5713,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NHIE": {
+      "N": {
+        "charge": 0.752,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.16160000000000002,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0935,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.174,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CC",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "ND1": {
+        "charge": -0.5579,
+        "hydrogens": 0,
+        "element": "N",
+        "type": "NB",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CE1": {
+        "charge": 0.3201,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CR",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NE2": {
+        "charge": 0.05429999999999996,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CD2": {
+        "charge": -0.038599999999999995,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CW",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.6123,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5713,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NHIP": {
+      "N": {
+        "charge": 0.7672,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1628,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.15460000000000002,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": -0.0236,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CC",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "ND1": {
+        "charge": 0.2311,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CE1": {
+        "charge": 0.2634,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CR",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NE2": {
+        "charge": 0.2182,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CD2": {
+        "charge": 0.10619999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CW",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.7214,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.6013,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NTRP": {
+      "N": {
+        "charge": 0.7576999999999999,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1583,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0987,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": -0.1654,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C*",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD1": {
+        "charge": 0.040700000000000014,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CW",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "NE1": {
+        "charge": -0.0031999999999999806,
+        "hydrogens": 1,
+        "element": "N",
+        "type": "NA",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CE2": {
+        "charge": 0.1575,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CN",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CZ2": {
+        "charge": -0.1121,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CH2": {
+        "charge": 0.033100000000000004,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CZ3": {
+        "charge": -0.057599999999999985,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CE3": {
+        "charge": -0.06190000000000001,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD2": {
+        "charge": 0.1132,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CB",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.6123,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5713,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NPHE": {
+      "N": {
+        "charge": 0.75,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1774,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0538,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.0031,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD1": {
+        "charge": -0.001799999999999996,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CE1": {
+        "charge": -0.0169,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CZ": {
+        "charge": 0.012099999999999986,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CE2": {
+        "charge": -0.016999999999999987,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD2": {
+        "charge": -0.001700000000000007,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.6123,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5713,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NTYR": {
+      "N": {
+        "charge": 0.7559,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1553,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0863,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": -0.0205,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD1": {
+        "charge": -0.028200000000000003,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CE1": {
+        "charge": -0.05889999999999998,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CZ": {
+        "charge": 0.3139,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OH": {
+        "charge": -0.15769999999999995,
+        "hydrogens": 1,
+        "element": "O",
+        "type": "OH",
+        "sigma": 3.06647,
+        "epsilon": 0.880314
+      },
+      "CE2": {
+        "charge": -0.05889999999999998,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "CD2": {
+        "charge": -0.028200000000000003,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CA",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "C": {
+        "charge": 0.6123,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5713,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NGLU": {
+      "N": {
+        "charge": 0.719,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.179,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.0445,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": -0.0866,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD": {
+        "charge": 0.8087,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OE1": {
+        "charge": -0.8189,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OE2": {
+        "charge": -0.8189,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "C": {
+        "charge": 0.5621,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5889,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NASP": {
+      "N": {
+        "charge": 0.7382,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.14329999999999998,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": -0.0573,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.8194,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C6",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "OD1": {
+        "charge": -0.8084,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "OD2": {
+        "charge": -0.8084,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "O2",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      },
+      "C": {
+        "charge": 0.5621,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5889,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NLYS": {
+      "N": {
+        "charge": 0.7461,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.11649999999999999,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.07780000000000001,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.0194,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CD": {
+        "charge": 0.0658,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CE": {
+        "charge": 0.2161,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "NZ": {
+        "charge": 0.6382,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "C": {
+        "charge": 0.7214,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.6013,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NPRO": {
+      "N": {
+        "charge": 0.422,
+        "hydrogens": 2,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CD": {
+        "charge": 0.188,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.07900000000000001,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.085,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CA": {
+        "charge": 0.2,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "C7",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.526,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NCYS": {
+      "N": {
+        "charge": 0.7394000000000001,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.2338,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.11810000000000001,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "SG": {
+        "charge": -0.13229999999999997,
+        "hydrogens": 1,
+        "element": "S",
+        "type": "SH",
+        "sigma": 3.5635899999999996,
+        "epsilon": 1.046
+      },
+      "C": {
+        "charge": 0.6123,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5713,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NCYX": {
+      "N": {
+        "charge": 0.7514,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1977,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.10830000000000001,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "SG": {
+        "charge": -0.0984,
+        "hydrogens": 0,
+        "element": "S",
+        "type": "S",
+        "sigma": 3.5635899999999996,
+        "epsilon": 1.046
+      },
+      "C": {
+        "charge": 0.6123,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5713,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    },
+    "NMET": {
+      "N": {
+        "charge": 0.7544000000000001,
+        "hydrogens": 3,
+        "element": "N",
+        "type": "N3",
+        "sigma": 3.25,
+        "epsilon": 0.7112799999999999
+      },
+      "CA": {
+        "charge": 0.1337,
+        "hydrogens": 1,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CB": {
+        "charge": 0.11149999999999999,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "CG": {
+        "charge": 0.0918,
+        "hydrogens": 2,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "SD": {
+        "charge": -0.2774,
+        "hydrogens": 0,
+        "element": "S",
+        "type": "S",
+        "sigma": 3.5635899999999996,
+        "epsilon": 1.046
+      },
+      "CE": {
+        "charge": 0.14500000000000002,
+        "hydrogens": 3,
+        "element": "C",
+        "type": "CT",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.45773
+      },
+      "C": {
+        "charge": 0.6123,
+        "hydrogens": 0,
+        "element": "C",
+        "type": "C",
+        "sigma": 3.399670000000001,
+        "epsilon": 0.359824
+      },
+      "O": {
+        "charge": -0.5713,
+        "hydrogens": 0,
+        "element": "O",
+        "type": "OB",
+        "sigma": 2.95992,
+        "epsilon": 0.87864
+      }
+    }
+  },
+  "water": [
+    3.165,
+    0.998989
+  ]
+}

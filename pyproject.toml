@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name        = "fasthydromap"
-version     = "0.1.4"
+version     = "2.0.0a1"
 description = "Predict per-residue FastHydroMap Fdewet and water-structure PC maps"
 authors     = [{name="Samuel Lobo", email="samuels.lobo@gmail.com"}]
 license     = "MIT"
@@ -50,7 +50,7 @@ Issues = "https://github.com/samlobe/FastHydroMap/issues"
 where = ["src"]
 
 [tool.setuptools.package-data]
-FastHydroMap = ["weights/sasa_feature_stats.npz", "weights/*.pt"]
+FastHydroMap = ["weights/sasa_feature_stats.npz", "weights/*.pt", "weights/v2/*.pt", "weights/v2/*.json", "v2/chemistry.json"]
 
 [project.scripts]
 fasthydromap = "FastHydroMap.cli:main"

@@ -1,0 +1,4 @@
+include LICENSE README.md CHANGELOG.md pyproject.toml pytest.ini
+recursive-include docs *.md
+recursive-include tests *.py *.pdb *.csv *.json
+include examples/1A1U.pdb examples/proteinG.pdb examples/proteinG_short.dcd

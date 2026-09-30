@@ -9,7 +9,7 @@ import pandas as pd
 from .io.pdb            import write_bfactor
 from .install_torch import install_torch, torch_install_command
 
-QUANTITIES = ("fdewet", "pc1", "pc2", "pc3")
+QUANTITIES = ("fdewet", "pc1", "pc2", "pc3", "all")
 QUANTITY_LABELS = {
     "fdewet": "Fdewet",
     "pc1": "PC1",
@@ -71,6 +71,14 @@ def _build_parser() -> argparse.ArgumentParser:
         default="fdewet",
         help="per-residue quantity to predict (default: fdewet)",
     )
+
+    for command in (p, pt):
+        command.add_argument("--model", choices=("v1", "v2"), default="v1",
+                             help="model generation (v2 is opt-in during preview)")
+        command.add_argument("--threads", type=int, default=4, help="v2 CPU workers (default: 4)")
+        command.add_argument("--histidine-states", type=Path, help="v2 CSV: res_uid,histidine_state")
+        command.add_argument("--prepare", action="store_true", help="v2: add missing heavy atoms and save the prepared PDB")
+        command.add_argument("--overwrite", action="store_true", help="v2: allow replacing existing output files")
 
     # -------- install-torch ------------------------------------------
     it = sub.add_parser(
@@ -148,6 +156,18 @@ def main() -> None:
         print("  Default is CPU; use --variant cu121 or --variant cu118 for CUDA builds.")
         return
 
+    if args.model == "v2":
+        _load_predictor_or_exit()  # shared friendly missing-PyTorch message
+        from .v2.command import run
+        try:
+            run(args)
+        except (ValueError, FileNotFoundError) as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            sys.exit(2)
+        return
+    if args.quantity == "all" or args.histidine_states or args.prepare:
+        print("error: --quantity all, --histidine-states and --prepare require --model v2", file=sys.stderr)
+        sys.exit(2)
     FdewetPredictor = _load_predictor_or_exit()
     predictor = FdewetPredictor(quantity=args.quantity)
     quantity_label = QUANTITY_LABELS[args.quantity]
