@@ -8,7 +8,7 @@
     "PC2",
     "PC3"
   ],
-  "status": "publication_candidate_not_distributed",
+  "status": "released",
   "training_stage": "full800",
   "fit_proteins": 800,
   "embedding_seed": 17,
@@ -1304,20 +1304,23 @@
     {
       "seed": 17,
       "file": "shared16_seed17.pt",
-      "sha256": "1ebf9de8a55a79f88eed4a9599a4981b09d37362fcfec4cdcf7185351f9162b2",
+      "sha256": "7c5f8585a99e30dc3b7f4e0c8339294fc93885e1afaefbe20ca1cd0633c369d7",
       "steps": 2100
     },
     {
       "seed": 29,
       "file": "shared16_seed29.pt",
-      "sha256": "81e33851717067a52a15b31031eb3a599e9be9e398dd9b10ddea206418101804",
+      "sha256": "b1694f557c0c0e0de69674223fa2fa7d88c5fcdb90c462592c2159b1a6eda36c",
       "steps": 2200
     },
     {
       "seed": 43,
       "file": "shared16_seed43.pt",
-      "sha256": "f14c79046d3ba70f6043e2f201b399d44ebfd2304c39d8dceb758a854c9628ad",
+      "sha256": "72786798dd80509be6a65178b7d22ae83183edda1d7ba4227c42dbeab67f8d04",
       "steps": 2100
     }
-  ]
+  ],
+  "release_version": "2.0.0",
+  "release_date": "2026-10-19",
+  "validated_candidate_manifest_sha256": "7c4901c462faf5e6be43733c0c8f9e555ab8095169e5946b8f80568a5e5e31ac"
 }

@@ -148,6 +148,10 @@ def test_selected_weights_are_full_refits_not_provisional():
     weights = root / "src/FastHydroMap/weights/v2"
     manifest = json.loads((weights / "manifest.json").read_text())
     protocol = json.loads((root / "training/shared_protocol.json").read_text())
+    import tomllib
+    project = tomllib.loads((root / "pyproject.toml").read_text())
+    assert manifest["status"] == "released"
+    assert manifest["release_version"] == project["project"]["version"]
     assert manifest["training_stage"] == "full800"
     assert manifest["fit_proteins"] == 800
     assert manifest["feature_version"] == "terminal_carboxylate_v2"
@@ -160,6 +164,8 @@ def test_selected_weights_are_full_refits_not_provisional():
         meta = torch.load(path, map_location="cpu", weights_only=True)["metadata"]
         assert meta["fit_proteins"] == 800 and meta["arm"] == "control"
         assert meta["feature_version"] == "terminal_carboxylate_v2"
+        assert meta["status"] == "released"
+        assert meta["release_version"] == manifest["release_version"]
         assert meta["best_step"] == member["steps"]
         assert meta["seed"] == member["seed"]
         assert meta["feature_normalization"] == manifest["feature_normalization"]

@@ -1,11 +1,10 @@
 # Installation
 
-This checkout is an unreleased candidate. Use `pip install -e .` when reviewing
-it locally; PyPI serves the previous release until publication approval.
+The 2.0.0 source release is prepared. Until it is uploaded to PyPI, install
+this checkout with `python -m pip install -e .`.
 
-Python 3.12 is the recommended environment and has passed fresh-install testing
-on Linux. Package metadata allows Python 3.11–3.14; the remaining Python versions
-and Windows/macOS checks are pending for this candidate.
+Python 3.12 is recommended. CI covers Python 3.11–3.14 on Linux and macOS,
+plus the test suite on Windows with Python 3.12.
 
 ## Recommended pip install
 

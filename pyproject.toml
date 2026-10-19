@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name        = "fasthydromap"
-version     = "2.0.0a1"
+version     = "2.0.0"
 description = "Predict per-residue FastHydroMap Fdewet and water-structure PC maps"
 authors     = [{name="Samuel Lobo", email="samuels.lobo@gmail.com"}]
 license     = "MIT"
@@ -13,7 +13,7 @@ readme      = "README.md"
 requires-python = ">=3.11,<3.15"
 keywords = ["protein", "hydrophobicity", "molecular-dynamics", "biophysics", "machine-learning"]
 classifiers = [
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Science/Research",
   "Topic :: Scientific/Engineering :: Bio-Informatics",
   "Programming Language :: Python :: 3",

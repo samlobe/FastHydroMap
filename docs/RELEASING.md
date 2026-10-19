@@ -1,7 +1,7 @@
 # Release checklist
 
-The current checkout is an unreleased candidate. Public submission follows
-review of the exact source commit, model manifest, wheel, and ChimeraX bundle.
+Version 2.0.0 is prepared for merging and tagging. PyPI and Toolshed publication
+are separate steps using the approved source commit and checked artifacts.
 
 ## Current model
 
@@ -12,22 +12,22 @@ review of the exact source commit, model manifest, wheel, and ChimeraX bundle.
 - Original validation/test cohorts are excluded from fitting and normalization.
 
 The historical 500-fit / 100-tune / 200-audit roles remain unchanged for
-development analyses. Corrected-feature ablations and learning curves run
+development analyses. Corrected-feature ablations and learning curves completed
 separately; they do not block the software release. Do not substitute older
 600-protein results for current-model results in the paper.
 
 ## Software release gates
 
-- [ ] Review the intended source diff, README, model notes, and examples.
+- [x] Review the intended source diff, README, model notes, and examples.
 - [x] Pass the CPU suite and independent feature/readout parity checks.
 - [x] Build wheel and source distribution; check metadata and packaged files.
 - [x] Install the exact wheel outside the checkout and test structures,
   embeddings, trajectories, preparation, and legacy inference.
-- [ ] Run the supported-platform CI matrix or clearly state unverified platforms.
+- [x] Run the supported-platform CI matrix or clearly state unverified platforms.
 - [x] Verify the training protocol and retained input-archive checksums.
 - [ ] Complete dependency, force-field, and data attribution review.
-- [ ] Choose the release version and update citation/changelog/status.
-- [ ] Review and approve the PR before merging and tagging.
+- [x] Choose the release version and update citation/changelog/status.
+- [x] Review and approve the PR before merging and tagging.
 
 Keep the unpublished README notice until the new package is available on PyPI.
 For the release, switch the quick start to PyPI installation. Mark the manifest
@@ -49,9 +49,12 @@ The corrected 800-protein backend requires a fresh bundle check; the earlier
 - [x] Check cache reuse/invalidation and internal-coordinate behavior.
 - [x] Check upgrades, failed-update retention, and installation instructions.
 
-The October 19 Linux review passed 164 source tests, 164 installed-wheel tests,
-and 30-protein feature/readout parity. ChimeraX 1.12 passed 66 focused tests
-and seven live GUI checks. macOS and Windows are not qualified by these checks.
+The October 19 cross-platform run passed all 14 CI jobs, including the Windows
+newline correction. The local suite contains 165 tests; the earlier installed
+candidate passed 164 tests before that checkout regression was added.
+The 30-protein feature/readout parity check passed. ChimeraX 1.12 on Linux
+passed 66 focused tests and seven live GUI checks; that GUI check does not
+qualify ChimeraX on macOS or Windows.
 
 Publish and verify the Python backend before submitting the compatible bundle
 to the Toolshed. A passing Python wheel does not validate the GUI bridge.
@@ -59,7 +62,7 @@ See the bundle repository's `RELEASING.md` for submission and rollback.
 
 ## Paper and data follow-up
 
-- [ ] Complete and summarize the scheduled ablations and learning curves.
+- [x] Complete the scheduled ablations and learning-curve summary tables.
 - [ ] Report current-model held-out and coordinate-sensitivity results with
   their actual evaluation history.
 - [ ] Deposit approved reproducibility/data archives and fill access URLs/DOIs.

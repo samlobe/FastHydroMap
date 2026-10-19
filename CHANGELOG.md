@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0a1 unreleased
+## 2.0.0 — 2026-10-19
 
 - Use the current bundled model by default (`--model latest`).
 - Retain the previous published model as `--model v0`.
@@ -24,6 +24,5 @@
 
 The current model has no intrinsic/contextual decomposition; use the legacy
 model for `--parts`. See [legacy usage](docs/LEGACY.md) for compatibility details.
-The corrected candidate is undergoing package and ChimeraX verification.
-Public data deposition, attribution review, and cross-platform release checks
-remain pending. Nothing has been published.
+Cross-platform package checks and the Linux ChimeraX 1.12 review passed.
+PyPI/Toolshed publication and public training-data deposition are separate steps.
