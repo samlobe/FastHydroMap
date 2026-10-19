@@ -1,5 +1,5 @@
 [build-system]
-requires      = ["setuptools>=70", "wheel"]
+requires      = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -8,6 +8,7 @@ version     = "2.0.0a1"
 description = "Predict per-residue FastHydroMap Fdewet and water-structure PC maps"
 authors     = [{name="Samuel Lobo", email="samuels.lobo@gmail.com"}]
 license     = "MIT"
+license-files = ["LICENSE"]
 readme      = "README.md"
 requires-python = ">=3.11,<3.15"
 keywords = ["protein", "hydrophobicity", "molecular-dynamics", "biophysics", "machine-learning"]
@@ -50,7 +51,7 @@ Issues = "https://github.com/samlobe/FastHydroMap/issues"
 where = ["src"]
 
 [tool.setuptools.package-data]
-FastHydroMap = ["weights/sasa_feature_stats.npz", "weights/*.pt", "weights/v2/*.pt", "weights/v2/*.json", "v2/chemistry.json"]
+FastHydroMap = ["weights/sasa_feature_stats.npz", "weights/*.pt", "weights/v2/shared16_*.pt", "weights/v2/manifest.json", "v2/chemistry.json"]
 
 [project.scripts]
 fasthydromap = "FastHydroMap.cli:main"

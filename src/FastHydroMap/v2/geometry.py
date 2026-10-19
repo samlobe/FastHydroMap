@@ -3,7 +3,7 @@ import numpy as np
 import torch
 from scipy.spatial import cKDTree
 from Bio.PDB import PDBParser
-from ..utils.atom_names import backbone_alias_priority, canonical_backbone_atom_name
+from ..utils.atom_names import canonical_backbone_atom_name
 from ..io.residue_qc import residue_uid
 
 
@@ -149,24 +149,30 @@ def planar_frame(
 
 def canonical_atoms(residue) -> tuple[dict[str, np.ndarray], list[np.ndarray]]:
     atom_by_name: dict[str, np.ndarray] = {}
-    priorities: dict[str, int] = {}
     sidechain = []
+    oxygen_names = {
+        "O": "O", "OT1": "O", "O1": "O", "OC1": "O",
+        "OXT": "OXT", "OT2": "OXT", "O2": "OXT", "OC2": "OXT",
+    }
     for atom in residue:
         element = (atom.element or "").strip().upper()
         if element == "H":
             continue
         name = atom.name.strip().upper()
         coordinate = atom.coord.astype(np.float32)
-        canonical = canonical_backbone_atom_name(name, element)
-        if canonical in {"N", "CA", "C", "O"}:
-            priority = backbone_alias_priority(name)
-            if priority < priorities.get(canonical, 9999):
-                atom_by_name[canonical] = coordinate
-                priorities[canonical] = priority
+        if name in oxygen_names:
+            if element != "O":
+                raise ValueError(f"{residue_uid_from_biopdb(residue)}: {name} must be an oxygen atom")
+            canonical = oxygen_names[name]
         else:
-            atom_by_name[name] = coordinate
-            if name != "OXT":
-                sidechain.append(coordinate)
+            canonical = canonical_backbone_atom_name(name, element) or name
+        if canonical in atom_by_name:
+            raise ValueError(
+                f"{residue_uid_from_biopdb(residue)}: ambiguous duplicate atom aliases for {canonical}"
+            )
+        atom_by_name[canonical] = coordinate
+        if canonical not in {"N", "CA", "C", "O", "OXT"}:
+            sidechain.append(coordinate)
     return atom_by_name, sidechain
 
 

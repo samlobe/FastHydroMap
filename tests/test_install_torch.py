@@ -1,15 +1,22 @@
 import sys
+import pytest
 
 from FastHydroMap.cli import _build_parser, main
 from FastHydroMap.install_torch import torch_install_command
 
 
-def test_torch_install_command_cpu_uses_cpu_index():
+@pytest.mark.parametrize("platform, index", [
+    ("linux", "https://download.pytorch.org/whl/cpu"),
+    ("win32", "https://download.pytorch.org/whl/cpu"),
+    ("darwin", "https://pypi.org/simple"),
+])
+def test_torch_install_command_cpu_uses_platform_index(monkeypatch, platform, index):
+    monkeypatch.setattr(sys, "platform", platform)
     command = torch_install_command("cpu", python_executable="/tmp/python")
     assert command[:4] == ["/tmp/python", "-m", "pip", "install"]
     assert "--upgrade" in command
     assert "torch>=2.2,<2.12" in command
-    assert command[-1] == "https://download.pytorch.org/whl/cpu"
+    assert command[-1] == index
 
 
 def test_cli_install_torch_dry_run(monkeypatch, capsys):
@@ -23,7 +30,8 @@ def test_cli_install_torch_dry_run(monkeypatch, capsys):
 
     out = capsys.readouterr().out
     assert "Torch install command:" in out
-    assert "https://download.pytorch.org/whl/cpu" in out
+    index = "https://pypi.org/simple" if sys.platform == "darwin" else "https://download.pytorch.org/whl/cpu"
+    assert index in out
 
 
 def test_install_torch_subparser_has_plain_description():

@@ -1,0 +1,15 @@
+{
+  "purpose": "Complete terminal chemistry for an inference regression fixture, not a training protein or measured label source.",
+  "source": "PDB 5O3L, chain A, residues 306-378; extracted coordinates match examples/5o3l.pdb.",
+  "original_sha256": "0cd4f073aa5b9b73bc4d410311d7ee7a3939be5bb5914045a844b87b9c735169",
+  "completed_sha256": "592d54561851084c98e50c4695a0ae2a24e42274fc917768a262840ac21c770f",
+  "method": "PDBFixer findMissingAtoms/addMissingAtoms with seed 17, no missing residues rebuilt. Only the resulting OXT atom was appended; original atom records were retained verbatim.",
+  "pdbfixer_version": "1.12.0",
+  "openmm_version": "8.3.1",
+  "seed": 17,
+  "added_atom": {"res_uid": "A:378", "name": "OXT", "xyz_A": [222.368, 177.228, 166.927]},
+  "original_atoms": 557,
+  "completed_atoms": 558,
+  "max_original_coordinate_change_A": 0.0,
+  "note": "The modeled oxygen completes the extracted fragment for software testing; its position is not an experimentally resolved 5O3L atom. Legacy fixtures are unchanged."
+}

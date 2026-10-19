@@ -1,79 +1,74 @@
 # FastHydroMap
 
 FastHydroMap predicts residue-level hydrophobicity (`Fdewet`) and water-structure
-maps (`PC1`, `PC2`, `PC3`) from protein structures and trajectories.
+maps (`PC1`, `PC2`, `PC3`) from protein structures. It runs on a
+CPU without explicit-water simulations. Lower Fdewet indicates a more hydrophobic
+local surface.
 
-This branch prepares **FastHydroMap v2** for release: improved training labels,
-explicit histidine states, and more detailed local surface features. Models are
-included; prediction needs no MD simulation, network access, or research files.
+> This version is not yet available on PyPI or the ChimeraX Toolshed.
+> The instructions below install it from this checkout.
+
+![FastHydroMap overview](images/FastHydroMap_image.png)
 
 ## Quick start
 
-Install this checkout in a fresh Python 3.11–3.14 environment:
+From this repository's directory, in a fresh Python 3.12 environment:
 
 ```bash
-pip install -e .
+python -m pip install -e .
 fasthydromap install-torch
-fasthydromap predict protein.pdb --model v2 --prepare -o results/protein
+fasthydromap predict protein.pdb -o results/protein
 ```
 
-`--prepare` adds missing heavy atoms and saves a prepared PDB for inspection.
-Omit it for already prepared structures. CPU inference is the default.
-During this preview, `--model v2` selects the new models; omitting it retains
-published v1 behavior. **This is not yet a published v2 release.**
+This writes one CSV with all four scores, four PDBs with the scores in their
+B-factor columns, and an NPZ file of [residue embeddings](docs/MODEL.md#residue-embeddings)
+for downstream analysis.
 
-## Water-structure maps
+For missing heavy atoms, add `--prepare` and inspect the saved prepared structure.
 
-```bash
-# One map
-fasthydromap predict protein.pdb --model v2 --prepare --quantity pc1 -o results/pc1
+## ChimeraX
 
-# All four maps, sharing the structural calculations
-fasthydromap predict protein.pdb --model v2 --prepare --quantity all -o results/maps
+In ChimeraX, open **Tools → More Tools…**, find **FastHydroMap** in the
+[Toolshed](https://cxtoolshed.rbvi.ucsf.edu/), and click **Install**.
+Run `fasthydromap install` once to set up its Python dependencies, then predict
+and color a structure:
+
+```text
+fasthydromap #1
+fasthydromap #1 quantity pc1
 ```
 
-Outputs include a CSV, PDBs with predictions in the B-factor column, and a JSON
-record identifying models and histidine assignments. Use `--parts` to include
-the model's intrinsic and context contributions.
-
-Histidines default to neutral HIE unless specified in the PDB or with
-`--histidine-states states.csv`. This is not a pKa prediction.
-See [model and input notes](docs/V2.md) for examples and limitations.
+See the [ChimeraX tutorial](docs/ChimeraX_tutorial.md) for installation,
+coloring output PDBs, and interpreting the maps.
 
 ## Trajectories
 
-Use a prepared topology whose atoms match the trajectory:
-
 ```bash
-fasthydromap predict-trajectory protein.pdb trajectory.dcd --model v2 -o results/trajectory
+fasthydromap predict-trajectory protein.pdb trajectory.dcd -o results/trajectory
 ```
 
-DCD and XTC are supported. Output is a frame-by-residue CSV. Do not use
-`--prepare` with a trajectory. Make molecules whole first; periodic-boundary
-wrapping is not repaired automatically.
+DCD and XTC trajectory files are supported. This writes `trajectory.npz` with all four scores
+per frame and residue, plus residue IDs and frame/time information.
+Add `--csv` for a wide `_total.csv`, or `--embeddings` to include per-frame
+embeddings in the NPZ.
+Make sure you have a complete topology with matching atom order, and make molecules whole
+before prediction.
+See [how to load the results](docs/MODEL.md#loading-trajectory-results).
 
-## Visualization
+## Inputs and scope
 
-Open an output PDB in ChimeraX and color its B-factors:
+Use standard protein heavy atoms. Ordinary HIS defaults to neutral HIE;
+HID/HIE/HIP names or `--histidine-states states.csv` specify an assignment.
+FastHydroMap does not estimate pKa. See [input details](docs/MODEL.md).
 
-```text
-color bfactor range 4,6.5 palette ^lipophilicity
-```
+Training used restrained, single-chain protein simulations. Buried residues,
+termini, assemblies, and unsupported chemistry need caution.
 
-The existing [ChimeraX bundle](docs/ChimeraX_tutorial.md) supports the published
-release. Its integration with this v2 preview has not yet been verified.
+## Documentation and citation
 
-## Scope
-
-The models were trained on standard single-chain proteins. Assemblies are
-exploratory; predictions for buried or terminal residues require caution.
-Some predictions remain sensitive to small coordinate changes. Experimental
-smoothing models are not included.
-
-See [v2 model notes](docs/V2.md), [installation](docs/INSTALL.md), and the
-[release checklist](docs/V2_RELEASE.md).
-
-## Citation
+- [Installation](docs/INSTALL.md)
+- [Python API, inputs, embeddings, and model](docs/MODEL.md)
+- [Training and data](training/README.md)
 
 Lobo, S.; Najafi, S.; Shea, J.-E.; Shell, M. S. *Context-Aware Hydrophobicity
 Modeling: HydroMap and FastHydroMap*. bioRxiv (2026).

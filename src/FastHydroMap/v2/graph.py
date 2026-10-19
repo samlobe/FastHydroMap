@@ -5,6 +5,7 @@ import numpy as np
 import torch
 from Bio.PDB import PDBParser
 from . import geometry
+from .layers import radial_basis
 from .sasa import compute_sasa
 from ..featurize.sasa import compute_relative_sasa_features
 
@@ -44,6 +45,10 @@ def core(path, rows):
         uids, geometry.parse_geometry(path), "functional"
     )
     src, dst, rank = geometry.inbound_neighbors(xyz, 24)
+    # Compute the cutoff in float64, matching the frozen training builder.
+    capped = np.linalg.norm(xyz[src].astype(float) - xyz[dst], axis=1) <= 12.0
+    functional = geometry.edge_features(src, dst, xyz, fn, fv, fc)
+    distance = torch.tensor(np.linalg.norm(xyz[src] - xyz[dst], axis=1))
     return Graph(
         x=torch.tensor(x),
         pos=torch.tensor(xyz),
@@ -52,9 +57,11 @@ def core(path, rows):
             np.column_stack((sasa.sum(1), sasa[:, 5], sasa[:, 6])).astype(np.float32)
         ),
         pf_edge_index=torch.tensor(np.stack((src, dst)), dtype=torch.long),
-        pf_edge_distance=torch.tensor(np.linalg.norm(xyz[src] - xyz[dst], axis=1)),
+        pf_edge_distance=distance,
         pf_edge_rank=torch.tensor(rank),
-        pf_functional_edge=geometry.edge_features(src, dst, xyz, fn, fv, fc),
+        pf_functional_edge=functional,
+        graph_edge_index=torch.tensor(np.stack((src[capped], dst[capped])), dtype=torch.long),
+        graph_edge_attr=torch.cat((radial_basis(distance[capped], 8), functional[capped]), -1),
     )
 
 

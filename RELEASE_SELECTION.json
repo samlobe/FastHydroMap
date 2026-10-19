@@ -1,0 +1,63 @@
+{
+  "selection_date": "2026-10-19",
+  "status": "local_corrected_full800_candidate_under_review",
+  "default_model": "latest",
+  "legacy_model": "v0",
+  "architecture": "shared_water_embedding_v1",
+  "feature_version": "terminal_carboxylate_v2",
+  "residue_embedding_width": 16,
+  "prediction_seeds": [
+    17,
+    29,
+    43
+  ],
+  "official_embedding_seed": 17,
+  "embedding_layer": "post_message_passing_pre_prediction_heads",
+  "outputs": [
+    "Fdewet",
+    "PC1",
+    "PC2",
+    "PC3"
+  ],
+  "fit_proteins": 800,
+  "manifest_sha256": "7c4901c462faf5e6be43733c0c8f9e555ab8095169e5946b8f80568a5e5e31ac",
+  "training_protocol": "training/shared_protocol.json",
+  "training_protocol_sha256": "3889286e3a062760613a03ceea2d0f9f8120306ad59d46c3551bf9b2ce4ce1f2",
+  "training_inputs": "training/DATA_ACCESS.json",
+  "structure_outputs": "all-target CSV, four B-factor PDBs, embedding NPZ, provenance JSON",
+  "trajectory_outputs": "scores NPZ and provenance JSON; embeddings/CSV opt-in; no PDBs",
+  "verification": {
+    "source_cpu_tests": 164,
+    "python": "3.12.13",
+    "torch": "2.11.0+cpu",
+    "feature_readout_parity_proteins": 30,
+    "max_prediction_delta": 3.814697265625e-06,
+    "max_embedding_delta": 8.344650268554688e-07,
+    "embedding_export_invariance": true,
+    "seed17_readout_reconstruction": true,
+    "heldout_proteins_scored_after_freeze": 200,
+    "installed_wheel_cpu_tests": 164,
+    "fresh_dependency_resolution": "passed",
+    "pip_check": "passed",
+    "wheel_and_sdist_metadata": "passed",
+    "chimerax_focused_tests": 66,
+    "chimerax_live_gui_checks": 7,
+    "chimerax_version": "1.12",
+    "verified_platform": "Linux x86_64",
+    "cross_platform_ci": "configured; not executed for this candidate"
+  },
+  "publication_analyses": {
+    "status": "independent_job_running",
+    "fits": 57,
+    "training_roles": "500 fit /100 tune /200 development audit",
+    "software_release_blocking": false
+  },
+  "required_before_distribution": [
+    "Review exact source diff and final version",
+    "Run cross-platform CI or state unverified platforms",
+    "Complete attribution review and publish approved artifacts"
+  ],
+  "data_deposition": "pending; not required for inference",
+  "old_versions_preserved": true,
+  "published": false
+}

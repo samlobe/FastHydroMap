@@ -1,134 +1,138 @@
-# FastHydroMap ChimeraX tutorial
+# FastHydroMap in ChimeraX
 
-FastHydroMap predicts a per-residue dewetting free energy (`Fdewet`) or one of
-three learned water-structure components (`PC1`, `PC2`, and `PC3`) and maps the
-result onto a ChimeraX structure.
+Predict residue-level Fdewet, PC1, PC2 and PC3 from a protein structure, then
+color its atoms, cartoon or surface.
 
-The method is described in Lobo, Najafi, Shea, and Shell,
-[*Context-Aware Hydrophobicity Modeling: HydroMap and FastHydroMap*](https://doi.org/10.64898/2026.06.07.730647).
+**Unreleased candidate:** this updated bridge and Python package are not on
+Toolshed/PyPI yet. The installation commands below describe the released
+workflow. For local review, install the candidate bundle manually and use
+`fasthydromap install packageSpec /absolute/path/to/candidate.whl`.
 
 ![FastHydroMap overview](../images/FastHydroMap_tutorial_overview.png)
 
-## 1. Install
+## Install once
 
-FastHydroMap requires ChimeraX 1.12 or newer. Install the bundle from
-**Tools > More Tools...**, search for **FastHydroMap**, and click **Install**.
-The equivalent ChimeraX command is:
+In ChimeraX 1.12 or newer:
 
 ```text
-toolshed install FastHydroMap
-```
-
-The first prediction also needs a one-time installation of FastHydroMap and
-PyTorch in an isolated environment managed by the bundle:
-
-```text
+toolshed install ChimeraX-FastHydroMap
 fasthydromap install
 ```
 
-Wait for the ChimeraX Log to report a
-successful installation before continuing.
+Wait for successful installation in the Log. The bundle installs FastHydroMap
+and CPU PyTorch into an isolated environment; a GPU is not needed. Updating the
+bundle does not automatically update that environment.
+Run `fasthydromap install` again to update it. The installer verifies a new
+environment before switching to it and retains the previous installation if
+the update fails.
 
-When installation finishes, the ChimeraX Log displays clickable example and
-help commands. You can reopen the full command reference at any time with:
-
-```text
-help fasthydromap
-```
-
-## 2. Make Fdewet and water-structure maps
-
-Open a protein, then make the default `Fdewet` map:
+## Make a map
 
 ```text
 open 1a1u
 fasthydromap #1
-```
-where `#1` specifies the atoms to be colored. For example, `#2` would instead color the second loaded model, while `/A` would color just chain A.
-
-To make water-structure maps:
-```text
 fasthydromap #1 quantity pc1
-fasthydromap #1 quantity pc2
-fasthydromap #1 quantity pc3
 ```
-where PC1, PC2, and PC3 refer to different aspects of water structuring; see interpretation below.
 
-`Fdewet` describes the thermodynamic cost of removing hydration water.
+The first calculation computes all four quantities together and stores them as residue
+attributes: `fasthydromap_fdewet`, `fasthydromap_pc1`,
+`fasthydromap_pc2` and `fasthydromap_pc3`. The `quantity` option selects
+which one to color; switching maps reuses the cached predictions when the input
+and prediction settings are unchanged. Embeddings are also retained for later
+export. Use `fasthydromap #1 refresh true` to force a new calculation.
 
-`PC1` tracks a tradeoff between icosahedral waters (60°) and tetrahedral or ice-like waters (100-120°);
+With exactly one atomic model open, `fasthydromap` needs no model specifier.
+With several open, it asks you to select one, for example `fasthydromap #1`.
+Each selected model uses only its own internal coordinates and active frame:
+moving it in the scene does not alter predictions, and other open models do
+not contribute. Multiple explicitly selected models are analyzed independently.
+An assembly must be in one atomic model to include its interchain contacts.
+Commands operate on whole atomic structures, including hidden atoms, preserving
+the surrounding protein context; selecting a chain is not a request to
+remove the rest of its assembly.
 
-`PC2` tracks vapor-like or ideal-gas-like water signature (90°) that are often seen near extended hydrophobic surfaces;
+The input needs complete standard heavy atoms. If missing atoms prevent
+prediction, `prepare true` rebuilds them in a temporary copy, without changing
+the open structure. Inspect rebuilt regions with the standalone CLI's
+`--prepare` output when they matter to your interpretation.
 
-`PC3` tracks closely packed waters (50°) that are often seen near charged surfaces.
+```text
+fasthydromap #1 prepare true
+fasthydromap #1 prepare true quantity pc2 target cs
+fasthydromap #1 prepare true quantity pc3 palette blue:white:red range -3,3
+fasthydromap #1 prepare true color false
+```
 
-Changes in these hydration structures may help explain protein
-function, including water-mediated stabilization, wetting or drying of pockets
-and interfaces, and tightly coordinated hydration near polar or charged sites.
+Prediction options are not sticky: repeat `prepare true` or `histidineStates`
+when recoloring to retain those settings. Changed input coordinates, residue
+identities, histidine-file contents, prediction options or installed model files
+invalidate the cache. Color, palette and display range do not. The Log reports
+cache reuse. Only the most recent input is cached per model, and caches are not
+restored from saved sessions; old residue attributes alone never authorize reuse.
+Unknown custom executable/editable-install layouts safely recalculate instead.
 
-## 3. Why use dewetting free energy (Fdewet)?
+## Open a map from the command line
 
-Traditional sequence hydropathy scales assign one value to each amino-acid
-identity. They are useful for sequence-level analysis, but they cannot describe
-how the same residue changes when its solvent exposure, neighboring chemistry,
-surface curvature, or conformation changes.
+The standalone CLI writes one B-factor PDB per quantity. Open and color one
+without installing the FastHydroMap bundle:
 
-`Fdewet` instead measures the thermodynamic cost of removing hydration water
-from a local surface. A lower value means that water is easier to remove and the
-surface is more hydrophobic; a higher value means that water is retained more
-strongly and the surface is more hydrophilic. FastHydroMap predicts this
-context-dependent quantity directly from protein structure, making it useful for
-examining binding interfaces, pockets, conformational changes, folding, and
-aggregation without running the expensive dewetting simulations directly.
+```text
+open results/protein_fdewet.pdb
+color bfactor range 4,6.5 palette ^lipophilicity
+```
 
-See [Najafi, *et al.*](https://doi.org/10.1021/acs.jpcb.4c06399), [Lobo, *et al.*](https://doi.org/10.1021/acs.jpcb.5c02360), and papers from [Amish Patel](https://patelgroup.seas.upenn.edu/publications/) for further discussion of dewetting free energy.
+For PC maps, open the corresponding `_pc1.pdb`, `_pc2.pdb` or `_pc3.pdb` and
+use the color ranges below.
 
-## 4. Interpret the water-structure maps
+## Interpret the values
 
-PC1, PC2, and PC3 are signed projections of the local hydration-water triplet-
-angle distribution relative to bulk water. These principal component projections are based on the water-structure analysis of
-[Robinson Brown *et al.*](https://doi.org/10.1021/acs.jpcb.3c00826), so the
-signs have the following interpretations:
+Lower Fdewet means water is easier to remove: a more hydrophobic local surface.
+Higher Fdewet indicates stronger water retention.
+
+PC1–PC3 are signed projections of hydration-water angular distributions, not
+three additional hydrophobicity scales. Interpret their signs using the
+HydroMap loadings and their fixed convention:
 
 ![HydroMap PC loading traces](../images/hydromap_pc_traces.png)
 
-| Map | Negative values | Positive values |
+| Map | Negative | Positive |
 | --- | --- | --- |
-| **PC1** | More tetrahedral, water-like ordering (~100-120°) associated with hydrophobic surfaces. | A shift toward more simple-fluid/icosahedral motifs (~60°) and away from tetrahedral ordering. |
-| **PC2** | Enrichment of roughly 130–150° triplet angles and depletion around 90°. | Enrichment around 90° and depletion around 130–150°; a more disordered signature associated with water next to large, smooth hydrophobic interfaces. |
-| **PC3** | Depletion of the 40–50° high-coordination signature. | Enrichment of 40–50°, highly coordinated waters seen near polar and charged sites; this generally accompanies higher `Fdewet` and greater hydrophilicity. |
+| PC1 | More tetrahedral ordering (~100–120°) | More ~60° ordering |
+| PC2 | More ~130–150° ordering relative to ~90° | More ~90° ordering |
+| PC3 | Less ~40–50° ordering | More highly coordinated ~40–50° ordering |
 
+PC color limits retain the original ranges: PC1 −8 to 8, PC2 −2 to 8, and
+PC3 −2 to 2. These are display choices, not fitted percentiles. Values beyond
+the limits receive the endpoint colors; **the residue attributes remain raw,
+unclipped predictions**. Use `range low,high` to change the display.
 
+## Histidines and embeddings
 
-## 5. Change the scale or display
-
-Set the two palette extremes with `range low,high`:
+Ordinary HIS defaults to neutral HIE, with a warning. Named HIP/HIE/HID residues
+are recognized. Explicit states can be supplied as a CSV with
+`res_uid,histidine_state` columns (for example, `A:42,HIP`):
 
 ```text
-fasthydromap #1 range 4,7
+fasthydromap #1 histidineStates /path/to/states.csv
+fasthydromap #1 histidineStates /path/to/states.csv quantity pc1
+fasthydromap #1 histidineStates /path/to/states.csv embeddings /path/to/protein_embeddings.npz
 ```
 
-Predict another quantity or supply a ChimeraX palette:
+HIP changes both the charge flag and atom-level partial charges. HIE/HIP were
+represented in training; HID is accepted but not validated by this dataset.
+Assignments are not inferred from pH. Embedding export requires one structure
+and a new output file; the NPZ includes residue IDs and checkpoint identity.
 
-```text
-fasthydromap #1 quantity pc2 palette blue:white:red range -2,8
-fasthydromap #1 quantity pc3 palette ^lipophilicity range -2,2
-```
+## Scope
 
-The default display colors atoms, cartoon, and molecular surface and is a good
-starting point. Cosmetic options such as `target` and `showAtoms` can change
-which representations are colored or shown. Use `help fasthydromap` for those
-options. Use `color false` when you want to calculate and store the attribute
-without recoloring the model.
+These are structural predictions, not new HydroMap simulations. Buried residues,
+termini, reconstructed regions and unfamiliar chemistry need caution.
+Nonprotein context (ligands, membranes, nucleic acids and explicit waters) is
+not modeled. Assembly predictions are useful structural extrapolations, not a
+separately validated assembly-label benchmark. See [model notes](MODEL.md).
 
-## Notes
-
-- FastHydroMap was trained on structured proteins and the 20 canonical
-  amino-acid chemistries. Treat predictions for modified or non-canonical amino
-  acids cautiously.
-- Non-protein residues are not meaningfully modeled by FastHydroMap.
-- Differences in histidine protonation states (HID vs HIE) are not meaningfully modeled. Charged histidine state (HIP) is not currently modeled, so be cautious about interpreting histidine hydrophobicity / water structure.
-- We recommend using/altering [HydroMap](https://github.com/samlobe/HydroMap) to model hydrophobicity of noncanonical amino acids, specific histidine protonation states, or non-protein residues (e.g. DNA/RNA).
-- The managed FastHydroMap installation is separate from the ChimeraX bundle.
-  Removing or upgrading one does not automatically remove the other.
-- Run `help fasthydromap` inside ChimeraX for the complete command reference.
+For the previous published model, use `model v0`; its PC display ranges remain
+unchanged. Switching model/input clears incompatible attributes rather than
+mixing results. Legacy targets are computed separately and cached as requested.
+The default `model latest` is the model bundled with the installed
+package, not a network download. Full command reference: `help fasthydromap`.

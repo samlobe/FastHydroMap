@@ -4,9 +4,13 @@ import json
 import numpy as np
 import pandas as pd
 import pytest
+import torch
+from types import SimpleNamespace
 from Bio.PDB import PDBParser, PDBIO
 from FastHydroMap.v2 import Predictor
 from FastHydroMap.cli import main
+from FastHydroMap.v2.model import SharedWaterModel
+from FastHydroMap.v2.chemistry import NAMES
 
 DATA = Path(__file__).parent / "data"
 PDB = DATA / "v2_chain.pdb"
@@ -17,19 +21,22 @@ def predictor():
     return Predictor()
 
 
-def test_selected_model_regression_and_parts(predictor):
+def test_selected_model_regression_and_single_head(predictor):
     with pytest.warns(UserWarning, match="HIE"):
-        got = predictor.predict(PDB, parts=True)
-    expected = pd.read_json(DATA / "v2_expected.json")
-    assert got.res_uid.tolist() == expected.uid.tolist()
+        got = predictor.predict(PDB)
+    expected = pd.DataFrame(json.loads((DATA/'v2_shared_chain_expected.json').read_text())['records'])
+    assert got.res_uid.tolist() == expected.res_uid.tolist()
     for target in predictor.quantities:
         np.testing.assert_allclose(got[target], expected[target], atol=5e-6, rtol=0)
-        np.testing.assert_allclose(
-            got[target],
-            got[target + "_intrinsic"] + got[target + "_context"],
-            atol=5e-6,
-            rtol=0,
-        )
+    with pytest.raises(ValueError, match="intrinsic/context"):
+        predictor.predict(PDB, parts=True)
+    assert got.terminal_caution.equals(got.is_n_term | got.is_c_term)
+    assert got.zero_sasa_caution.equals(got.sasa_A2 <= 0)
+    from FastHydroMap.v2.sasa import compute_sasa
+    np.testing.assert_allclose(got.sasa_A2, 100 * compute_sasa(PDB, len(got)).sum(1), atol=1e-5, rtol=1e-6)
+    assert got.no_probe_caution.equals(got.probe_count == 0)
+    assert not got.assembly_caution.any()
+    assert not any("intrinsic" in c or "context" in c for c in got.columns)
 
 
 def test_histidine_validation_and_charge(predictor):
@@ -42,6 +49,51 @@ def test_histidine_validation_and_charge(predictor):
         predictor.predict(PDB, histidine_states={"X:99999": "HIP"})
     with pytest.raises(ValueError, match="HID, HIE or HIP"):
         predictor.predict(PDB, histidine_states={hist[0]: "auto"})
+
+
+def test_compact_unused_features_and_disconnected_nodes():
+    torch.manual_seed(17)
+    model = SharedWaterModel().eval()
+    assert len(model.layers) == 2
+    assert sum(p.numel() for p in model.parameters()) == 8740
+    assert not hasattr(model, "intrinsic_head")
+    n = 8
+    g = SimpleNamespace(
+        x=torch.randn(n, 33), point=torch.randn(n, 24, 32),
+        probe_atom=torch.randn(n, 24, 8, 21), point_mask=torch.ones(n, 24, dtype=torch.bool),
+        graph_edge_index=torch.tensor([[0, 1, 2, 3], [1, 0, 3, 2]]),
+        graph_edge_attr=torch.randn(4, 20),
+        **{"rich_" + k: torch.randn(n, len(v)) for k, v in NAMES.items()},
+    )
+    changed = copy.deepcopy(g)
+    changed.point[..., 11:] = 999
+    changed.probe_atom[..., [2, 3]] = 999
+    changed.rich_cavity[:, 1:-1] = 999
+    for bank in ("angular", "field", "atom_env"):
+        getattr(changed, "rich_" + bank)[:] = 999
+    changed.target = torch.full((n,), 999.)
+    changed.avg_n_waters = torch.full((n,), 999.)
+    with torch.inference_mode():
+        expected = model(model.inputs(g))
+        torch.testing.assert_close(model(model.inputs(changed)), expected, rtol=0, atol=0)
+        # Nodes 4..7 have no edges to 0..3. Their embeddings cannot alter the readout.
+        changed.x[4:] = 999
+        changed.point[4:] = 999
+        changed.probe_atom[4:] = 999
+        torch.testing.assert_close(model(model.inputs(changed))[:4], expected[:4], rtol=0, atol=0)
+
+
+def test_compact_graph_degree_and_distance_cap():
+    from FastHydroMap.v2.graph import core
+    from FastHydroMap.io.residue_qc import collect_residue_records
+    from dataclasses import asdict
+    records, _, _ = collect_residue_records(PDB)
+    rows = [dict(asdict(r), histidine_charged=0) for r in records]
+    g = core(PDB, rows)
+    source, target = g.graph_edge_index
+    assert len(g.x) == len(records)  # Every residue is context, not only surface sites.
+    assert torch.bincount(target, minlength=len(records)).max() <= 24
+    assert torch.all(torch.linalg.vector_norm(g.pos[source].double() - g.pos[target].double(), dim=1) <= 12)
 
 
 def test_disconnected_component_does_not_change_predictions(predictor, tmp_path):
@@ -87,7 +139,6 @@ def test_cli_all_and_overwrite_guard(monkeypatch, tmp_path):
         "v2",
         "--quantity",
         "all",
-        "--parts",
         "-o",
         str(root),
     ]
@@ -95,7 +146,7 @@ def test_cli_all_and_overwrite_guard(monkeypatch, tmp_path):
     main()
     frame = pd.read_csv(str(root) + ".csv")
     assert len(frame) == 73
-    assert json.loads(Path(str(root) + ".json").read_text())["model"] == "v2"
+    assert json.loads(Path(str(root) + ".json").read_text())["model"] == "latest"
     for target in ("fdewet", "pc1", "pc2", "pc3"):
         assert Path(str(root) + "_" + target + ".pdb").exists()
     before = Path(str(root) + ".csv").read_bytes()
@@ -144,19 +195,18 @@ def test_streaming_trajectory(monkeypatch, tmp_path, predictor):
             str(dcd),
             "--model",
             "v2",
-            "--parts",
             "-o",
             str(root),
         ],
     )
     main()
-    total = pd.read_csv(str(root) + ".csv").drop(columns="frame").to_numpy()
-    intrinsic = (
-        pd.read_csv(str(root) + "_intrinsic.csv").drop(columns="frame").to_numpy()
-    )
-    context = pd.read_csv(str(root) + "_context.csv").drop(columns="frame").to_numpy()
-    assert total.shape == (2, 73)
+    total = np.load(str(root) + ".npz", allow_pickle=False)["scores"]
+    assert not Path(str(root) + "_fdewet.pdb").exists()
+    assert not Path(str(root) + "_pc3.pdb").exists()
+    assert not Path(str(root) + "_total.csv").exists()
+    assert total.shape == (2, 73, 4)
     np.testing.assert_allclose(total[0], total[1], atol=1e-6, rtol=0)
-    np.testing.assert_allclose(total, intrinsic + context, atol=5e-6, rtol=0)
-    reference = predictor.predict(PDB).Fdewet.to_numpy()
+    assert not Path(str(root) + "_intrinsic.csv").exists()
+    assert not Path(str(root) + "_context.csv").exists()
+    reference = predictor.predict(PDB)[list(predictor.quantities)].to_numpy()
     np.testing.assert_allclose(total[0], reference, atol=1e-5, rtol=0)

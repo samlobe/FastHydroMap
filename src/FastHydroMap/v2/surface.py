@@ -38,6 +38,7 @@ def build(
     targets=None,
     parsed=None,
     optimized=False,
+    compact=False,
 ):
     if spacing != 1.0:
         raise ValueError("The selected model requires 1-A grid spacing")
@@ -282,15 +283,51 @@ def build(
         cloud["point_pos"][i, :m] = chosen - c[i]
         cloud["point_normal"][i, :m] = normal
 
+    def residue_compact(i):
+        # Same consumed features and point ordering; omit unused residue banks.
+        own = np.where(owner == i)[0]
+        ids = lattice_ids(x[own], points[0], shape)
+        ids = ids[free[ids]]
+        out["cavity"][i, 0] = np.log1p(len(ids))
+        if not len(ids):
+            out["cavity"][i, -1] = 1
+            return
+        ids = ids[np.linspace(0, len(ids) - 1, min(24, len(ids)), dtype=int)]
+        chosen = points[ids]
+        m = len(chosen)
+        clr, _ = rich.clearance(chosen, tree, radii)
+        own_dist = cKDTree(x[own]).query(chosen)[0]
+        d, ix = tree.query(chosen, k=8)
+        nb = ix[np.arange(m), np.argmin(d - props[ix, 0], axis=1)]
+        normal = chosen - x[nb]
+        normal /= np.linalg.norm(normal, axis=1, keepdims=True)
+        outward = chosen - c[i]
+        outward /= np.maximum(np.linalg.norm(outward, axis=1, keepdims=True), 1e-8)
+        allowed = rich.clearance(
+            (chosen[:, None, :] + 2.8 * directions).reshape(-1, 3), tree, radii
+        )[0].reshape(m, direction_count) > 1.4
+        pair = allowed[:, ii] & allowed[:, jj]
+        hist = (pair @ basis) / np.maximum(pair.sum(1)[:, None], 1)
+        anis = np.linalg.norm(allowed @ directions, axis=1) / np.maximum(allowed.sum(1), 1)
+        cloud["point"][i, :m, :14] = np.column_stack((
+            clr, own_dist, connected[ids],
+            lattice_counts[2.0][ids] / (4 * np.pi * 2**3 / 3),
+            lattice_counts[3.5][ids] / (4 * np.pi * 3.5**3 / 3),
+            (normal * outward).sum(1), allowed.mean(1), anis, hist))
+        cloud["point_mask"][i, :m] = True
+        cloud["point_pos"][i, :m] = chosen - c[i]
+        cloud["point_normal"][i, :m] = normal
+
     targets = range(n) if targets is None else targets
+    residue_builder = residue_compact if compact else residue
     if residue_workers == 1:
         for i in targets:
-            residue(i)
+            residue_builder(i)
     else:
         from concurrent.futures import ThreadPoolExecutor
 
         with ThreadPoolExecutor(max_workers=residue_workers) as pool:
-            list(pool.map(residue, targets))
+            list(pool.map(residue_builder, targets))
     # Atom encoder helper uses the first frame as its reference.
     af_frames = np.asarray(frames).copy()
     af_frames[0] = frame

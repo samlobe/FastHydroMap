@@ -13,12 +13,16 @@ from Bio.PDB import PDBParser, PDBIO, Select
 from scipy.spatial import cKDTree
 from . import chemistry, surface, graph
 from .geometry import residue_uid_from_biopdb
-from .model import SurfaceModel
+from .model import SharedWaterModel
 from ..io.residue_qc import collect_residue_records
 from ..utils.constants import AA3
 
 WEIGHTS = Path(__file__).parents[1] / "weights" / "v2"
 TARGETS = ("Fdewet", "PC1", "PC2", "PC3")
+FEATURE_VERSION = "terminal_carboxylate_v2"
+TERMINAL_CAUTION_NOTE = (
+    "Terminal residues were excluded from fitting targets; their predictions are extrapolations."
+)
 
 
 def components(path, rows):
@@ -61,7 +65,7 @@ class Predictor:
     ordinary HIS defaults to HIE with a warning; this is not pKa estimation.
     """
 
-    def __init__(self, quantities=TARGETS, threads=4):
+    def __init__(self, quantities=TARGETS, threads=4, weights=None):
         if not isinstance(threads, int) or threads < 1:
             raise ValueError("threads must be a positive integer")
         if isinstance(quantities, str):
@@ -76,35 +80,62 @@ class Predictor:
         if not self.quantities:
             raise ValueError("Select at least one quantity")
         self.threads = threads
-        self.manifest = json.loads((WEIGHTS / "manifest.json").read_text())
-        self.models = {}
-        for target in self.quantities:
-            spec = self.manifest["models"][target]
-            models = []
-            for member in spec["members"]:
-                path = WEIGHTS / member["file"]
-                if hashlib.sha256(path.read_bytes()).hexdigest() != member["sha256"]:
-                    raise ValueError(f"Checkpoint checksum mismatch: {path.name}")
-                model = SurfaceModel()
-                model.load_state_dict(
-                    torch.load(path, map_location="cpu", weights_only=True)
-                )
-                models.append(model.eval())
-            self.models[target] = (models, spec["normalization"])
+        self.weights = Path(weights) if weights is not None else WEIGHTS
+        self.manifest = json.loads((self.weights / "manifest.json").read_text())
+        self.shared = self.manifest.get("architecture") == "shared_water_embedding_v1"
+        self.compact = True
+        if not self.shared:
+            raise ValueError("This predictor requires shared-model weights; use --model v0 for the previous published model")
+        if self.manifest.get("feature_version") != FEATURE_VERSION:
+            raise ValueError(
+                f"Model feature version must be {FEATURE_VERSION!r}; these weights are "
+                "incompatible with the current terminal-chemistry features."
+            )
+        if self.shared:
+            self.members = []
+            seeds = [m['seed'] for m in self.manifest['members']]
+            if len(seeds) != len(set(seeds)) or self.manifest['embedding_seed'] not in seeds:
+                raise ValueError('Unique model seeds and an official embedding member are required')
+            if self.manifest['targets'] != list(TARGETS) or self.manifest['width'] != 16:
+                raise ValueError('Unsupported shared output order or embedding width')
+            for member in self.manifest['members']:
+                path = self.weights / member['file']
+                if hashlib.sha256(path.read_bytes()).hexdigest() != member['sha256']:
+                    raise ValueError(f'Checkpoint checksum mismatch: {path.name}')
+                payload = torch.load(path, map_location='cpu', weights_only=True)
+                meta = payload['metadata']
+                if meta.get("feature_version") != FEATURE_VERSION:
+                    raise ValueError(f"Checkpoint feature version mismatch: {path.name}")
+                for key in ('feature_normalization', 'target_normalization'):
+                    if meta[key] != self.manifest[key]:
+                        raise ValueError(f'Checkpoint/manifest mismatch: {key}')
+                if meta['seed'] != member['seed'] or meta['architecture'] != 'shared_water_embedding_v1':
+                    raise ValueError('Checkpoint identity mismatch')
+                if meta['fit_proteins'] != self.manifest['fit_proteins']:
+                    raise ValueError('Checkpoint training population mismatch')
+                network = SharedWaterModel()
+                network.load_state_dict(payload['state_dict'])
+                self.members.append((member, network.eval()))
+            if self.manifest.get('status') != 'released':
+                warnings.warn('LOCAL PUBLICATION CANDIDATE: these weights are not a published release. '
+                    'Check model_manifest_sha256 when recording predictions.', stacklevel=2)
+            return
 
     @torch.inference_mode()
-    def _component(self, path, rows, parts):
+    def _component(self, path, rows, parts, embeddings=False):
         uids = [r["res_uid"] for r in rows]
         states = [r["histidine_state"] for r in rows]
         try:
             parsed = chemistry.parse(path, uids, states)
         except (AssertionError, KeyError, ValueError) as exc:
             raise ValueError(
-                f"Incomplete or unsupported heavy-atom chemistry: {exc}. Prepare the structure before v2 inference (see docs/V2.md)."
+                f"Incomplete or unsupported heavy-atom chemistry: {exc}. "
+                "For missing atoms, use --prepare on a single structure and inspect the "
+                "prepared PDB; trajectory topology must be complete (see docs/MODEL.md)."
             ) from exc
         if len(parsed[0]) < 8:
             raise ValueError(
-                "v2 atom features require at least eight protein heavy atoms"
+                "Atom features require at least eight protein heavy atoms"
             )
         core = graph.core(path, rows)
         raw = cloud = atoms = None
@@ -120,6 +151,7 @@ class Predictor:
                 optimized=True,
                 workers=self.threads,
                 residue_workers=self.threads,
+                compact=self.compact,
             )
             if raw is None:
                 raw = {k: np.zeros_like(v) for k, v in rr.items()}
@@ -131,29 +163,31 @@ class Predictor:
                 cloud[k][ix] = cc[k][ix]
             atoms[ix] = aa[ix]
         output = {}
-        for target, (models, stats) in self.models.items():
-            g = graph.attach(core, raw, cloud, atoms, stats)
-            values = [m(g, return_parts=True) for m in models]
-            means = {
-                k: torch.stack([v[k] for v in values]).mean(0).numpy()
-                for k in values[0]
-            }
-            if "pc_target" in stats:
-                s = stats["pc_target"]
-                for k in means:
-                    means[k] = means[k] * s["std"] + (
-                        s["mean"] if k != "context" else 0.0
-                    )
-            output[target] = means["total"]
-            if parts:
-                output[target + "_intrinsic"] = means["intrinsic"]
-                output[target + "_context"] = means["context"]
+        if getattr(self, 'shared', False):
+            g = SharedWaterModel.inputs(graph.attach(core, raw, cloud, atoms, self.manifest['feature_normalization']))
+            norm = self.manifest['target_normalization']
+            mean, std = torch.tensor(norm['mean']), torch.tensor(norm['std'])
+            predictions = []
+            for member, network in self.members:
+                value, h = network(g, return_embeddings=True)
+                predictions.append(value * std + mean)
+                if embeddings and member['seed'] == self.manifest['embedding_seed']:
+                    output.update({f'embedding_{j}': h[:, j].numpy() for j in range(16)})
+            averaged = torch.stack(predictions).mean(0).numpy()
+            output.update({target: averaged[:, TARGETS.index(target)] for target in self.quantities})
         if not all(np.isfinite(v).all() for v in output.values()):
             raise ValueError("Nonfinite model output")
+        # MDTraj returns nm²; only this user-facing display column is in Å².
+        output["sasa_A2"] = core.raw_sasa[:, 0].numpy() * 100.0
+        output["probe_count"] = cloud["point_mask"].sum(1).astype(np.float32)
         return output
 
-    def predict(self, pdb, *, histidine_states=None, parts=False):
+    def predict(self, pdb, *, histidine_states=None, parts=False, embeddings=False):
         """Return a DataFrame with stable residue IDs and unrounded predictions."""
+        if parts and self.compact:
+            raise ValueError("The selected v2 model has no intrinsic/context decomposition. Omit --parts.")
+        if embeddings and not getattr(self, 'shared', False):
+            raise ValueError('Embedding export requires the shared water model')
         path = Path(pdb)
         structure = PDBParser(QUIET=True).get_structure("", str(path))
         if len(structure) != 1:
@@ -162,10 +196,22 @@ class Predictor:
             raise ValueError("PDB coordinates must be finite")
         if any(a.is_disordered() for a in structure.get_atoms()):
             raise ValueError(
-                "Resolve alternate atom locations before v2 prediction (or use --prepare)"
+                "Resolve alternate atom locations before prediction (or use --prepare)"
+            )
+        standard_names = set(AA3) | {"HID", "HIE", "HIP"}
+        unsupported = [
+            f"{residue_uid_from_biopdb(r)} {r.resname}"
+            for r in structure.get_residues()
+            if (r.id[0] == " " and r.resname not in standard_names)
+            or r.resname in {"ACE", "NME", "NHE", "NH2"}
+        ]
+        if unsupported:
+            raise ValueError(
+                "Unsupported polymer residues or caps: " + ", ".join(unsupported)
+                + ". Supply standard, uncapped protein residues."
             )
         if any(
-            r.id[0] == " " and r.resname in AA3 and "CA" not in r
+            r.id[0] == " " and r.resname in standard_names and "CA" not in r
             for r in structure.get_residues()
         ):
             raise ValueError(
@@ -242,7 +288,10 @@ class Predictor:
                         writer = PDBIO()
                         writer.set_structure(structure[0])
                         writer.save(str(current), Keep())
-                    out = self._component(current, [rows[i] for i in indices], parts)
+                    if embeddings:
+                        out = self._component(current, [rows[i] for i in indices], parts, embeddings=True)
+                    else:
+                        out = self._component(current, [rows[i] for i in indices], parts)
                     for key, values in out.items():
                         outputs.setdefault(key, np.zeros(len(rows), np.float32))[
                             indices
@@ -263,6 +312,25 @@ class Predictor:
         ]
         for key, values in outputs.items():
             frame[key] = values
-        frame.attrs["model"] = "v2"
+        frame["probe_count"] = frame.probe_count.astype(int)
+        frame["terminal_caution"] = frame.is_n_term | frame.is_c_term
+        frame["zero_sasa_caution"] = frame.sasa_A2 <= 0
+        frame["no_probe_caution"] = frame.probe_count == 0
+        frame["assembly_caution"] = frame.chain_id.nunique() > 1
+        frame["hid_unvalidated_caution"] = frame.histidine_state.eq("HID")
+        frame["applicability_note"] = "Structural flags only; MD hydration support, replica repeatability and prediction confidence are unknown."
+        frame.attrs["model"] = "latest"
+        frame.attrs["terminal_caution_note"] = TERMINAL_CAUTION_NOTE
+        frame.attrs["feature_version"] = FEATURE_VERSION
         frame.attrs["input_sha256"] = hashlib.sha256(Path(pdb).read_bytes()).hexdigest()
+        if getattr(self, 'shared', False):
+            official = next(m for m in self.manifest['members'] if m['seed'] == self.manifest['embedding_seed'])
+            frame.attrs.update(architecture=self.manifest['architecture'],
+                model_status=self.manifest['status'],
+                model_manifest_sha256=hashlib.sha256((self.weights/'manifest.json').read_bytes()).hexdigest(),
+                embedding_seed=official['seed'] if embeddings else None,
+                embedding_checkpoint_sha256=official['sha256'] if embeddings else None,
+                embedding_width=16 if embeddings else None,
+                embedding_representation='post_message_passing_pre_prediction_heads' if embeddings else None,
+                prediction_ensemble_seeds=[m['seed'] for m in self.manifest['members']])
         return frame

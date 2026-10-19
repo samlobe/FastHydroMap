@@ -8,7 +8,16 @@ from Bio.PDB import PDBParser
 @lru_cache(maxsize=1)
 def templates():
     data = json.loads((Path(__file__).parent / "chemistry.json").read_text())
-    return data["templates"], data["water"]
+    # The source force field names the two terminal oxygens OC1/OC2.
+    # Canonicalize names only; retain every atom and its original parameters.
+    normalized = {}
+    for name, atoms in data["templates"].items():
+        renamed = { {"OC1": "O", "OC2": "OXT"}.get(atom, atom): values
+                    for atom, values in atoms.items() }
+        if len(renamed) != len(atoms):
+            raise ValueError(f"Ambiguous terminal oxygen names in template {name}")
+        normalized[name] = renamed
+    return normalized, data["water"]
 
 
 RADII = {"C": 1.70, "N": 1.55, "O": 1.52, "S": 1.80}
@@ -94,8 +103,14 @@ def parse(path, uids, histidine_states):
     # Imported here so feature workers need no graph/torch imports.
     from .geometry import canonical_atoms, select_altloc, backbone_frame
     from .geometry import residue_uid_from_biopdb
+    from ..io.residue_qc import _peptide_bond_present
 
     model = PDBParser(QUIET=True).get_structure("", str(path))[0]
+    if len(uids) != len(histidine_states):
+        raise ValueError("Each residue must have a matching histidine-state entry")
+    caps = {"ACE", "NME", "NHE", "NH2"}
+    if any(r.resname in caps for r in model.get_residues()):
+        raise ValueError("Capped peptides are unsupported; supply uncapped standard protein residues")
     lookup = {
         residue_uid_from_biopdb(r): r
         for r in model.get_residues()
@@ -107,6 +122,9 @@ def parse(path, uids, histidine_states):
         r = lookup[uid]
         select_altloc(r)
         a, _ = canonical_atoms(r)
+        missing = {"N", "CA", "C", "O"} - a.keys()
+        if missing:
+            raise ValueError(f"{uid}: missing backbone heavy atoms {sorted(missing)}")
         res.append((r, a))
     sg = [
         (i, a["SG"]) for i, (r, a) in enumerate(res) if r.resname == "CYS" and "SG" in a
@@ -131,18 +149,31 @@ def parse(path, uids, histidine_states):
         prev = (
             i > 0
             and res[i - 1][0].parent.id == residue.parent.id
-            and np.linalg.norm(res[i - 1][1]["C"] - atoms["N"]) < 1.8
+            and _peptide_bond_present(res[i - 1][0], residue)
         )
         nxt = (
             i < len(res) - 1
             and res[i + 1][0].parent.id == residue.parent.id
-            and np.linalg.norm(atoms["C"] - res[i + 1][1]["N"]) < 1.8
+            and _peptide_bond_present(residue, res[i + 1][0])
         )
-        # A normalized terminal OXT is required to claim a C-terminal template.
-        if "OXT" in atoms and "C" + name in ts:
+        if not prev and not nxt:
+            raise ValueError(
+                f"{uids[i]}: singleton/disconnected residue requires a combined N/C-terminal "
+                "template, which is not available"
+            )
+        if "OXT" in atoms and nxt:
+            raise ValueError(f"{uids[i]}: OXT is incompatible with a following peptide bond")
+        if not nxt:
+            if "OXT" not in atoms:
+                raise ValueError(
+                    f"{uids[i]}: C-terminal OXT is missing; use --prepare for a single "
+                    "structure. Trajectory topology must already contain terminal oxygens"
+                )
             name = "C" + name
-        elif not prev and "N" + name in ts:
+        elif not prev:
             name = "N" + name
+        if name not in ts:
+            raise ValueError(f"{uids[i]}: unsupported terminal chemistry {name}")
         template = ts[name]
         if set(atoms) != set(template):
             raise ValueError(
