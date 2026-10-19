@@ -6,3 +6,4 @@ tests/data/*expected.json linguist-generated=true
 src/FastHydroMap/weights/v2/manifest.json linguist-generated=true
 training/shared_protocol.json linguist-generated=true
 training/development_split.json linguist-generated=true
+images/architecture.svg linguist-generated=true whitespace=-blank-at-eol
