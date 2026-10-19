@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from FastHydroMap.cli import main
+from FastHydroMap.cli import main as cli_main
 from FastHydroMap.featurize.sasa import residue_sasa_components
 from FastHydroMap.predictors.fdewet import FdewetPredictor
 
@@ -18,6 +18,16 @@ REF_CSV = DATA_DIR / "1A1U_fdewet.csv"
 EXAMPLES_DIR = Path(__file__).resolve().parents[1] / "examples"
 TRAJ_PDB_PATH = EXAMPLES_DIR / "proteinG.pdb"
 TRAJ_DCD_PATH = EXAMPLES_DIR / "proteinG_short.dcd"
+
+
+def main():
+    """These frozen regression fixtures describe the previous model."""
+    previous = sys.argv
+    try:
+        sys.argv = [*previous, "--model", "v0"]
+        return cli_main()
+    finally:
+        sys.argv = previous
 
 
 def _write_1a1u_with_53a(src: Path, dst: Path) -> None:

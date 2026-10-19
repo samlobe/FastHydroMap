@@ -1,0 +1,13 @@
+# PDB is a fixed-column format; trailing blank charge fields are intentional.
+tests/data/v2_chain.pdb whitespace=-blank-at-eol
+
+# Preserve byte-verified fixtures and manifests across checkout platforms.
+*.pdb text eol=lf
+*.json text eol=lf
+
+# Numerical references and training manifests are generated artifacts.
+tests/data/*expected.json linguist-generated=true
+src/FastHydroMap/weights/v2/manifest.json linguist-generated=true
+training/shared_protocol.json linguist-generated=true
+training/development_split.json linguist-generated=true
+images/architecture.svg linguist-generated=true whitespace=-blank-at-eol

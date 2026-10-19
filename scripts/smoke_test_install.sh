@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-pytest -q \
-  tests/test_atom_names.py \
-  tests/test_sasa.py \
-  tests/test_graph_builder.py \
-  tests/test_predictor_regression.py \
-  tests/test_install_torch.py
-
-OUTDIR="${OUTDIR:-./outputs/smoke_test_install}"
-mkdir -p "${OUTDIR}"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "${ROOT_DIR}"
+python -m pip check
+python -m pytest -q
+SMOKE_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/fasthydromap-smoke.XXXXXXXX")"
 fasthydromap --help >/dev/null
-fasthydromap install-torch --variant cpu
-fasthydromap predict examples/1A1U.pdb -o "${OUTDIR}/1A1U_fdewet"
-fasthydromap predict examples/1A1U.pdb --quantity pc1 -o "${OUTDIR}/1A1U_pc1"
+# Install CPU Torch beforehand: fasthydromap install-torch --variant cpu
+fasthydromap predict tests/data/v2_chain.pdb -o "${SMOKE_ROOT}/all"
+fasthydromap predict examples/1A1U.pdb --model v0 -o "${SMOKE_ROOT}/legacy"
+echo "Smoke outputs: ${SMOKE_ROOT}"

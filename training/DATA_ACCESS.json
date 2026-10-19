@@ -1,0 +1,30 @@
+{
+  "status": "public_deposition_pending",
+  "download_url": null,
+  "doi": null,
+  "archives": [
+    {
+      "filename": "shared_corrected_full800_inputs.zip",
+      "sha256": "e29806b894de0fe5f98ef1bac800b353ee8c24eb3bafa591ab230cdbc39f728b",
+      "bytes": 1189137304,
+      "members": {
+        "full800.pt": {
+          "sha256": "ceac0bc1fb654937fcfbfce2d62c4d58e85d4f158757d1490619c94b969994c4",
+          "bytes": 3563008739
+        },
+        "full800.json": {
+          "sha256": "ace18dcedc34902d7c5d5c62aebd6eb98ed27bad529f25b4a151e41427007d7e",
+          "bytes": 30736
+        }
+      }
+    }
+  ],
+  "cache_member": "full800.pt",
+  "cache_receipt_member": "full800.json",
+  "feature_version": "terminal_carboxylate_v2",
+  "fit_proteins": 800,
+  "limitations": [
+    "Reproduction starts from precomputed features, not raw structures or simulations",
+    "Dataset/force-field attribution and license review pending"
+  ]
+}

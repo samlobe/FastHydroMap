@@ -23,12 +23,17 @@ def torch_install_command(
     if variant not in TORCH_INDEX_URLS:
         valid = ", ".join(sorted(TORCH_INDEX_URLS))
         raise ValueError(f"Unknown torch variant {variant!r}; expected one of: {valid}")
+    if sys.platform == "darwin" and variant != "cpu":
+        raise ValueError("CUDA wheels are not available on macOS; use --variant cpu")
 
     python_executable = python_executable or sys.executable
     command = [python_executable, "-m", "pip", "install"]
     if upgrade:
         command.append("--upgrade")
-    command.extend([torch_spec, "--index-url", TORCH_INDEX_URLS[variant]])
+    command.append(torch_spec)
+    # macOS wheels are distributed through PyPI, not the CPU-only wheel index.
+    index = "https://pypi.org/simple" if sys.platform == "darwin" else TORCH_INDEX_URLS[variant]
+    command.extend(["--index-url", index])
     return command
 
 

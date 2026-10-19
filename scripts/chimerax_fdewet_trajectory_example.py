@@ -5,7 +5,7 @@ Typical workflow:
 
 1. Run FastHydroMap on your trajectory:
 
-       fasthydromap predict-trajectory your_topology.pdb your_traj.dcd -o outputs/mytraj --parts
+       fasthydromap predict-trajectory your_topology.pdb your_traj.dcd --csv -o outputs/mytraj
 
 2. Edit the user settings below:
    - PDB_PATH
@@ -17,8 +17,9 @@ Typical workflow:
        chimerax --script chimerax_fdewet_trajectory_example.py
 
 Notes:
-- Use the ``*_total.csv`` file for total Fdewet values.
-- If you ran ``--parts``, you can swap to ``*_intrinsic.csv`` or
+- This helper reads the Fdewet columns from the optional all-target ``*_total.csv``.
+  Previous single-quantity CSVs are also supported.
+- With the previous model only (``--model v0 --parts``), you can swap to ``*_intrinsic.csv`` or
   ``*_context.csv`` to visualize those components instead.
 - This script is intentionally simple and comment-heavy so a future researcher
   can edit it without needing to know much ChimeraX scripting beforehand.
@@ -79,11 +80,15 @@ def load_fdewet_table(path: pathlib.Path):
                 f"{path} does not look like a FastHydroMap trajectory CSV "
                 "(expected first column to be 'frame')."
             )
-        residue_labels = header[1:]
+        columns = [(i, label.removeprefix("Fdewet:")) for i, label in enumerate(header)
+                   if label.startswith("Fdewet:")]
+        if not columns:
+            if any(label.startswith(("PC1:", "PC2:", "PC3:")) for label in header):
+                raise ValueError("Trajectory CSV has no Fdewet columns")
+            columns = list(enumerate(header[1:], start=1))
         for line in reader:
             frame_idx = int(line[0])
-            values = [float(v) for v in line[1:]]
-            rows.append((frame_idx, dict(zip(residue_labels, values))))
+            rows.append((frame_idx, {label: float(line[i]) for i, label in columns}))
     if not rows:
         raise ValueError(f"{path} had no frame rows.")
     return rows

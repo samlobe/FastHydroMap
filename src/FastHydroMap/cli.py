@@ -1,6 +1,8 @@
 # FastHydroMap/cli.py
 from __future__ import annotations
-import argparse, sys
+import argparse
+import subprocess
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -9,13 +11,18 @@ import pandas as pd
 from .io.pdb            import write_bfactor
 from .install_torch import install_torch, torch_install_command
 
-QUANTITIES = ("fdewet", "pc1", "pc2", "pc3")
+QUANTITIES = ("fdewet", "pc1", "pc2", "pc3", "all")
 QUANTITY_LABELS = {
     "fdewet": "Fdewet",
     "pc1": "PC1",
     "pc2": "PC2",
     "pc3": "PC3",
 }
+
+
+def _model_name(value):
+    # Accept the unpublished preview spellings without advertising them.
+    return {"v1": "v0", "v2": "latest"}.get(value, value)
 
 
 # ---------------------------------------------------------------------
@@ -32,18 +39,18 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument("dcd", nargs="?", type=Path, default=None,
                 help="optional trajectory (DCD/XTC); if omitted runs single-structure mode")
     p.add_argument("-o", "--outroot", type=Path,
-                help="basename for outputs (default: <pdb>_fdewet)",
+                help="basename for outputs (latest: <pdb>_maps or <trajectory>_maps_traj; v0: <pdb>_<quantity>)",
                 default=None)
     p.add_argument(
         "--parts",
         action="store_true",
-        help="for single-structure predictions, include intrinsic and context columns",
+        help="with --model v0, include intrinsic and context columns",
     )
     p.add_argument(
         "--quantity",
         choices=QUANTITIES,
-        default="fdewet",
-        help="per-residue quantity to predict (default: fdewet)",
+        default=None,
+        help="legacy v0 map to export (default: fdewet); latest always exports all four",
     )
 
     # -------- predict-trajectory --------------------------------------
@@ -58,19 +65,31 @@ def _build_parser() -> argparse.ArgumentParser:
         "--outroot",
         type=Path,
         default=None,
-        help="basename for outputs (default: <dcd>_fdewet_traj)",
+        help="basename for outputs (latest: <trajectory>_maps_traj; v0: <trajectory>_<quantity>_traj)",
     )
     pt.add_argument(
         "--parts",
         action="store_true",
-        help="write intrinsic, context, and per-frame summary CSVs in addition to total",
+        help="with --model v0, also write intrinsic/context and per-frame summaries",
     )
     pt.add_argument(
         "--quantity",
         choices=QUANTITIES,
-        default="fdewet",
-        help="per-residue quantity to predict (default: fdewet)",
+        default=None,
+        help="legacy v0 map to export (default: fdewet); latest always exports all four",
     )
+
+    for command in (p, pt):
+        command.add_argument("--model", type=_model_name, choices=("latest", "v0"), default="latest",
+                             help="bundled model (default: latest; v0 reproduces the previous model)")
+        command.add_argument("--threads", type=int, default=4, help="CPU workers for latest (default: 4)")
+        command.add_argument("--histidine-states", type=Path, help="CSV: res_uid,histidine_state")
+        command.add_argument("--prepare", action="store_true",
+                             help="add missing heavy atoms (single structure only; rejected with trajectories)"
+                             if command is p else argparse.SUPPRESS)
+        command.add_argument("--overwrite", action="store_true", help="allow replacing existing latest-model outputs")
+        command.add_argument("--embeddings", action="store_true", help="include per-frame embeddings in the trajectory archive (automatic for structures)")
+        command.add_argument("--csv", action="store_true", help="also export a wide trajectory CSV (latest only)")
 
     # -------- install-torch ------------------------------------------
     it = sub.add_parser(
@@ -122,32 +141,68 @@ def _load_predictor_or_exit():
 
 
 def main() -> None:
-    args = _build_parser().parse_args()
+    parser = _build_parser()
+    args = parser.parse_args()
 
     if args.cmd not in {"predict", "predict-trajectory", "install-torch"}:
         print("Unknown sub-command", file=sys.stderr)
         sys.exit(1)
 
     if args.cmd == "install-torch":
-        command = torch_install_command(
-            args.variant,
-            torch_spec=args.torch_spec,
-            upgrade=not args.no_upgrade,
-        )
+        try:
+            command = torch_install_command(
+                args.variant,
+                torch_spec=args.torch_spec,
+                upgrade=not args.no_upgrade,
+            )
+        except ValueError as exc:
+            parser.error(str(exc))
         print("Torch install command:")
         print("  " + " ".join(command))
         if args.dry_run:
             return
 
-        install_torch(
-            args.variant,
-            torch_spec=args.torch_spec,
-            upgrade=not args.no_upgrade,
-        )
+        try:
+            install_torch(
+                args.variant,
+                torch_spec=args.torch_spec,
+                upgrade=not args.no_upgrade,
+            )
+        except (OSError, subprocess.CalledProcessError) as exc:
+            parser.exit(2, f"error: PyTorch installation failed: {exc}\n")
         print("✓ torch installation completed")
-        print("  Default is CPU; use --variant cu121 or --variant cu118 for CUDA builds.")
+        print("  Default is CPU; CUDA wheel variants are available on Linux and Windows.")
         return
 
+    # Fail before importing/loading a predictor or touching any output paths.
+    # Applies to both trajectory spellings and both model versions.
+    if args.dcd is not None and args.prepare:
+        parser.error("--prepare is only available for a single structure, not trajectories. "
+                     "Use a complete topology whose atom count and order match the trajectory.")
+    if args.csv and args.dcd is None:
+        parser.error("--csv is a trajectory option; structures always include a CSV.")
+    if args.quantity is None:
+        args.quantity = "all" if args.model == "latest" else "fdewet"
+
+    if args.model == "latest":
+        if args.threads < 1:
+            parser.error("--threads must be a positive integer")
+        if args.parts:
+            parser.error("The latest model has no intrinsic/context decomposition; omit --parts or use --model v0.")
+        if args.quantity != "all":
+            parser.error("The latest model always exports all four targets; omit --quantity. "
+                         "Single-target selection is available with --model v0.")
+        _load_predictor_or_exit()  # shared friendly missing-PyTorch message
+        from .v2.command import run
+        try:
+            run(args)
+        except (ValueError, OSError) as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            sys.exit(2)
+        return
+    if args.quantity == "all" or args.histidine_states or args.prepare or args.embeddings or args.csv:
+        print("error: --quantity all, --histidine-states, --prepare, --embeddings and --csv require --model latest", file=sys.stderr)
+        sys.exit(2)
     FdewetPredictor = _load_predictor_or_exit()
     predictor = FdewetPredictor(quantity=args.quantity)
     quantity_label = QUANTITY_LABELS[args.quantity]
