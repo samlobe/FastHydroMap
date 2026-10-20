@@ -21,6 +21,7 @@ fi
 "${TEST_PYTHON}" - "${WHEEL}" <<'PY'
 import hashlib
 import json
+from email.parser import BytesParser
 from pathlib import Path
 import sys
 import zipfile
@@ -30,6 +31,12 @@ if wheel.suffix != ".whl":
     raise SystemExit(f"Expected a wheel file: {wheel}")
 with zipfile.ZipFile(wheel) as archive:
     names = set(archive.namelist())
+    metadata_name, = [name for name in names if name.endswith(".dist-info/METADATA")]
+    metadata = BytesParser().parsebytes(archive.read(metadata_name))
+    assert metadata["License-Expression"] == "MIT AND LicenseRef-VIPARR-FF"
+    license_root = metadata_name.removesuffix("METADATA") + "licenses/"
+    for license_file in ("LICENSE", "licenses/VIPARR-FF-LICENSE.txt"):
+        assert license_root + license_file in names, f"Missing license: {license_file}"
     root = "FastHydroMap/weights/"
     manifest = json.loads(archive.read(root + "v2/manifest.json"))
     expected = {root + "v2/" + member["file"] for member in manifest["members"]}
