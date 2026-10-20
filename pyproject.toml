@@ -7,8 +7,8 @@ name        = "fasthydromap"
 version     = "2.0.0"
 description = "Predict per-residue FastHydroMap Fdewet and water-structure PC maps"
 authors     = [{name="Samuel Lobo", email="samuels.lobo@gmail.com"}]
-license     = "MIT"
-license-files = ["LICENSE"]
+license     = "MIT AND LicenseRef-VIPARR-FF"
+license-files = ["LICENSE", "licenses/VIPARR-FF-LICENSE.txt"]
 readme      = "README.md"
 requires-python = ">=3.11,<3.15"
 keywords = ["protein", "hydrophobicity", "molecular-dynamics", "biophysics", "machine-learning"]

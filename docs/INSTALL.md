@@ -1,8 +1,5 @@
 # Installation
 
-The 2.0.0 source release is prepared. Until it is uploaded to PyPI, install
-this checkout with `python -m pip install -e .`.
-
 Python 3.12 is recommended. CI covers Python 3.11–3.14 on Linux and macOS,
 plus the test suite on Windows with Python 3.12.
 

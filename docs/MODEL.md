@@ -169,7 +169,10 @@ The model combines sampled water positions with a local residue graph:
 4. **Prediction:** four small heads read the refined residue state. Predictions
    are averaged over three networks, each with 8,740 parameters.
 
-Chemistry includes partial charges with bonded hydrogen charges combined into the heavy site; partial charges come from the a99SB-disp force field.
+Chemistry includes partial charges with bonded hydrogen charges combined into
+the heavy site; partial charges come from the
+[a99SB-disp force field](https://doi.org/10.1073/pnas.1800690115).
+See [third-party notices](../THIRD_PARTY_NOTICES.md) for parameter-data attribution.
 
 ## Scientific scope
 

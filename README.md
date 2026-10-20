@@ -5,28 +5,28 @@ maps (`PC1`, `PC2`, `PC3`) from protein structures. It runs on a
 CPU without explicit-water simulations. Lower Fdewet indicates a more hydrophobic
 local surface.
 
-> This version is not yet available on PyPI or the ChimeraX Toolshed.
-> The instructions below install it from this checkout.
-
-![FastHydroMap overview](images/FastHydroMap_image.png)
+![FastHydroMap overview](https://raw.githubusercontent.com/samlobe/FastHydroMap/main/images/FastHydroMap_image.png)
 
 ## Quick start
 
-From this repository's directory, in a fresh Python 3.12 environment:
+In a fresh Python 3.12 environment:
 
 ```bash
-python -m pip install -e .
+python -m pip install fasthydromap
 fasthydromap install-torch
 fasthydromap predict protein.pdb -o results/protein
 ```
 
 This writes one CSV with all four scores, four PDBs with the scores in their
-B-factor columns, and an NPZ file of [residue embeddings](docs/MODEL.md#residue-embeddings)
+B-factor columns, and an NPZ file of [residue embeddings](https://github.com/samlobe/FastHydroMap/blob/main/docs/MODEL.md#residue-embeddings)
 for downstream analysis.
 
 For missing heavy atoms, add `--prepare` and inspect the saved prepared structure.
 
 ## ChimeraX
+
+The updated bundle is awaiting Toolshed publication. The instructions below
+describe the published installation workflow.
 
 In ChimeraX, open **Tools → More Tools…**, find **FastHydroMap** in the
 [Toolshed](https://cxtoolshed.rbvi.ucsf.edu/), and click **Install**.
@@ -38,7 +38,7 @@ fasthydromap #1
 fasthydromap #1 quantity pc1
 ```
 
-See the [ChimeraX tutorial](docs/ChimeraX_tutorial.md) for installation,
+See the [ChimeraX tutorial](https://github.com/samlobe/FastHydroMap/blob/main/docs/ChimeraX_tutorial.md) for installation,
 coloring output PDBs, and interpreting the maps.
 
 ## Trajectories
@@ -53,22 +53,22 @@ Add `--csv` for a wide `_total.csv`, or `--embeddings` to include per-frame
 embeddings in the NPZ.
 Make sure you have a complete topology with matching atom order, and make molecules whole
 before prediction.
-See [how to load the results](docs/MODEL.md#loading-trajectory-results).
+See [how to load the results](https://github.com/samlobe/FastHydroMap/blob/main/docs/MODEL.md#loading-trajectory-results).
 
 ## Inputs and scope
 
 Use standard protein heavy atoms. Ordinary HIS defaults to neutral HIE;
 HID/HIE/HIP names or `--histidine-states states.csv` specify an assignment.
-FastHydroMap does not estimate pKa. See [input details](docs/MODEL.md).
+FastHydroMap does not estimate pKa. See [input details](https://github.com/samlobe/FastHydroMap/blob/main/docs/MODEL.md).
 
 Training used restrained, single-chain protein simulations. Buried residues,
 termini, assemblies, and unsupported chemistry need caution.
 
 ## Documentation and citation
 
-- [Installation](docs/INSTALL.md)
-- [Python API, inputs, embeddings, and model](docs/MODEL.md)
-- [Training and data](training/README.md)
+- [Installation](https://github.com/samlobe/FastHydroMap/blob/main/docs/INSTALL.md)
+- [Python API, inputs, embeddings, and model](https://github.com/samlobe/FastHydroMap/blob/main/docs/MODEL.md)
+- [Training and data](https://github.com/samlobe/FastHydroMap/blob/main/training/README.md)
 
 Lobo, S.; Najafi, S.; Shea, J.-E.; Shell, M. S. *Context-Aware Hydrophobicity
 Modeling: HydroMap and FastHydroMap*. bioRxiv (2026).

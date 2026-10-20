@@ -1,7 +1,9 @@
 # Release checklist
 
-Version 2.0.0 is prepared for merging and tagging. PyPI and Toolshed publication
-are separate steps using the approved source commit and checked artifacts.
+Version 2.0.0 is merged and tagged. PyPI and Toolshed publication are separate
+steps using checked artifacts. A packaging-only follow-up adds upstream notices
+and PyPI installation text without changing the tagged model code or weights.
+Record its source commit and artifact checksums with the upload verification.
 
 ## Current model
 
@@ -25,14 +27,15 @@ separately; they do not block the software release. Do not substitute older
   embeddings, trajectories, preparation, and legacy inference.
 - [x] Run the supported-platform CI matrix or clearly state unverified platforms.
 - [x] Verify the training protocol and retained input-archive checksums.
-- [ ] Complete dependency, force-field, and data attribution review.
+- [x] Review dependency, force-field, and data attribution; include the
+  [parameter-data notice](../THIRD_PARTY_NOTICES.md) in release artifacts.
 - [x] Choose the release version and update citation/changelog/status.
 - [x] Review and approve the PR before merging and tagging.
 
-Keep the unpublished README notice until the new package is available on PyPI.
-For the release, switch the quick start to PyPI installation. Mark the manifest
-as released only at the approved release freeze, record its new hash, refresh
-provenance fixtures, and rerun the package checks. Do not alter numerical weights.
+The upload candidate uses the PyPI quick start; retain the Toolshed-only notice
+until the compatible bundle is published. The manifest is already marked as
+released at the approved freeze. Do not alter numerical weights or move the
+existing release tag when completing publication metadata.
 
 The previous published checkpoints and releases remain available. Test
 `--model v0`; never replace or delete an old PyPI release.

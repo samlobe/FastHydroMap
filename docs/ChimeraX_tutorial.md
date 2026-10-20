@@ -3,9 +3,9 @@
 Predict residue-level Fdewet, PC1, PC2 and PC3 from a protein structure, then
 color its atoms, cartoon or surface.
 
-**PyPI/Toolshed update pending:** the installation commands below describe the
-published workflow. Until the updates are available, install the bundle manually
-and use `fasthydromap install packageSpec /absolute/path/to/package.whl`.
+**Toolshed update pending:** the updated bundle must be installed manually
+until it is published. The installation commands below describe the published
+workflow; the Python backend can be installed from PyPI.
 
 ![FastHydroMap overview](../images/FastHydroMap_tutorial_overview.png)
 
