@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import subprocess
 import sys
+import platform
 
 
 TORCH_INDEX_URLS = {
@@ -31,6 +32,9 @@ def torch_install_command(
     if upgrade:
         command.append("--upgrade")
     command.append(torch_spec)
+    # The last official Intel-Mac wheels are PyTorch 2.2.x (NumPy 1.x ABI).
+    if sys.platform == "darwin" and platform.machine() == "x86_64":
+        command.extend(["numpy<2", "mdtraj<1.11"])
     # macOS wheels are distributed through PyPI, not the CPU-only wheel index.
     index = "https://pypi.org/simple" if sys.platform == "darwin" else TORCH_INDEX_URLS[variant]
     command.extend(["--index-url", index])

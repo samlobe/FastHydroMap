@@ -1,0 +1,24 @@
+{
+  "title": "FastHydroMap",
+  "description": "FastHydroMap predicts residue-level dewetting free energy (Fdewet) and water-structure components PC1, PC2 and PC3 from protein structures and trajectories. The software includes a shared four-target model, a command-line interface and a Python API. The MIT license applies to the software; bundled third-party parameter data retain the terms in licenses/VIPARR-FF-LICENSE.txt. HydroMap simulation-derived labels, protein structures and precomputed refitting inputs are deposited separately in the linked dataset.",
+  "version": "2.0.1",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "mit",
+  "creators": [
+    {"name": "Lobo, Samuel"}
+  ],
+  "keywords": ["protein", "hydrophobicity", "water structure", "machine learning"],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.23543197",
+      "relation": "isSupplementTo",
+      "resource_type": "dataset"
+    },
+    {
+      "identifier": "10.64898/2026.06.07.730647",
+      "relation": "isSupplementTo",
+      "resource_type": "publication-preprint"
+    }
+  ]
+}

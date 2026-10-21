@@ -1,10 +1,11 @@
 {
-  "status": "public_deposition_pending",
-  "download_url": null,
-  "doi": null,
+  "status": "published",
+  "download_url": "https://zenodo.org/records/23543197/files/shared_corrected_full800_inputs.zip?download=1",
+  "doi": "10.5281/zenodo.23543197",
   "archives": [
     {
       "filename": "shared_corrected_full800_inputs.zip",
+      "download_url": "https://zenodo.org/records/23543197/files/shared_corrected_full800_inputs.zip?download=1",
       "sha256": "e29806b894de0fe5f98ef1bac800b353ee8c24eb3bafa591ab230cdbc39f728b",
       "bytes": 1189137304,
       "members": {
@@ -21,10 +22,21 @@
   ],
   "cache_member": "full800.pt",
   "cache_receipt_member": "full800.json",
+  "labels_archive": {
+    "filename": "hydromap_labels_structures_v2.zip",
+    "bytes": 116008483,
+    "sha256": "95c1519603f2c1e23830fa669935e22de6e792eb7d7866b0810a15e1ae18975a",
+    "download_url": "https://zenodo.org/records/23543197/files/hydromap_labels_structures_v2.zip?download=1",
+    "doi": "10.5281/zenodo.23543197",
+    "proteins": 1000,
+    "replica_residue_rows": 495078,
+    "residue_summaries": 165026,
+    "contents": "HydroMap simulation-derived labels, three-replica summaries, original and completed structures, and production configs; no trajectories"
+  },
   "feature_version": "terminal_carboxylate_v2",
   "fit_proteins": 800,
   "limitations": [
     "Reproduction starts from precomputed features, not raw structures or simulations",
-    "Dataset/force-field attribution and license review pending"
+    "Original labels and metadata are CC BY 4.0, with separate third-party attribution"
   ]
 }

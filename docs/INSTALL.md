@@ -2,6 +2,9 @@
 
 Python 3.12 is recommended. CI covers Python 3.11–3.14 on Linux and macOS,
 plus the test suite on Windows with Python 3.12.
+Intel Macs require Python 3.11 or 3.12 because their official PyTorch wheels
+stop at 2.2.x. The Torch installer selects compatible NumPy/MDTraj versions
+there; Apple-silicon Macs use the current compatible packages.
 
 ## Recommended pip install
 
@@ -24,7 +27,7 @@ fasthydromap predict your_structure.pdb -o outputs/your_structure
 If you want to try a bundled repo example from a local checkout:
 
 ```bash
-fasthydromap predict examples/1A1U.pdb -o outputs/1A1U
+fasthydromap predict examples/1A1U.pdb --prepare -o outputs/1A1U
 ```
 
 The latest model exports all four maps together: one CSV, four quantity-suffixed
@@ -67,7 +70,7 @@ CPU image:
 ```bash
 docker build -t fasthydromap:cpu .
 docker run --rm -u "$(id -u):$(id -g)" -v "$(pwd)/docker_out:/out" fasthydromap:cpu \
-  predict /opt/FastHydroMap/examples/1A1U.pdb -o /out/1A1U
+  predict /opt/FastHydroMap/examples/1A1U.pdb --prepare -o /out/1A1U
 ```
 
 Trajectory prediction:

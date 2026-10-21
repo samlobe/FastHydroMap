@@ -63,9 +63,12 @@
   ],
   "data_deposition": "pending; not required for inference",
   "old_versions_preserved": true,
-  "release_version": "2.0.0",
+  "release_version": "2.0.1",
+  "model_release_version": "2.0.0",
+  "previous_release_version": "2.0.0",
+  "patch_scope": "Documentation, data catalog and packaging metadata; checkpoint files and inference implementation unchanged",
   "validated_candidate_manifest_sha256": "7c4901c462faf5e6be43733c0c8f9e555ab8095169e5946b8f80568a5e5e31ac",
   "numerical_weights_changed": false,
   "pypi_published": false,
-  "toolshed_published": false
+  "toolshed_published": true
 }

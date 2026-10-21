@@ -3,18 +3,17 @@
 Predict residue-level Fdewet, PC1, PC2 and PC3 from a protein structure, then
 color its atoms, cartoon or surface.
 
-**Toolshed update pending:** the updated bundle must be installed manually
-until it is published. The installation commands below describe the published
-workflow; the Python backend can be installed from PyPI.
-
 ![FastHydroMap overview](../images/FastHydroMap_tutorial_overview.png)
 
 ## Install once
 
 In ChimeraX 1.12 or newer:
 
+Open **Tools → More Tools…**, find **FastHydroMap**, and install bundle 0.2.1
+or newer from its Toolshed page. Restart ChimeraX after upgrading an existing
+bundle. Then install its Python backend:
+
 ```text
-toolshed install ChimeraX-FastHydroMap
 fasthydromap install
 ```
 
@@ -28,7 +27,7 @@ the update fails.
 ## Make a map
 
 ```text
-open 1a1u
+open 1ubq
 fasthydromap #1
 fasthydromap #1 quantity pc1
 ```
@@ -51,8 +50,10 @@ the surrounding protein context; selecting a chain is not a request to
 remove the rest of its assembly.
 
 The input needs complete standard heavy atoms. If missing atoms prevent
-prediction, `prepare true` rebuilds them in a temporary copy, without changing
-the open structure. Inspect rebuilt regions with the standalone CLI's
+prediction (including a missing terminal oxygen, OXT), `prepare true` rebuilds
+them in a temporary copy, without changing the open structure. It does not
+reconstruct missing loops or make unsupported chemistry reliable.
+Inspect rebuilt regions with the standalone CLI's
 `--prepare` output when they matter to your interpretation.
 
 ```text

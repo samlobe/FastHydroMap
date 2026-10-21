@@ -9,7 +9,7 @@ local surface.
 
 ## Quick start
 
-In a fresh Python 3.12 environment:
+In a fresh Python environment (Python 3.11–3.14):
 
 ```bash
 python -m pip install fasthydromap
@@ -25,11 +25,9 @@ For missing heavy atoms, add `--prepare` and inspect the saved prepared structur
 
 ## ChimeraX
 
-The updated bundle is awaiting Toolshed publication. The instructions below
-describe the published installation workflow.
-
 In ChimeraX, open **Tools → More Tools…**, find **FastHydroMap** in the
 [Toolshed](https://cxtoolshed.rbvi.ucsf.edu/), and click **Install**.
+Use bundle 0.2.1 or newer and restart ChimeraX after upgrading an existing bundle.
 Run `fasthydromap install` once to set up its Python dependencies, then predict
 and color a structure:
 
@@ -69,6 +67,8 @@ termini, assemblies, and unsupported chemistry need caution.
 - [Installation](https://github.com/samlobe/FastHydroMap/blob/main/docs/INSTALL.md)
 - [Python API, inputs, embeddings, and model](https://github.com/samlobe/FastHydroMap/blob/main/docs/MODEL.md)
 - [Training and data](https://github.com/samlobe/FastHydroMap/blob/main/training/README.md)
+- [Protein list and dataset splits](https://github.com/samlobe/FastHydroMap/blob/main/training/proteins.csv)
+- [HydroMap labels, structures and training inputs](https://doi.org/10.5281/zenodo.23543197)
 
 Lobo, S.; Najafi, S.; Shea, J.-E.; Shell, M. S. *Context-Aware Hydrophobicity
 Modeling: HydroMap and FastHydroMap*. bioRxiv (2026).

@@ -1,4 +1,5 @@
 import sys
+import platform
 import pytest
 
 from FastHydroMap.cli import _build_parser, main
@@ -41,3 +42,16 @@ def test_install_torch_subparser_has_plain_description():
     )
     install_torch_parser = subparsers_action.choices["install-torch"]
     assert install_torch_parser.description == "Install or replace PyTorch in the current environment."
+
+
+@pytest.mark.parametrize("system,machine,constrained", [
+    ("darwin", "x86_64", True), ("darwin", "arm64", False),
+    ("win32", "AMD64", False), ("linux", "x86_64", False),
+])
+def test_intel_mac_numpy_compatibility(monkeypatch, system, machine, constrained):
+    monkeypatch.setattr(sys, "platform", system)
+    monkeypatch.setattr(platform, "machine", lambda: machine)
+    command = torch_install_command("cpu")
+    assert ("numpy<2" in command) is constrained
+    assert ("mdtraj<1.11" in command) is constrained
+

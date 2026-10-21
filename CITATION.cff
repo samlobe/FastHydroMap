@@ -6,8 +6,8 @@ authors:
   - family-names: "Lobo"
     given-names: "Samuel"
     email: "samuels.lobo@gmail.com"
-version: "2.0.0"
-date-released: 2026-10-19
+version: "2.0.1"
+date-released: 2026-10-21
 url: "https://github.com/samlobe/FastHydroMap"
 repository-code: "https://github.com/samlobe/FastHydroMap"
 license: "MIT"
@@ -18,7 +18,7 @@ preferred-citation:
     - family-names: "Lobo"
       given-names: "Samuel"
     - family-names: "Najafi"
-      given-names: "Soroush"
+      given-names: "Saeed"
     - family-names: "Shea"
       given-names: "Joan-Emma"
     - family-names: "Shell"

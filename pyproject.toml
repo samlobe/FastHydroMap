@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name        = "fasthydromap"
-version     = "2.0.0"
+version     = "2.0.1"
 description = "Predict per-residue FastHydroMap Fdewet and water-structure PC maps"
 authors     = [{name="Samuel Lobo", email="samuels.lobo@gmail.com"}]
 license     = "MIT AND LicenseRef-VIPARR-FF"
@@ -46,6 +46,7 @@ dev = ["build", "twine", "pytest", "black", "ruff"]
 Homepage = "https://github.com/samlobe/FastHydroMap"
 Repository = "https://github.com/samlobe/FastHydroMap"
 Issues = "https://github.com/samlobe/FastHydroMap/issues"
+Dataset = "https://doi.org/10.5281/zenodo.23543197"
 
 [tool.setuptools.packages.find]
 where = ["src"]
