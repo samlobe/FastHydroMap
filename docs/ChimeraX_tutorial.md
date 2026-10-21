@@ -9,8 +9,11 @@ color its atoms, cartoon or surface.
 
 In ChimeraX 1.12 or newer:
 
+Open **Tools → More Tools…**, find **FastHydroMap**, and install bundle 0.2.1
+or newer from its Toolshed page. Restart ChimeraX after upgrading an existing
+bundle. Then install its Python backend:
+
 ```text
-toolshed install ChimeraX-FastHydroMap
 fasthydromap install
 ```
 

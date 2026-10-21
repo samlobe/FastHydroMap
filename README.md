@@ -27,6 +27,7 @@ For missing heavy atoms, add `--prepare` and inspect the saved prepared structur
 
 In ChimeraX, open **Tools → More Tools…**, find **FastHydroMap** in the
 [Toolshed](https://cxtoolshed.rbvi.ucsf.edu/), and click **Install**.
+Use bundle 0.2.1 or newer and restart ChimeraX after upgrading an existing bundle.
 Run `fasthydromap install` once to set up its Python dependencies, then predict
 and color a structure:
 
