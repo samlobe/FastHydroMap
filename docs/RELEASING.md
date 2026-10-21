@@ -21,6 +21,8 @@ bundle that requires it.
 The Zenodo GitHub integration must be enabled for `samlobe/FastHydroMap`.
 Check the resulting software record and DOI after publishing the GitHub Release.
 Keep previous software versions available.
+Zenodo uses `.zenodo.json` for archive metadata, including the dataset link;
+keep its version and creators consistent with `CITATION.cff`.
 
 ## Model identity
 

@@ -10,9 +10,9 @@ This workflow starts from precomputed training inputs rather than rebuilding
 them from PDB structures and simulations.
 
 1. Install this checkout and PyTorch, as in [installation](../docs/INSTALL.md).
-2. Obtain `shared_corrected_full800_inputs.zip`, listed in
-   [DATA_ACCESS.json](DATA_ACCESS.json).
-   **Public deposition is pending:** there is no download link or DOI yet.
+2. Download [shared_corrected_full800_inputs.zip](https://zenodo.org/records/23543197/files/shared_corrected_full800_inputs.zip?download=1)
+   from the [Zenodo dataset](https://doi.org/10.5281/zenodo.23543197).
+   [DATA_ACCESS.json](DATA_ACCESS.json) records the archive checksums.
 3. Extract `full800.pt` and `full800.json`, then run:
 
 ```bash
@@ -46,11 +46,13 @@ assignments. Its training IDs match the released fitting protocol. The structure
 hashes distinguish the original simulation inputs from the completed model
 inputs, including terminal oxygens recovered from the simulation preparation.
 
-The label/structure archive is listed in [DATA_ACCESS.json](DATA_ACCESS.json).
+The [label/structure archive](https://zenodo.org/records/23543197/files/hydromap_labels_structures_v2.zip?download=1)
+is available from the same dataset record and listed in [DATA_ACCESS.json](DATA_ACCESS.json).
 It contains HydroMap simulation-derived labels, not FastHydroMap predictions,
 including all three replicas and their mean, sample SD and SEM. The historical
 `Fdewet_pred` column names refer to the HydroMap label estimator, not this neural
-network. Public deposition is pending. The table in `data/all_residue_results.csv`
+network. Original labels and metadata are CC BY 4.0; see the archive's third-party
+notices for redistributed material. The table in `data/all_residue_results.csv`
 is legacy training data, not the current corpus.
 
 Fdewet fitting uses nonterminal residues with mean hydration count >7 and

@@ -59,6 +59,25 @@ def test_model_selection_receipt_matches_release_manifest():
     assert receipt["model_release_version"] == json.loads(manifest_path.read_text())["release_version"]
 
 
+def test_published_dataset_links_and_archive_identity():
+    access = json.loads((ROOT / "training/DATA_ACCESS.json").read_text())
+    doi = "10.5281/zenodo.23543197"
+    base = "https://zenodo.org/records/23543197/files/"
+    assert access["status"] == "published"
+    assert access["doi"] == access["labels_archive"]["doi"] == doi
+    inputs, = access["archives"]
+    assert access["download_url"] == inputs["download_url"]
+    for archive in [inputs, access["labels_archive"]]:
+        assert archive["download_url"] == base + archive["filename"] + "?download=1"
+        assert re.fullmatch(r"[0-9a-f]{64}", archive["sha256"])
+        assert archive["bytes"] > 0
+    project = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]
+    assert project["urls"]["Dataset"] == "https://doi.org/" + doi
+    training_readme = (ROOT / "training/README.md").read_text()
+    assert "deposition is pending" not in training_readme.lower()
+    assert doi in training_readme
+
+
 def test_preferred_citation_has_correct_author_names():
     import yaml
     citation = yaml.safe_load((ROOT / "CITATION.cff").read_text())
@@ -67,3 +86,19 @@ def test_preferred_citation_has_correct_author_names():
         ("Lobo", "Samuel"), ("Najafi", "Saeed"),
         ("Shea", "Joan-Emma"), ("Shell", "M. Scott"),
     ]
+
+
+def test_zenodo_release_metadata_matches_package_and_dataset():
+    import yaml
+    metadata = json.loads((ROOT / ".zenodo.json").read_text())
+    project = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]
+    citation = yaml.safe_load((ROOT / "CITATION.cff").read_text())
+    assert metadata["version"] == project["version"] == citation["version"]
+    assert metadata["creators"] == [
+        {"name": f'{a["family-names"]}, {a["given-names"]}'}
+        for a in citation["authors"]
+    ]
+    assert metadata["upload_type"] == "software"
+    assert metadata["license"] == citation["license"].lower()
+    assert {"identifier": "10.5281/zenodo.23543197", "relation": "isSupplementTo",
+            "resource_type": "dataset"} in metadata["related_identifiers"]

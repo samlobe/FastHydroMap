@@ -68,6 +68,7 @@ termini, assemblies, and unsupported chemistry need caution.
 - [Python API, inputs, embeddings, and model](https://github.com/samlobe/FastHydroMap/blob/main/docs/MODEL.md)
 - [Training and data](https://github.com/samlobe/FastHydroMap/blob/main/training/README.md)
 - [Protein list and dataset splits](https://github.com/samlobe/FastHydroMap/blob/main/training/proteins.csv)
+- [HydroMap labels, structures and training inputs](https://doi.org/10.5281/zenodo.23543197)
 
 Lobo, S.; Najafi, S.; Shea, J.-E.; Shell, M. S. *Context-Aware Hydrophobicity
 Modeling: HydroMap and FastHydroMap*. bioRxiv (2026).
