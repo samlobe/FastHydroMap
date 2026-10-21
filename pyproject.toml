@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name        = "fasthydromap"
-version     = "2.0.0"
+version     = "2.0.1"
 description = "Predict per-residue FastHydroMap Fdewet and water-structure PC maps"
 authors     = [{name="Samuel Lobo", email="samuels.lobo@gmail.com"}]
 license     = "MIT AND LicenseRef-VIPARR-FF"

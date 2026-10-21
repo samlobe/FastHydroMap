@@ -40,6 +40,19 @@ test proteins are excluded from both fitting and this cache.
 The label corpus contains 1,000 protein chains, each with three independently
 seeded restrained explicit-water replicas.
 
+[proteins.csv](proteins.csv) lists all 1,000 chains, their PDB entries and source
+chain identifiers, sequences, lengths, and final 800/100/100 train/validation/test
+assignments. Its training IDs match the released fitting protocol. The structure
+hashes distinguish the original simulation inputs from the completed model
+inputs, including terminal oxygens recovered from the simulation preparation.
+
+The label/structure archive is listed in [DATA_ACCESS.json](DATA_ACCESS.json).
+It contains HydroMap simulation-derived labels, not FastHydroMap predictions,
+including all three replicas and their mean, sample SD and SEM. The historical
+`Fdewet_pred` column names refer to the HydroMap label estimator, not this neural
+network. Public deposition is pending. The table in `data/all_residue_results.csv`
+is legacy training data, not the current corpus.
+
 Fdewet fitting uses nonterminal residues with mean hydration count >7 and
 replica-mean Fdewet in [3.8, 8.7]. PC fitting uses the hydration/terminal mask
 without a Fdewet filter, with fit-only 2nd/98th-percentile winsorization.

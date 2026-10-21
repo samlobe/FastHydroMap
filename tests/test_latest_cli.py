@@ -151,7 +151,8 @@ def test_selected_weights_are_full_refits_not_provisional():
     import tomllib
     project = tomllib.loads((root / "pyproject.toml").read_text())
     assert manifest["status"] == "released"
-    assert manifest["release_version"] == project["project"]["version"]
+    from packaging.version import Version
+    assert Version(manifest["release_version"]) <= Version(project["project"]["version"])
     assert manifest["training_stage"] == "full800"
     assert manifest["fit_proteins"] == 800
     assert manifest["feature_version"] == "terminal_carboxylate_v2"

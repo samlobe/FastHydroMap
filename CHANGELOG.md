@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.0.1 — 2026-10-21
+
+- Publish a readable list of all 1,000 proteins and their dataset splits.
+- Clarify the supported Python versions and use a complete ChimeraX example.
+- Update ChimeraX installation instructions and data-archive documentation.
+- Keep the standalone Torch installer compatible with official Intel-Mac wheels.
+- Correct Saeed Najafi's given name in citation metadata.
+- Retain the 2.0.0 model checkpoints, feature calculations, and predictions.
+
 ## 2.0.0 — 2026-10-19
 
 - Use the current bundled model by default (`--model latest`).

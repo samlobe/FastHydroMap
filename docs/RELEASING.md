@@ -1,76 +1,73 @@
-# Release checklist
+# Releasing FastHydroMap
 
-Version 2.0.0 is merged and tagged. PyPI and Toolshed publication are separate
-steps using checked artifacts. A packaging-only follow-up adds upstream notices
-and PyPI installation text without changing the tagged model code or weights.
-Record its source commit and artifact checksums with the upload verification.
+The Python package and ChimeraX bundle have separate version numbers and release
+workflows. Publish and verify a compatible Python backend before releasing a
+bundle that requires it.
 
-## Current model
+## Python package
 
-- Shared 16-dimensional residue encoder, four heads, three ensemble members.
-- Final refits use all 800 original training proteins with fixed schedules.
-- Both C-terminal oxygens and terminal chemistry are represented.
-- The feature-version contract rejects incompatible preview weights.
-- Original validation/test cohorts are excluded from fitting and normalization.
+1. Update the package version, changelog and citation metadata.
+2. Run the CPU test suite and supported-platform CI checks.
+3. Build the wheel and source distribution with `scripts/build_release.sh`.
+4. Install the exact wheel outside the checkout with
+   `scripts/test_wheel_install.sh /path/to/wheel.whl`. Check structure maps,
+   embeddings, preparation, trajectories and legacy inference.
+5. Review the PR, wait for CI, merge, and tag the reviewed commit. Never move a
+   published tag or replace files in an existing PyPI release.
+6. Upload the checked distributions to PyPI, then download and verify them.
+7. Publish a GitHub Release for the same tag and attach the wheel and source
+   distribution. A Git tag alone does not trigger Zenodo archiving.
 
-The historical 500-fit / 100-tune / 200-audit roles remain unchanged for
-development analyses. Corrected-feature ablations and learning curves completed
-separately; they do not block the software release. Do not substitute older
-600-protein results for current-model results in the paper.
+The Zenodo GitHub integration must be enabled for `samlobe/FastHydroMap`.
+Check the resulting software record and DOI after publishing the GitHub Release.
+Keep previous software versions available.
 
-## Software release gates
+## Model identity
 
-- [x] Review the intended source diff, README, model notes, and examples.
-- [x] Pass the CPU suite and independent feature/readout parity checks.
-- [x] Build wheel and source distribution; check metadata and packaged files.
-- [x] Install the exact wheel outside the checkout and test structures,
-  embeddings, trajectories, preparation, and legacy inference.
-- [x] Run the supported-platform CI matrix or clearly state unverified platforms.
-- [x] Verify the training protocol and retained input-archive checksums.
-- [x] Review dependency, force-field, and data attribution; include the
-  [parameter-data notice](../THIRD_PARTY_NOTICES.md) in release artifacts.
-- [x] Choose the release version and update citation/changelog/status.
-- [x] Review and approve the PR before merging and tagging.
+The shared model has a 16-dimensional residue encoder, four prediction heads,
+and three ensemble members fitted on 800 proteins. Validation and test proteins
+are excluded from fitting and normalization.
 
-The upload candidate uses the PyPI quick start; retain the Toolshed-only notice
-until the compatible bundle is published. The manifest is already marked as
-released at the approved freeze. Do not alter numerical weights or move the
-existing release tag when completing publication metadata.
+A documentation or packaging patch does not require retraining or rewriting
+checkpoints. Version 2.0.1 retains the 2.0.0 model files and manifest byte for
+byte. The model's recorded release version therefore remains 2.0.0, while the
+installed Python package reports 2.0.1. Checkpoint and manifest checksums identify
+the numerical model independently of the package version.
 
-The previous published checkpoints and releases remain available. Test
-`--model v0`; never replace or delete an old PyPI release.
+## ChimeraX bundle
 
-## ChimeraX
+Follow the bundle repository's `RELEASING.md`. Build and install the actual wheel,
+restart ChimeraX, and exercise the public installation workflow. Check all four
+maps, cached recoloring, embedding export, histidine assignments, missing-atom
+errors and optional preparation. Confirm that existing open structures are not
+modified and that failed backend updates preserve a working installation.
 
-The corrected 800-protein backend requires a fresh bundle check; the earlier
-600-protein review is historical evidence only.
+The portable application smoke script is `tests/chimerax_smoke.py` in the bundle
+repository. Linux application tests and platform-mocked unit tests do not
+establish native macOS or Windows application compatibility.
 
-- [x] Pass focused bundle tests and build the exact candidate.
-- [x] Use an isolated supported ChimeraX installation/profile.
-- [x] Compare all four maps and embedding exports with the Python CLI.
-- [x] Check missing OXT, preparation, and rejection of incompatible backends.
-- [x] Check cache reuse/invalidation and internal-coordinate behavior.
-- [x] Check upgrades, failed-update retention, and installation instructions.
+After uploading, verify the public wheel checksum and installation from the
+Toolshed. Check its machine-readable install catalog as well as its website:
+the catalog may not immediately advertise a newly downloadable version.
 
-The October 19 cross-platform run passed all 14 CI jobs, including the Windows
-newline correction. The local suite contains 165 tests; the earlier installed
-candidate passed 164 tests before that checkout regression was added.
-The 30-protein feature/readout parity check passed. ChimeraX 1.12 on Linux
-passed 66 focused tests and seven live GUI checks; that GUI check does not
-qualify ChimeraX on macOS or Windows.
+## Dataset deposition
 
-Publish and verify the Python backend before submitting the compatible bundle
-to the Toolshed. A passing Python wheel does not validate the GUI bridge.
-See the bundle repository's `RELEASING.md` for submission and rollback.
+Keep large simulation and training archives out of Git. The repository contains
+`training/proteins.csv`, the fitting protocol, and `training/DATA_ACCESS.json`.
+Deposit the labels/structures and exact precomputed fitting inputs as a separate
+Zenodo dataset record, with confirmed creators, license and third-party notices.
+These labels come from HydroMap simulations, not FastHydroMap inference.
 
-## Paper and data follow-up
+Before publication, verify:
 
-- [x] Complete the scheduled ablations and learning-curve summary tables.
-- [ ] Report current-model held-out and coordinate-sensitivity results with
-  their actual evaluation history.
-- [ ] Deposit approved reproducibility/data archives and fill access URLs/DOIs.
-- [ ] Update manuscript/SI methods, figures, and software/data citations.
+- All 1,000 proteins and their final 800/100/100 split assignments.
+- Source and normalized chain IDs, structure hashes, and histidine assignments.
+- Three replicas per protein and reproducible mean, sample SD and SEM values.
+- Complete archive contents and checksums, with no full trajectories included.
+- Rights and attribution for original data, PDB structures and third-party material.
 
-Data deposition is pending; inference uses the packaged weights and does not
-require the training archive. The verified local archive is described in
-[DATA_ACCESS.json](../training/DATA_ACCESS.json).
+Reserve the dataset DOI in a Zenodo draft, upload the verified archives, review
+the metadata and publish. Fill the DOI and download URLs in
+`training/DATA_ACCESS.json`; do not claim public data availability before the
+record is actually published. Link the software and dataset records and update
+the paper's software/data availability statements.
