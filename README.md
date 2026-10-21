@@ -9,7 +9,7 @@ local surface.
 
 ## Quick start
 
-In a fresh Python 3.12 environment:
+In a fresh Python environment (Python 3.11–3.14):
 
 ```bash
 python -m pip install fasthydromap
